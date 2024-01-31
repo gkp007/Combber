@@ -10,16 +10,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import Router from './src/Router';
 import {GluestackUIProvider} from '@gluestack-ui/themed';
 import {config} from '@gluestack-ui/config';
+import customConfig from './src/styles';
 
 function App(): JSX.Element {
   return (
-    <GluestackUIProvider
-      config={{
-        dependencies: {
-          'linear-gradient': require('react-native-linear-gradient').default,
-        },
-        config,
-      }}>
+    <GluestackUIProvider config={customConfig}>
       <NavigationContainer>
         <Router />
       </NavigationContainer>

@@ -1,11 +1,12 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-
+import {Box, Text} from '@gluestack-ui/themed';
 const Router = () => {
   return (
-    <View>
-      <Text>Router</Text>
-    </View>
+    <Box flex={1} bg={'white'}>
+      <Text bold size={'lg'}>
+        Router
+      </Text>
+    </Box>
   );
 };
 

@@ -1,5 +1,6 @@
 import {createConfig} from '@gluestack-style/react';
 import {fontFamily} from '../../app.json';
+import {config} from '@gluestack-ui/config';
 
 export const COLORS = {
   primary: {
@@ -42,8 +43,9 @@ export const COLORS = {
     950: '#E5E7EB',
   },
 };
-export const config = createConfig({
+export const customConfig = createConfig({
   tokens: {
+    ...config,
     colors: COLORS,
     fontConfig: {
       [fontFamily]: {
@@ -75,10 +77,6 @@ export const config = createConfig({
           normal: `${fontFamily}-Black`,
           italic: `${fontFamily}-BlackItalic`,
         },
-        900: {
-          normal: `${fontFamily}-Black`,
-          italic: `${fontFamily}-BlackItalic`,
-        },
       },
     },
     fonts: {
@@ -89,10 +87,10 @@ export const config = createConfig({
   },
   aliases: undefined,
 });
-type Config = typeof config;
+type Config = typeof customConfig;
 
 declare module '@gluestack-ui/themed' {
   interface UIConfig extends Config {}
 }
 
-export default config;
+export default customConfig;
