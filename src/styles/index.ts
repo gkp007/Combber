@@ -1,6 +1,10 @@
 import {createConfig} from '@gluestack-style/react';
 import {fontFamily} from '../../app.json';
 import {config} from '@gluestack-ui/config';
+import {Dimensions} from 'react-native';
+
+export const WIDTH = Dimensions.get('window').width;
+export const HEIGHT = Dimensions.get('window').width;
 
 export const COLORS = {
   primary: {

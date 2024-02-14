@@ -14,7 +14,7 @@ import customConfig from './src/styles';
 
 function App(): JSX.Element {
   return (
-    <GluestackUIProvider config={customConfig}>
+    <GluestackUIProvider config={config}>
       <NavigationContainer>
         <Router />
       </NavigationContainer>

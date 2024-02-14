@@ -10,3 +10,18 @@ export type BottomTabsTypes = {
 type PrivateScreens = {
   [key in keyof typeof Private]: undefined;
 };
+
+type OmittedScreens = 'Search';
+
+export type PrivateNavigationProp = Omit<PrivateScreens, OmittedScreens> & {
+  Search: undefined;
+};
+
+export type PrivateRoutesType = {
+  TabLayouts: undefined;
+} & PrivateNavigationProp;
+
+export type StackAndTabType = CompositeNavigationProp<
+  BottomTabNavigationProp<BottomTabsTypes>,
+  NativeStackNavigationProp<PrivateRoutesType>
+>;
