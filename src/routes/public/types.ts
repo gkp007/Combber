@@ -1,5 +1,18 @@
 import {Auth, Public} from '../../screens';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-export type PublicRoutesType = {
+type PublicScreens = {
   [key in keyof typeof Public]: undefined;
-} & {[key in keyof typeof Auth]: undefined};
+};
+
+type AuthScreens = {
+  [key in keyof typeof Auth]: undefined;
+};
+
+type OmittedScreen = '';
+
+export type PublicNavigationProp = Omit<PublicScreens, OmittedScreen>;
+
+export type PublicRoutesTypes = PublicScreens & AuthScreens;
+
+export type PublicRouteProps = NativeStackNavigationProp<PublicRoutesTypes>;

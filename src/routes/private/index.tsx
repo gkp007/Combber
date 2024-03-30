@@ -12,7 +12,9 @@ type PrivateRouteProps = {
 
 export default function PrivateRoutes({initialRouteName}: PrivateRouteProps) {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName={initialRouteName}
+      screenOptions={{headerShown: false}}>
       <Stack.Screen name="Home" component={Private.Home} />
     </Stack.Navigator>
   );
