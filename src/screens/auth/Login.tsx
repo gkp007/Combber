@@ -10,7 +10,7 @@ import {
 } from '@gluestack-ui/themed';
 
 import {useForm} from 'react-hook-form';
-import {COLORS} from '../../styles';
+import {COLORS, WIDTH} from '../../styles';
 import AppInput from '../../components/core/AppInput';
 import {IconProps} from '../../components/core/AppIcon';
 
@@ -66,14 +66,14 @@ const Login = () => {
 
   return (
     <Box bg={COLORS.theme[500]} flex={1}>
-      <Center w={'$full'} mx={'$8'}>
+      <Center w={WIDTH}>
         <Heading bold color="white" size="xl">
           Welcome Back{' '}
         </Heading>
         <Text textAlign="center" size="lg" bold color="white">
           Login to your account.
         </Text>
-        <Box mb={'$5'}>
+        <Box mb={'$5'} mx={'$8'}>
           {formInputs.map(input => (
             <AppInput
               input={input}
