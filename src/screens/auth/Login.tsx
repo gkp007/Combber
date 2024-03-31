@@ -119,11 +119,10 @@ const Login = () => {
             w={'$full'}
             px={'$8'}>
             <Btn
-              w={'$full'}
-              h={'$12'}
+              softShadow="4"
               iconSide={'RIGHT'}
+              isLoading
               icon={{FeatherName: 'lock'}}
-              backgroundColor="transparent"
               _text={{
                 fontWeight: '$medium',
                 fontSize: '$lg',
