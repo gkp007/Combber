@@ -10,14 +10,17 @@ import {
   VStack,
   Image,
   ScrollView,
+  Pressable,
 } from '@gluestack-ui/themed';
 
 import {useForm} from 'react-hook-form';
 import {COLORS, HEIGHT, WIDTH} from '../../styles';
 import AppInput from '../../components/core/AppInput';
-import {IconProps} from '../../components/core/AppIcon';
+import AppIcon, {IconProps} from '../../components/core/AppIcon';
 import Btn from '../../components/core/Btn';
 import {IMAGES} from '../../assets';
+import {useNavigation} from '@react-navigation/native';
+import {PublicRouteProps} from '../../routes/public/types';
 
 type FormInput = {
   key: string;
@@ -31,6 +34,7 @@ type FormData = {
   [key: string]: string;
 };
 const Login = () => {
+  const {goBack, navigate} = useNavigation<PublicRouteProps>();
   const formInputs: FormInput[] = useMemo(
     () => [
       {
@@ -71,6 +75,18 @@ const Login = () => {
 
   return (
     <Box bg={COLORS.theme[600]} flex={1}>
+      <Pressable
+        p="$3"
+        m={'$3'}
+        bg={COLORS.theme[600]}
+        $hover-bg="$primary400"
+        w={'$12'}
+        onPress={() => goBack()}
+        borderRadius={'$3xl'}
+        borderWidth={'$1'}
+        borderColor="#fff">
+        <AppIcon AntDesignName={'left'} color={'white'} size={20} />
+      </Pressable>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* <Box
           position="absolute"
@@ -122,6 +138,7 @@ const Login = () => {
               w={'$full'}
               h={'$12'}
               iconSide={'RIGHT'}
+              onPress={() => navigate('Splash')}
               icon={{FeatherName: 'lock'}}
               backgroundColor="transparent"
               _text={{
@@ -135,7 +152,7 @@ const Login = () => {
               <Text size="sm" color="white">
                 Don't have an Account?
               </Text>
-              <Link alignItems="center">
+              <Link alignItems="center" onPress={() => navigate('Register')}>
                 <LinkText size="sm" color="white">
                   Sign Up
                 </LinkText>
