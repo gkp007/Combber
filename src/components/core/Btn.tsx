@@ -7,12 +7,14 @@ import {
   Pressable,
   Spinner,
   Text,
+  ButtonSpinner,
 } from '@gluestack-ui/themed';
 import AppIcon, {IconProps} from './AppIcon';
-import {COLORS, WIDTH} from '../../styles';
+import {COLORS} from '../../styles';
 import {LinearGradient as RNLinearGradient} from 'react-native-linear-gradient';
+import React from 'react';
 
-type RowProps = React.ComponentProps<typeof HStack>;
+type ButtonProps = React.ComponentProps<typeof Button>;
 type TextProps = React.ComponentProps<typeof Text>;
 
 type BottomProps = {
@@ -24,63 +26,62 @@ type BottomProps = {
   iconSide?: 'LEFT' | 'RIGHT';
   onPress?: () => void;
   _text?: TextProps;
-} & RowProps;
+  // backgroundColor?: string;
+} & ButtonProps;
 
 const Btn: React.FC<BottomProps> = ({
   children,
   isLoading = false,
   isDisabled = false,
-  colors,
+  colors = [
+    COLORS.secondary[900],
+    COLORS.secondary[900],
+    COLORS.secondary[600],
+  ],
   icon,
   onPress,
   _text,
   iconSide = 'LEFT',
-  ..._row
+  // backgroundColor = 'transparent',
+  ..._button
 }) => {
-  const renderIcon = () => {
-    if (isLoading) {
-      return <Spinner size="small" />;
-    }
-    if (icon) {
-      return <AppIcon {...icon} color={'#fff'} size={16} />;
-    }
-  };
-  return (
-    <Button
-      // w={WIDTH / 2}
-      w={'$64'}
-      borderRadius="$full"
-      // variant="solid"
-      // action="primary"
+  const renderIcon = React.useMemo(
+    () => icon && <AppIcon {...icon} color="#fff" size={16} />,
+    [icon],
+  );
 
-      isDisabled={false}
-      isFocusVisible={false}>
+  return (
+    <>
       <LinearGradient
-        w={'$64'}
-        colors={
-          colors || [
-            COLORS.secondary[900],
-            COLORS.secondary[900],
-            COLORS.secondary[600],
-          ]
-        }
-        borderRadius="$full"
+        colors={colors}
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
+        borderRadius="$full"
         as={RNLinearGradient}>
-        {iconSide === 'LEFT' && renderIcon()}
+        <Button
+          {..._button}
+          onPress={onPress}
+          borderRadius="$full"
+          $hover-bg="$success800"
+          // backgroundColor={backgroundColor}
+          isDisabled={isLoading || isDisabled}
+          isFocusVisible={false}>
+          {iconSide === 'LEFT' && renderIcon}
+          {isLoading ? (
+            <>
+              <ButtonSpinner mr="$1" />
+              <ButtonText>Please wait...</ButtonText>
+            </>
+          ) : typeof children === 'string' ? (
+            <ButtonText>{children}</ButtonText>
+          ) : (
+            children
+          )}
 
-        {typeof children === 'string' ? (
-          children
-        ) : (
-          <ButtonText m="$2" textAlign="center" {..._text}>
-            {children}
-          </ButtonText>
-        )}
-
-        {iconSide === 'RIGHT' && renderIcon()}
+          {iconSide === 'RIGHT' && renderIcon}
+        </Button>
       </LinearGradient>
-    </Button>
+    </>
   );
 };
 

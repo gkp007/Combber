@@ -7,11 +7,13 @@ import {
   Link,
   HStack,
   LinkText,
+  VStack,
   Image,
+  ScrollView,
 } from '@gluestack-ui/themed';
 
 import {useForm} from 'react-hook-form';
-import {COLORS, WIDTH} from '../../styles';
+import {COLORS, HEIGHT, WIDTH} from '../../styles';
 import AppInput from '../../components/core/AppInput';
 import {IconProps} from '../../components/core/AppIcon';
 import Btn from '../../components/core/Btn';
@@ -68,73 +70,80 @@ const Login = () => {
   } = useForm<FormData>();
 
   return (
-    <Box bg={COLORS.theme[500]} flex={1}>
-      <Box borderRadius={'$full'} rounded={20}>
-        <Image
-          source={IMAGES.LOGIN_1}
-          alt="login"
-          w={'$full'}
-          h={'$80'}
-          bottom={'$6'}
-          resizeMode={'contain'}
-        />
-      </Box>
-      {/* <Image
-            source={IMAGES.LOGO}
+    <Box bg={COLORS.theme[600]} flex={1}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* <Box
+          position="absolute"
+          alignSelf="center"
+          bg={'$amber400'}
+          borderRadius={'$full'}
+          overflow="hidden"
+          bottom={'$32'}
+          alignItems="center"
+          justifyContent="flex-end"
+          h={WIDTH}
+          w={WIDTH * 1.1}>
+          <Image
+            source={IMAGES.LOGIN_1}
+            alt="login"
+            w={'$full'}
+            h={'$full'}
             resizeMode={'contain'}
-            w={'full'}
-            h="32"
-            alt="Logo"
-            my="2"
-          /> */}
-      <Center w={WIDTH}>
-        <Heading bold color="white" size="xl">
-          Welcome Back{' '}
-        </Heading>
-        <Text textAlign="center" size="lg" bold color="white">
-          Login to your account.
-        </Text>
-        <Box mb={'$5'} mx={'$8'}>
-          {formInputs.map(input => (
-            <AppInput
-              input={input}
-              key={input.key}
-              control={control}
-              // {console.log('mmm', errors?.[input?.key]?.message)}
-              errorMessage={errors?.[input?.key]?.message}
-            />
-          ))}
-          <Text size="sm" color="white" textAlign="right" pt={'$3'}>
-            Forgot Password ?
+          />
+        </Box> */}
+        <Center>
+          <Heading bold color="white" size="2xl">
+            Welcome Back{' '}
+          </Heading>
+          <Text textAlign="center" size="sm" bold color="white">
+            Login to your account.
           </Text>
-          <HStack space={'sm'} justifyContent="center" mt={'$5'}>
-            <Text size="sm" color="white">
-              Don't have an Account?
+          <Box mb={'$5'} mx={'$8'}>
+            {formInputs.map(input => (
+              <AppInput
+                input={input}
+                key={input.key}
+                control={control}
+                // {console.log('mmm', errors?.[input?.key]?.message)}
+                errorMessage={errors?.[input?.key]?.message}
+              />
+            ))}
+            <Text size="sm" color="white" textAlign="right" pt={'$3'}>
+              Forgot Password ?
             </Text>
-            <Link alignItems="center">
-              <LinkText size="sm" color="white">
-                Sign Up
-              </LinkText>
-            </Link>
-          </HStack>
-          <Box alignSelf="center" mt={'$6'}>
-            <Btn
-
-            // iconSide={'RIGHT'}
-            // icon={{FeatherName: 'lock'}}
-            // colors={[
-            //   COLORS.secondary[50],
-            //   COLORS.theme[100],
-            //   COLORS.theme[200],
-            // ]}
-            >
-              <Text fontWeight="$medium" fontSize="$lg" color="$textLight100">
-                LOGIN
-              </Text>
-            </Btn>
           </Box>
-        </Box>
-      </Center>
+          <VStack
+            alignSelf="center"
+            space={'sm'}
+            mb={'$5'}
+            w={'$full'}
+            px={'$8'}>
+            <Btn
+              w={'$full'}
+              h={'$12'}
+              iconSide={'RIGHT'}
+              icon={{FeatherName: 'lock'}}
+              backgroundColor="transparent"
+              _text={{
+                fontWeight: '$medium',
+                fontSize: '$lg',
+                color: '$white',
+              }}>
+              LOGIN
+            </Btn>
+            <HStack space={'sm'} justifyContent="center">
+              <Text size="sm" color="white">
+                Don't have an Account?
+              </Text>
+              <Link alignItems="center">
+                <LinkText size="sm" color="white">
+                  Sign Up
+                </LinkText>
+              </Link>
+            </HStack>
+          </VStack>
+        </Center>
+      </ScrollView>
     </Box>
   );
 };

@@ -31,11 +31,17 @@ type Props = {
     icon: IconProps;
     textArea?: boolean;
   };
+  colors?: any[];
   errorMessage?: any;
   control: Control<any, any>;
 };
 
-export default function AppInput({input, errorMessage, control}: Props) {
+export default function AppInput({
+  input,
+  colors = [COLORS.secondary[50], COLORS.theme[100], COLORS.theme[200]],
+  errorMessage,
+  control,
+}: Props) {
   return (
     <Controller
       control={control}
@@ -57,6 +63,7 @@ export default function AppInput({input, errorMessage, control}: Props) {
           {!input?.textArea ? (
             <>
               <Input
+                softShadow="3"
                 borderLeftWidth={'$1'}
                 borderWidth={'$0'}
                 borderLeftColor={'$white'}
@@ -66,11 +73,7 @@ export default function AppInput({input, errorMessage, control}: Props) {
                 borderRadius={'$xl'}>
                 <LinearGradient
                   w={'$full'}
-                  colors={[
-                    COLORS.secondary[50],
-                    COLORS.theme[100],
-                    COLORS.theme[200],
-                  ]}
+                  colors={colors}
                   borderRadius="$md"
                   start={{x: 0, y: 0}}
                   end={{x: 1, y: 1}}
@@ -81,6 +84,8 @@ export default function AppInput({input, errorMessage, control}: Props) {
                     </Box>
                   </InputSlot>
                   <InputField
+                    $focus-bgColor={COLORS.theme[100]}
+                    $focus-w={'$full'}
                     alignSelf={'center'}
                     left={'$10'}
                     bgColor={'$transparent'}
@@ -95,8 +100,6 @@ export default function AppInput({input, errorMessage, control}: Props) {
                   />
                 </LinearGradient>
               </Input>
-
-              <>{console.log('first', errorMessage)}</>
             </>
           ) : (
             <Textarea size="md" w="$64">

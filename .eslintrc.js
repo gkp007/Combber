@@ -18,6 +18,8 @@ module.exports = {
         trailingComma: 'all',
       },
     ],
+
+    'no-unused-vars': 'error',
     'spaced-comment': 'off',
     'no-console': 'warn',
     'consistent-return': 'off',
