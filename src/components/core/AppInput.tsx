@@ -79,7 +79,7 @@ export default function AppInput({
                   end={{x: 1, y: 1}}
                   as={RNLinearGradient}>
                   <InputSlot position={'absolute'} top={'$0'}>
-                    <Box p="$3" w={'$full'}>
+                    <Box p="$3">
                       {<AppIcon {...input.icon} color={'#13285A'} size={20} />}
                     </Box>
                   </InputSlot>
@@ -87,11 +87,9 @@ export default function AppInput({
                     $focus-bgColor={COLORS.theme[100]}
                     $focus-w={'$full'}
                     alignSelf={'center'}
+                    w={'$full'}
                     left={'$10'}
                     bgColor={'$transparent'}
-                    position={'absolute'}
-                    // type="password"
-                    // defaultValue="12345"
                     placeholder={input.placeholder}
                     placeholderTextColor={'#13285A'}
                     value={value}
