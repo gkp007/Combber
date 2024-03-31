@@ -10,14 +10,17 @@ import {
   VStack,
   Image,
   ScrollView,
+  Pressable,
 } from '@gluestack-ui/themed';
 
 import {useForm} from 'react-hook-form';
 import {COLORS, HEIGHT, WIDTH} from '../../styles';
 import AppInput from '../../components/core/AppInput';
-import {IconProps} from '../../components/core/AppIcon';
+import AppIcon, {IconProps} from '../../components/core/AppIcon';
 import Btn from '../../components/core/Btn';
 import {IMAGES} from '../../assets';
+import {useNavigation} from '@react-navigation/native';
+import {PublicRouteProps} from '../../routes/public/types';
 
 type FormInput = {
   key: string;
@@ -31,6 +34,7 @@ type FormData = {
   [key: string]: string;
 };
 const Login = () => {
+  const {goBack, navigate} = useNavigation<PublicRouteProps>();
   const formInputs: FormInput[] = useMemo(
     () => [
       {
@@ -71,6 +75,13 @@ const Login = () => {
 
   return (
     <Box bg={COLORS.theme[600]} flex={1}>
+      <Pressable p="$3" m={'$3'} onPress={() => goBack()}>
+        <AppIcon
+          IoniconsName={'chevron-back-circle-outline'}
+          color={'white'}
+          size={32}
+        />
+      </Pressable>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* <Box
           position="absolute"
@@ -121,7 +132,6 @@ const Login = () => {
             <Btn
               softShadow="4"
               iconSide={'RIGHT'}
-              isLoading
               icon={{FeatherName: 'lock'}}
               _text={{
                 fontWeight: '$medium',
@@ -134,7 +144,7 @@ const Login = () => {
               <Text size="sm" color="white">
                 Don't have an Account?
               </Text>
-              <Link alignItems="center">
+              <Link alignItems="center" onPress={() => navigate('Register')}>
                 <LinkText size="sm" color="white">
                   Sign Up
                 </LinkText>
