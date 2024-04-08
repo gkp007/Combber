@@ -75,17 +75,12 @@ const Login = () => {
 
   return (
     <Box bg={COLORS.theme[600]} flex={1}>
-      <Pressable
-        p="$3"
-        m={'$3'}
-        bg={COLORS.theme[600]}
-        $hover-bg="$primary400"
-        w={'$12'}
-        onPress={() => goBack()}
-        borderRadius={'$3xl'}
-        borderWidth={'$1'}
-        borderColor="#fff">
-        <AppIcon AntDesignName={'left'} color={'white'} size={20} />
+      <Pressable p="$3" m={'$3'} onPress={() => goBack()}>
+        <AppIcon
+          IoniconsName={'chevron-back-circle-outline'}
+          color={'white'}
+          size={32}
+        />
       </Pressable>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* <Box
@@ -135,12 +130,9 @@ const Login = () => {
             w={'$full'}
             px={'$8'}>
             <Btn
-              w={'$full'}
-              h={'$12'}
+              softShadow="4"
               iconSide={'RIGHT'}
-              onPress={() => navigate('Splash')}
               icon={{FeatherName: 'lock'}}
-              backgroundColor="transparent"
               _text={{
                 fontWeight: '$medium',
                 fontSize: '$lg',

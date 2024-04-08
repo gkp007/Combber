@@ -4,7 +4,6 @@ import {
   ButtonText,
   HStack,
   LinearGradient,
-  Pressable,
   Spinner,
   Text,
   ButtonSpinner,
@@ -13,8 +12,9 @@ import AppIcon, {IconProps} from './AppIcon';
 import {COLORS} from '../../styles';
 import {LinearGradient as RNLinearGradient} from 'react-native-linear-gradient';
 import React from 'react';
+import {TouchableOpacity} from 'react-native';
 
-type ButtonProps = React.ComponentProps<typeof Button>;
+type HStackProps = React.ComponentProps<typeof HStack>;
 type TextProps = React.ComponentProps<typeof Text>;
 
 type BottomProps = {
@@ -26,8 +26,8 @@ type BottomProps = {
   iconSide?: 'LEFT' | 'RIGHT';
   onPress?: () => void;
   _text?: TextProps;
-  // backgroundColor?: string;
-} & ButtonProps;
+  backgroundColor?: string;
+} & HStackProps;
 
 const Btn: React.FC<BottomProps> = ({
   children,
@@ -42,8 +42,8 @@ const Btn: React.FC<BottomProps> = ({
   onPress,
   _text,
   iconSide = 'LEFT',
-  // backgroundColor = 'transparent',
-  ..._button
+  backgroundColor = 'transparent',
+  ..._hStack
 }) => {
   const renderIcon = React.useMemo(
     () => icon && <AppIcon {...icon} color="#fff" size={16} />,
@@ -52,35 +52,46 @@ const Btn: React.FC<BottomProps> = ({
 
   return (
     <>
-      <LinearGradient
-        colors={colors}
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 1}}
-        borderRadius="$full"
-        as={RNLinearGradient}>
-        <Button
-          {..._button}
-          onPress={onPress}
+      <TouchableOpacity
+        onPress={onPress}
+        disabled={isLoading || isDisabled}
+        style={{
+          backgroundColor: backgroundColor,
+          opacity: isDisabled ? 0.5 : 1,
+        }}>
+        <LinearGradient
+          colors={colors}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 1}}
           borderRadius="$full"
-          $hover-bg="$success800"
-          // backgroundColor={backgroundColor}
-          isDisabled={isLoading || isDisabled}
-          isFocusVisible={false}>
-          {iconSide === 'LEFT' && renderIcon}
-          {isLoading ? (
-            <>
-              <ButtonSpinner mr="$1" />
-              <ButtonText>Please wait...</ButtonText>
-            </>
-          ) : typeof children === 'string' ? (
-            <ButtonText>{children}</ButtonText>
-          ) : (
-            children
-          )}
+          as={RNLinearGradient}>
+          <HStack
+            {..._hStack}
+            space={'sm'}
+            borderRadius={'$full'}
+            p={'$3'}
+            alignItems="center"
+            justifyContent="center">
+            {!isLoading ? iconSide === 'LEFT' && renderIcon : null}
+            {isLoading ? (
+              <>
+                <ButtonSpinner mr="$1" size={'small'} color={'$white'} />
+                <Text color="white" fontWeight="sm" fontSize={'$lg'} {..._text}>
+                  Please wait...
+                </Text>
+              </>
+            ) : typeof children === 'string' ? (
+              <Text color="white" fontWeight="lg" fontSize={'$lg'} {..._text}>
+                {children}
+              </Text>
+            ) : (
+              children
+            )}
 
-          {iconSide === 'RIGHT' && renderIcon}
-        </Button>
-      </LinearGradient>
+            {!isLoading ? iconSide === 'RIGHT' && renderIcon : null}
+          </HStack>
+        </LinearGradient>
+      </TouchableOpacity>
     </>
   );
 };

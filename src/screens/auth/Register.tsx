@@ -105,19 +105,13 @@ const Register = () => {
   } = useForm<FormData>();
   return (
     <Box bg={COLORS.theme[600]} flex={1}>
-      <Pressable
-        p="$3"
-        m={'$3'}
-        bg={COLORS.theme[600]}
-        $hover-bg="$primary400"
-        w={'$12'}
-        onPress={() => goBack()}
-        borderRadius={'$3xl'}
-        borderWidth={'$1'}
-        borderColor="#fff">
-        <AppIcon AntDesignName={'left'} color={'white'} size={20} />
+      <Pressable p="$3" m={'$3'} onPress={() => goBack()}>
+        <AppIcon
+          IoniconsName={'chevron-back-circle-outline'}
+          color={'white'}
+          size={32}
+        />
       </Pressable>
-
       <ScrollView showsVerticalScrollIndicator={false}>
         <Center>
           <Heading bold color="white" size="2xl">
