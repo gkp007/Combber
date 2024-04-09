@@ -6,7 +6,11 @@ import PublicRoutes from './routes/public';
 
 const Router = () => {
   const {user} = useAuth();
-  return <PublicRoutes initialRouteName="Login" />;
+  return user ? (
+    <PublicRoutes initialRouteName="Login" />
+  ) : (
+    <PrivateRoutes initialRouteName="Home" />
+  );
 };
 
 export default Router;
