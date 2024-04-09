@@ -58,6 +58,7 @@ const Btn: React.FC<BottomProps> = ({
         style={{
           backgroundColor: backgroundColor,
           opacity: isDisabled ? 0.5 : 1,
+          borderRadius: 50,
         }}>
         <LinearGradient
           colors={colors}
