@@ -8,11 +8,11 @@ import {
   Text,
   ButtonSpinner,
 } from '@gluestack-ui/themed';
-import AppIcon, {IconProps} from './AppIcon';
-import {COLORS} from '../../styles';
-import {LinearGradient as RNLinearGradient} from 'react-native-linear-gradient';
+import AppIcon, { IconProps } from './AppIcon';
+import { COLORS } from '../../styles';
+import { LinearGradient as RNLinearGradient } from 'react-native-linear-gradient';
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 type HStackProps = React.ComponentProps<typeof HStack>;
 type TextProps = React.ComponentProps<typeof Text>;
@@ -61,15 +61,15 @@ const Btn: React.FC<BottomProps> = ({
         }}>
         <LinearGradient
           colors={colors}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 1}}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
           borderRadius="$full"
           as={RNLinearGradient}>
           <HStack
             {..._hStack}
             space={'sm'}
-            borderRadius={'$full'}
-            p={'$3'}
+            borderRadius={'$xl'}
+            p={'$2'}
             alignItems="center"
             justifyContent="center">
             {!isLoading ? iconSide === 'LEFT' && renderIcon : null}

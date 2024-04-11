@@ -1,6 +1,5 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-import {Control, Controller} from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 import {
   AlertCircleIcon,
   Box,
@@ -14,14 +13,11 @@ import {
   InputField,
   InputSlot,
   Textarea,
-  HStack,
   TextareaInput,
-  LinearGradient,
 } from '@gluestack-ui/themed';
-import {fontFamily} from '../../../app.json';
-import AppIcon, {IconProps} from './AppIcon';
-import {COLORS} from '../../styles';
-import {LinearGradient as RNLinearGradient} from 'react-native-linear-gradient';
+import { fontFamily } from '../../../app.json';
+import AppIcon, { IconProps } from './AppIcon';
+import { COLORS } from '../../styles';
 type Props = {
   input: {
     key: string;
@@ -47,13 +43,13 @@ export default function AppInput({
       control={control}
       name={input.key}
       rules={input.rules}
-      render={({field: {onBlur, onChange, value}}) => (
+      render={({ field: { onBlur, onChange, value } }) => (
         <FormControl
           size="md"
           // isDisabled={false}
           isInvalid={Boolean(errorMessage)}
-          // isReadOnly={false}
-          // isRequired={false}
+        // isReadOnly={false}
+        // isRequired={false}
         >
           <FormControlLabel mb="$1">
             <FormControlLabelText fontFamily={`${fontFamily}-Regular`}>
@@ -63,47 +59,38 @@ export default function AppInput({
           {!input?.textArea ? (
             <>
               <Input
-                softShadow="3"
-                borderLeftWidth={'$1'}
-                borderWidth={'$0'}
-                borderLeftColor={'$white'}
+                borderWidth={'$1'}
+                borderRightColor={'$grey200'}
+                borderLeftColor={'$grey200'}
+                borderRightWidth={"$1"}
                 size="sm"
                 h={'$12'}
-                bgColor={COLORS.primary[200]}
+                // bg={'$blue50'}
                 borderRadius={'$xl'}>
-                <LinearGradient
+                <InputSlot position={'absolute'} top={'$0'}>
+                  <Box p="$3">
+                    {<AppIcon {...input.icon} color={'black'} size={20} />}
+                  </Box>
+                </InputSlot>
+                <InputField
+                  $focus-w={'$full'}
+                  alignSelf={'center'}
                   w={'$full'}
-                  colors={colors}
-                  borderRadius="$md"
-                  start={{x: 0, y: 0}}
-                  end={{x: 1, y: 1}}
-                  as={RNLinearGradient}>
-                  <InputSlot position={'absolute'} top={'$0'}>
-                    <Box p="$3">
-                      {<AppIcon {...input.icon} color={'#13285A'} size={20} />}
-                    </Box>
-                  </InputSlot>
-                  <InputField
-                    $focus-bgColor={COLORS.theme[100]}
-                    $focus-w={'$full'}
-                    alignSelf={'center'}
-                    w={'$full'}
-                    left={'$10'}
-                    bgColor={'$transparent'}
-                    placeholder={input.placeholder}
-                    placeholderTextColor={'#13285A'}
-                    value={value}
-                    onChangeText={onChange}
-                    onBlur={onBlur}
-                  />
-                </LinearGradient>
+                  left={'$10'}
+                  bgColor={'$white'}
+                  placeholder={input.placeholder}
+                  placeholderTextColor={'gray'}
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                />
               </Input>
             </>
           ) : (
             <Textarea size="md" w="$64">
               <InputSlot>
                 <Box pl="$3">
-                  {<AppIcon {...input.icon} color={'red'} size={20} />}
+                  {<AppIcon {...input.icon} color={'$red100'} size={20} />}
                 </Box>
               </InputSlot>
               <TextareaInput placeholder={input.placeholder} />
