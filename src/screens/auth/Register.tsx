@@ -144,15 +144,15 @@ const Register = () => {
             <Btn
               w={'$full'}
               h={'$12'}
-              iconSide={'RIGHT'}
-              icon={{FeatherName: 'lock'}}
+              // iconSide={'RIGHT'}
+              // icon={{FeatherName: 'lock'}}
               backgroundColor="transparent"
               _text={{
                 fontWeight: '$medium',
                 fontSize: '$lg',
                 color: '$white',
               }}>
-              REGISTER
+              SIGN UP
             </Btn>
             <HStack space={'sm'} justifyContent="center">
               <Text size="sm" color="white">

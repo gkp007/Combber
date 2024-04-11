@@ -17,10 +17,10 @@ import {useForm} from 'react-hook-form';
 import {COLORS, HEIGHT, WIDTH} from '../../styles';
 import AppInput from '../../components/core/AppInput';
 import AppIcon, {IconProps} from '../../components/core/AppIcon';
-import Btn from '../../components/core/Btn';
-import {IMAGES} from '../../assets';
+
 import {useNavigation} from '@react-navigation/native';
-import {PublicRouteProps} from '../../routes/public/types';
+import {PublicRouteProps} from '~/routes/public/types';
+import Btn from '~/components/core/Btn';
 
 type FormInput = {
   key: string;
@@ -75,7 +75,7 @@ const Login = () => {
 
   return (
     <Box bg={COLORS.theme[600]} flex={1}>
-      <Pressable p="$3" m={'$3'} onPress={() => goBack()}>
+      <Pressable p="$3" m={'$3'} onPress={() => navigate('Onboarding')}>
         <AppIcon
           IoniconsName={'chevron-back-circle-outline'}
           color={'white'}
@@ -131,8 +131,8 @@ const Login = () => {
             px={'$8'}>
             <Btn
               softShadow="4"
-              iconSide={'RIGHT'}
-              icon={{FeatherName: 'lock'}}
+              // iconSide={'RIGHT'}
+              // icon={{FeatherName: 'lock'}}
               _text={{
                 fontWeight: '$medium',
                 fontSize: '$lg',
