@@ -147,6 +147,24 @@ export default function Register(): JSX.Element {
   const formInputs1: FormInput[] = useMemo(
     () => [
       {
+        key: 'mobile',
+        label: undefined,
+        placeholder: 'Enter your mobile number',
+        icon: { IoniconsName: 'call-outline', color: 'gray' },
+        rules: {
+          required: 'Mobile number is required',
+          pattern: {
+            value: /^[0-9]{10}$/,
+            message: 'Invalid mobile number',
+          },
+        },
+        inputProps: {
+          keyboardType: 'numeric',
+          autoCapitalize: 'none',
+          variant: 'underlined',
+        },
+      },
+      {
         key: 'E mail',
         label: undefined,
         placeholder: 'Enter your email address',
@@ -217,29 +235,6 @@ export default function Register(): JSX.Element {
     [secureTextEntry],
   );
 
-  const formInputs: FormInput[] = useMemo(
-    () => [
-      {
-        key: 'mobile',
-        label: undefined,
-        placeholder: 'Enter your mobile number',
-        icon: { IoniconsName: 'call-outline', color: 'gray' },
-        rules: {
-          required: 'Mobile number is required',
-          pattern: {
-            value: /^[0-9]{10}$/,
-            message: 'Invalid mobile number',
-          },
-        },
-        inputProps: {
-          keyboardType: 'numeric',
-          autoCapitalize: 'none',
-          variant: 'underlined',
-        },
-      },
-    ],
-    [secureTextEntry],
-  );
 
   return (
     <>
@@ -266,76 +261,46 @@ export default function Register(): JSX.Element {
             </Box>
           </Box>
 
-          {!isPhone ? (
-            <VStack space={'md'}>
-              <Box px="$4">
-                {formInputs1.map(input => (
-                  <AppInput
-                    input={input}
-                    key={input.key}
-                    control={control}
-                    errorMessage={errors?.[input?.key]?.message}
-                  />
-                ))}
-              </Box>
 
-              <Box mx={15} >
-                <Btn
-                  bg={COLORS.theme[600]}
-                  _text={{ color: 'white', fontSize: '$sm' }}
-                  onPress={handleSubmit(handleLoginWithGmail)}
-                >
-                  <Heading fontSize={15} color={'white'}>
-                    {isLoading || isGmailValidating ? (
-                      <Spinner size={'small'} color={'white'} />
-                    ) : (
-                      <HStack alignItems={'center'} space={'xs'}>
-                        <Text color={'white'} bold> Submit </Text>
-                        <AppIcon
-                          FeatherName="log-in"
-                          color={'white'}
-                          size={20}
-                        />
-                      </HStack>
-                    )}
-                  </Heading>
-                </Btn>
+          <VStack space={'md'}>
+            <Box px="$4">
+              {formInputs1.map(input => (
+                <AppInput
+                  input={input}
+                  key={input.key}
+                  control={control}
+                  errorMessage={errors?.[input?.key]?.message}
+                />
+              ))}
+            </Box>
 
-              </Box>
+            <Box mx={15} >
+              <Btn
+                bg={COLORS.theme[600]}
+                _text={{ color: 'white', fontSize: '$sm' }}
+                onPress={handleSubmit(handleLoginWithGmail)}
+              >
+                <Heading fontSize={15} color={'white'}>
+                  {isLoading || isGmailValidating ? (
+                    <Spinner size={'small'} color={'white'} />
+                  ) : (
+                    <HStack alignItems={'center'} space={'xs'}>
+                      <Text color={'white'} bold> Submit </Text>
+                      <AppIcon
+                        FeatherName="log-in"
+                        color={'white'}
+                        size={20}
+                      />
+                    </HStack>
+                  )}
+                </Heading>
+              </Btn>
+
+            </Box>
 
 
-            </VStack>
-          ) : (
-            <VStack space={'md'}>
-              <Box px="$4">
-                {formInputs.map(input => (
-                  <AppInput
-                    input={input}
-                    key={input.key}
-                    control={control}
-                    errorMessage={errors?.[input?.key]?.message}
+          </VStack>
 
-                  />
-                ))}
-              </Box>
-
-              <Box mx={'$4'} mt={'$1'}>
-                <Btn
-                  bg={COLORS.theme[600]}
-                  _text={{ color: 'white', fontSize: '$sm' }}
-                  onPress={handleSubmit(handleLogin)}
-                  py={'$3'}
-                >
-                  <HStack alignItems='center' space={'md'}>
-                    <Text color={'white'} bold> Get verification code</Text>
-                    <AppIcon FeatherName="log-in" color={'white'} size={20} />
-                  </HStack>
-
-                </Btn>
-              </Box>
-
-            </VStack>
-          )}
 
 
           <HStack
@@ -364,35 +329,6 @@ export default function Register(): JSX.Element {
             <Text mb={2} textAlign={'center'}>
               - Or -
             </Text>
-
-
-            <Pressable
-              $pressed={{ opacity: 0.8 }}
-              w={'92%'}
-              py={1.5}
-              onPress={() => {
-                setIsPhone(!isPhone);
-              }}
-              borderColor={'blue.800'}
-              rounded={'$full'}
-              bg={'white'}
-              alignSelf={'center'}
-              justifyContent={'center'}
-              alignItems={'center'}
-              borderWidth={0.3}>
-              <HStack
-                alignItems={'center'}
-                justifyContent={'center'}
-                space={'md'}>
-                <AppIcon
-                  IoniconsName={!isPhone ? 'call-outline' : 'mail-outline'}
-                  size={18}
-                />
-                <Heading fontSize={15} py={1} color={'gray'}>
-                  {`Register With ${!isPhone ? 'Phone' : 'Email'}`}
-                </Heading>
-              </HStack>
-            </Pressable>
 
 
             <Pressable
