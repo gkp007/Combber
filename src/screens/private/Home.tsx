@@ -147,7 +147,7 @@ export default function Register(): JSX.Element {
     () => [
       {
         key: 'username',
-        label: 'Email',
+        label: undefined,
         placeholder: 'Username',
         icon: { FeatherName: 'mail' },
         rules: {
@@ -165,7 +165,7 @@ export default function Register(): JSX.Element {
       },
       {
         key: 'password',
-        label: 'Password',
+        label: undefined,
         placeholder: 'Password',
         icon: { FeatherName: 'lock' },
         rules: {
@@ -197,7 +197,7 @@ export default function Register(): JSX.Element {
         key: 'mobile',
         label: undefined,
         placeholder: 'Enter your mobile number',
-        icon: { IoniconsName: 'call', color: 'gray' },
+        icon: { IoniconsName: 'call-outline', color: 'gray' },
         rules: {
           required: 'Mobile number is required',
           pattern: {
@@ -222,68 +222,165 @@ export default function Register(): JSX.Element {
         h={'100%'}
       >
         <Image
-          w="$72"
-          h="$72"
+          w="$56"
+          h="$56"
           source={IMAGES.ONBOARDING}
           alt="logo"
           alignSelf='center'
         />
-        <VStack space='md' justifyContent={'space-between'} h={'60%'}>
-          <Box>
-            <Heading textAlign={'center'} fontSize={22} color={'black'}>
-              Enter Your Mobile Number
+        <VStack space='md' justifyContent={'space-between'} h={'50%'}>
+          <Box mx={'$4'}>
+            <Heading fontSize={18} color={'black'}>
+              Login with your credentials
             </Heading>
-            <Box mt={2} alignItems={'center'}>
-              <Text fontSize={11} color={'blue.500'}>
-                We will send you a confirmation code
+            <Box mt={2}>
+              <Text fontSize={10} color={'blue.500'}>
+                We will send a code to your mobile
               </Text>
             </Box>
           </Box>
 
-          <VStack space={'md'}>
-            <Box px="$4">
-              {formInputs.map(input => (
-                <AppInput
-                  input={input}
-                  key={input.key}
-                  control={control}
-                  errorMessage={errors?.[input?.key]?.message}
-                />
-              ))}
-            </Box>
-            <Box mx={'$3'}>
-              <Btn
-                bg={COLORS.theme[600]}
-                _text={{ color: 'white', fontSize: '$xs' }}
-                onPress={handleSubmit(handleLogin)}
-              >
-                <Heading fontSize={12} color={'white'}>
+          {!isPhone ? (
+            <VStack space={'md'}>
+              <Box px="$4">
+                {formInputs1.map(input => (
+                  <AppInput
+                    input={input}
+                    key={input.key}
+                    control={control}
+                    errorMessage={errors?.[input?.key]?.message}
+                  />
+                ))}
+              </Box>
 
-                  <HStack space='md' alignItems='center'>
-                    <Text textAlign='center' color='white' bold> L O G I N </Text>
+              <Box mx={15} mt={'$5'}>
+                <Btn
+                  bg={COLORS.theme[600]}
+                  _text={{ color: 'white', fontSize: '$sm' }}
+                  onPress={handleSubmit(handleLoginWithGmail)}
+                >
+                  <Heading fontSize={15} color={'white'}>
+                    {isLoading || isGmailValidating ? (
+                      <Spinner size={'small'} color={'white'} />
+                    ) : (
+                      <HStack alignItems={'center'} space={'xs'}>
+                        <Text color={'white'} bold> Submit </Text>
+                        <AppIcon
+                          FeatherName="log-in"
+                          color={'white'}
+                          size={20}
+                        />
+                      </HStack>
+                    )}
+                  </Heading>
+                </Btn>
+
+              </Box>
+
+
+            </VStack>
+          ) : (
+            <VStack space={'md'}>
+              <Box px="$4">
+                {formInputs.map(input => (
+                  <AppInput
+                    input={input}
+                    key={input.key}
+                    control={control}
+                    errorMessage={errors?.[input?.key]?.message}
+
+                  />
+                ))}
+              </Box>
+
+              <Box mx={'$4'} mt={'$1'}>
+                <Btn
+                  bg={COLORS.theme[600]}
+                  _text={{ color: 'white', fontSize: '$sm' }}
+                  onPress={handleSubmit(handleLogin)}
+                  py={'$3'}
+                >
+                  <HStack alignItems='center' space={'md'}>
+                    <Text color={'white'} bold> Get verification code</Text>
                     <AppIcon FeatherName="log-in" color={'white'} size={20} />
                   </HStack>
 
-                </Heading>
-              </Btn>
-            </Box>
+                </Btn>
+              </Box>
+
+            </VStack>
+          )}
 
 
+          <HStack
+            alignItems="center"
+            flexDirection="row"
+            mx={'$5'}
+          >
+            <Text fontSize="$xs" fontWeight="400">
+              Don't have an account?
+            </Text>
+            <Btn
+              colors={['#fff', '#fff']}
+              _text={{
+                color: 'black',
+                fontSize: '$xs',
+                bold: true,
+              }}
+              onPress={() => navigate('Login', { objData })}>
+              Login
+            </Btn>
+          </HStack>
+
+
+
+          <>
             <Text mb={2} textAlign={'center'}>
               - Or -
             </Text>
 
+
             <Pressable
               $pressed={{ opacity: 0.8 }}
               w={'92%'}
-              py={'$1.5'}
+              py={1.5}
+              onPress={() => {
+                setIsPhone(!isPhone);
+              }}
               borderColor={'blue.800'}
-              borderRadius={'$xl'}
+              rounded={'$full'}
               bg={'white'}
               alignSelf={'center'}
               justifyContent={'center'}
               alignItems={'center'}
-              borderWidth={0.5}>
+              borderWidth={0.3}>
+              <HStack
+                alignItems={'center'}
+                justifyContent={'center'}
+                space={'md'}>
+                <AppIcon
+                  IoniconsName={!isPhone ? 'call-outline' : 'mail-outline'}
+                  size={18}
+                />
+                <Heading fontSize={15} py={1} color={'black'}>
+                  {`Login With ${!isPhone ? 'Phone' : 'Email'}`}
+                </Heading>
+              </HStack>
+            </Pressable>
+
+
+            <Pressable
+              $pressed={{ opacity: 0.8 }}
+              w={'92%'}
+              py={1.5}
+              borderColor={'blue.800'}
+              rounded={'$full'}
+
+              bg={'white'}
+              alignSelf={'center'}
+              justifyContent={'center'}
+              alignItems={'center'}
+              borderWidth={0.3}>
               <HStack
                 alignItems={'center'}
                 justifyContent={'center'}
@@ -300,30 +397,10 @@ export default function Register(): JSX.Element {
                   Login With Google
                 </Heading>
               </HStack>
-            </Pressable>
+            </Pressable></>
 
-            <HStack
-              alignItems="center"
-              flexDirection="row"
-              justifyContent={'center'}>
-              <Text fontSize="$md" fontWeight="400">
-                Already have an account?
-              </Text>
-              <Btn
-                colors={['#fff', '#fff']}
-                _text={{
-                  color: COLORS.theme[600],
-                  fontSize: '$sm',
-                  fontWeight: '',
-                }}
-                onPress={() => navigate('Login', { objData })}>
-                Login
-              </Btn>
-            </HStack>
-          </VStack>
 
-          <Box>
-          </Box>
+
           <Box alignItems={'center'}>
             <HStack>
               <Text fontSize={11} color="gray.500" >
@@ -357,7 +434,7 @@ export default function Register(): JSX.Element {
             </HStack>
           </Box>
         </VStack>
-      </Box>
+      </Box >
     </>
   );
 }

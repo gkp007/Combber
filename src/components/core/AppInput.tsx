@@ -59,14 +59,14 @@ export default function AppInput({
           {!input?.textArea ? (
             <>
               <Input
-                borderWidth={'$1'}
-                borderRightColor={'$grey200'}
-                borderLeftColor={'$grey200'}
-                borderRightWidth={"$1"}
+
+                rounded={'$full'}
                 size="sm"
                 h={'$12'}
-                // bg={'$blue50'}
-                borderRadius={'$xl'}>
+                bgColor={'$blue50'}
+
+
+              >
                 <InputSlot position={'absolute'} top={'$0'}>
                   <Box p="$3">
                     {<AppIcon {...input.icon} color={'black'} size={20} />}
@@ -77,7 +77,8 @@ export default function AppInput({
                   alignSelf={'center'}
                   w={'$full'}
                   left={'$10'}
-                  bgColor={'$white'}
+                  bgColor={'$blue50'}
+
                   placeholder={input.placeholder}
                   placeholderTextColor={'gray'}
                   value={value}

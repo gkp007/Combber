@@ -64,12 +64,12 @@ const Btn: React.FC<BottomProps> = ({
           colors={colors}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          borderRadius="$full"
+          rounded={'$full'}
           as={RNLinearGradient}>
           <HStack
             {..._hStack}
             space={'sm'}
-            borderRadius={'$xl'}
+            rounded={'$full'}
             p={'$2'}
             alignItems="center"
             justifyContent="center">
