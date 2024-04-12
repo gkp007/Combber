@@ -30,6 +30,7 @@ type Props = {
   colors?: any[];
   errorMessage?: any;
   control: Control<any, any>;
+  secureTextEntry?: boolean;
 };
 
 export default function AppInput({
@@ -37,6 +38,7 @@ export default function AppInput({
   colors = [COLORS.secondary[50], COLORS.theme[100], COLORS.theme[200]],
   errorMessage,
   control,
+  secureTextEntry
 }: Props) {
   return (
     <Controller

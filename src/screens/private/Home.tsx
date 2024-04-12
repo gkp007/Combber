@@ -63,6 +63,7 @@ export default function Register(): JSX.Element {
     formState: { errors },
   } = useForm<FormData>();
 
+
   const { setUser, getUser, setToken } = useAuth();
   const { mutation: login, isLoading } = useMutation();
   const { mutation: gmail, isLoading: isGmailValidating } = useMutation();
@@ -146,9 +147,9 @@ export default function Register(): JSX.Element {
   const formInputs1: FormInput[] = useMemo(
     () => [
       {
-        key: 'username',
+        key: 'E mail',
         label: undefined,
-        placeholder: 'Username',
+        placeholder: 'Enter your email address',
         icon: { FeatherName: 'mail' },
         rules: {
           required: 'Username is required',
@@ -170,6 +171,31 @@ export default function Register(): JSX.Element {
         icon: { FeatherName: 'lock' },
         rules: {
           required: 'Password is required',
+          minLength: {
+            value: 6,
+            message: 'Password must be at least 6 characters long',
+          },
+        },
+        inputProps: {
+          secureTextEntry,
+          rightElement: (
+            <Btn
+              colors={['#fff', '#fff']}
+              _text={{ color: 'black', fontSize: '$xs' }}
+              onPress={() => setSecureTextEntry(!secureTextEntry)}>
+              {secureTextEntry ? 'Show' : 'Hide'}
+            </Btn>
+          ),
+        },
+      },
+      {
+        key: 'ConfirmPassword',
+        label: undefined,
+        placeholder: 'Confirm Password',
+        icon: { FeatherName: 'lock' },
+        rules: {
+          required: 'Password is required',
+          confirmPassword: { value: 'password', message: 'Password does not match' },
           minLength: {
             value: 6,
             message: 'Password must be at least 6 characters long',
@@ -231,7 +257,7 @@ export default function Register(): JSX.Element {
         <VStack space='md' justifyContent={'space-between'} h={'50%'}>
           <Box mx={'$4'}>
             <Heading fontSize={18} color={'black'}>
-              Login with your credentials
+              Register with your us
             </Heading>
             <Box mt={2}>
               <Text fontSize={10} color={'blue.500'}>
@@ -253,7 +279,7 @@ export default function Register(): JSX.Element {
                 ))}
               </Box>
 
-              <Box mx={15} mt={'$5'}>
+              <Box mx={15} >
                 <Btn
                   bg={COLORS.theme[600]}
                   _text={{ color: 'white', fontSize: '$sm' }}
@@ -318,7 +344,7 @@ export default function Register(): JSX.Element {
             mx={'$5'}
           >
             <Text fontSize="$xs" fontWeight="400">
-              Don't have an account?
+              Already Have an account?
             </Text>
             <Btn
               colors={['#fff', '#fff']}
@@ -362,8 +388,8 @@ export default function Register(): JSX.Element {
                   IoniconsName={!isPhone ? 'call-outline' : 'mail-outline'}
                   size={18}
                 />
-                <Heading fontSize={15} py={1} color={'black'}>
-                  {`Login With ${!isPhone ? 'Phone' : 'Email'}`}
+                <Heading fontSize={15} py={1} color={'gray'}>
+                  {`Register With ${!isPhone ? 'Phone' : 'Email'}`}
                 </Heading>
               </HStack>
             </Pressable>
@@ -393,8 +419,8 @@ export default function Register(): JSX.Element {
                   bg={'transparent'}
                   alt="Logo"
                 />
-                <Heading fontSize={15} py={1} color={'black'}>
-                  Login With Google
+                <Heading fontSize={15} py={1} color={'gray'}>
+                  Register With Google
                 </Heading>
               </HStack>
             </Pressable></>
