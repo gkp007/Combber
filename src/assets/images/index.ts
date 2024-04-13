@@ -4,4 +4,6 @@ export const IMAGES = {
   LOGO: require('./logo1.png'),
   GOOGLE: require('./google.png'),
   ONBOARDING: require('./onboardingLogo.png'),
+  OTP: require('./otp.jpg'),
+  FORGOT: require('./forgot.jpg'),
 };

@@ -8,6 +8,7 @@ import {
   Image,
   Pressable,
   Spinner,
+  ScrollView,
 } from '@gluestack-ui/themed';
 
 import React, { useMemo, useState } from 'react';
@@ -167,6 +168,7 @@ export default function Register(): JSX.Element {
       {
         key: 'E mail',
         label: undefined,
+        hint: 'demo@demo.com',
         placeholder: 'Enter your email address',
         icon: { FeatherName: 'mail' },
         rules: {
@@ -237,7 +239,7 @@ export default function Register(): JSX.Element {
 
 
   return (
-    <>
+    <ScrollView>
       <Box
         bg={'white'}
         h={'100%'}
@@ -397,6 +399,6 @@ export default function Register(): JSX.Element {
           </Box>
         </VStack>
       </Box >
-    </>
+    </ScrollView>
   );
 }
