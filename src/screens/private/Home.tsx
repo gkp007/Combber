@@ -104,9 +104,22 @@ export default function Profile() {
 
       },
       {
-        title: 'Notification',
+        title: 'Bookings',
+        leftIcon: { FeatherName: 'user', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
+        subtitle: 'See all bookings',
+        // onPress: () => navigate('AllOrders')
+
+      },
+      {
+        title: 'Bank Details',
         leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
         subtitle: 'Manage Notification',
+        // onPress: () => navigate('WishList')
+      },
+      {
+        title: 'Employee Details',
+        leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
+        subtitle: 'Add or remove employees',
         // onPress: () => navigate('WishList')
       },
       {
@@ -122,7 +135,13 @@ export default function Profile() {
         // onPress: () => navigate('Address')
       },
       {
-        title: 'Languages',
+        title: 'Delete account',
+        leftIcon: { FeatherName: 'help-circle', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
+        subtitle: 'Get help',
+        // onPress: () => navigate('Address')
+      },
+      {
+        title: 'Business Details',
         leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
         subtitle: 'Manage Language',
         // onPress: () => navigate('Wallet')
@@ -185,18 +204,21 @@ export default function Profile() {
   return (
     <Box bg={'white'} h={'$full'} >
       <StatusBar animated backgroundColor={COLORS.theme[600]} />
-      <ImageBackground
-        h={HEIGHT * 0.3}
-        borderRadius={5}
-        resizeMode="cover"
-        source={IMAGES.ONBOARDING}
-        alt="Logo"
-        zIndex={1}
-        imageStyle={{ opacity: 0.5, backgroundColor: 'blue' }}>
+      <Box
+        bg={COLORS.theme[600]}
+        h={HEIGHT / 3}
+        zIndex={-1}
+        borderBottomLeftRadius={'$2xl'}
+        borderBottomRightRadius={'$2xl'}
+      >
 
         <VStack alignItems="center" space={'xs'} mt={5} >
 
+          <Heading textAlign={'center'} size="lg" color={'white'} mt={'$4'} >
+            Scissors
+          </Heading>
 
+          <Text color={'white'} textAlign={'center'} fontSize={14}>Gopalkrishna Pattanaik</Text>
 
           <Pressable
             justifyContent={'center'}
@@ -205,7 +227,7 @@ export default function Profile() {
             borderColor={COLORS.theme[600]}
             borderRadius={'$full'}
             position={'absolute'}
-            top={'$16'}
+            top={'$20'}
             zIndex={1}
           >
             <Avatar size="xl">
@@ -222,25 +244,20 @@ export default function Profile() {
 
 
         </VStack>
-      </ImageBackground>
+      </Box>
 
-      <Heading textAlign={'center'} size="md" color={'black'} mt={'$12'} >
-        Scissors Salon
-      </Heading>
 
-      <Text mb={'$5'} color={'black'} mt={1} textAlign={'center'} fontSize={14}>Gopalkrishna Pattanaik</Text>
-      <ScrollView >
 
-        <Box zIndex={0} mt={'$5'} bg={'white'} mx={3} >
-          <FlatList
-            data={listData}
-            renderItem={renderItem}
-            keyExtractor={(item, index) => index.toString()}
-          />
+      <Box zIndex={0} mt={'$16'} bg={'white'} mx={3} >
+        <FlatList
+          data={listData}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+        />
 
-        </Box>
+      </Box>
 
-      </ScrollView >
+
     </Box >
   );
 }
