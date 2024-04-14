@@ -1,4 +1,7 @@
-import React, { useMemo } from 'react';
+import { AvatarImage, Divider, FlatList, ImageBackground } from '@gluestack-ui/themed';
+import { ScrollView } from '@gluestack-ui/themed';
+import { AvatarFallbackText } from '@gluestack-ui/themed';
+import { Avatar } from '@gluestack-ui/themed';
 import {
   Box,
   Heading,
@@ -9,218 +12,235 @@ import {
   Pressable,
   Spinner,
 } from '@gluestack-ui/themed';
-
-import { COLORS } from '~/styles';
 import { useNavigation } from '@react-navigation/native';
-import { StackAndTabType } from '~/routes/private/types';
+import React from 'react';
+import { StatusBar } from 'react-native';
+import { Linking } from 'react-native';
 import { IMAGES } from '~/assets';
-import { ImageBackground } from 'react-native';
-import localStorage from '@react-native-async-storage/async-storage';
-import { useToast } from '@gluestack-ui/themed';
+import AppIcon, { IconProps } from '~/components/core/AppIcon';
 import useAuth from '~/hooks/useAuth';
-import { Toast } from '@gluestack-ui/themed';
-import useMutation from '~/hooks/useMutation';
-import OtpInput from '~/components/core/OTPInput';
-import Btn from '~/components/core/Btn';
-import AppInput from '~/components/core/AppInput';
-import { useForm } from 'react-hook-form';
+import { StackAndTabType } from '~/routes/private/types';
+import { COLORS, HEIGHT, WIDTH } from '~/styles';
+export default function Profile() {
 
-type otp = {
-  Success: undefined;
-};
-
-export default function OTPVerification({ route: { params } }: Props): JSX.Element {
-  const [otpValue, setOtpValue] = React.useState<string[]>([]);
   const { navigate, goBack } = useNavigation<StackAndTabType>();
-  const objData = '452144';
-  // Accessing route params?
-  const [asyncToken, setSyncToken] = React.useState<any>();
-  const { mutation: login, isLoading } = useMutation();
-  const { mutation: otp, isLoading: isOtpLoading } = useMutation();
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const accessToken = await localStorage.getItem('accessToken');
-      setSyncToken(accessToken);
-    };
 
-    fetchData();
-  }, [objData]);
 
-  const handleOtpChange = (newValue: string[]) => {
-    setOtpValue(newValue);
-  };
-  console.log({ objData });
+  function renderItem({ item, index }: { item: typeof listData[0], index: number }) {
 
-  const handleResend = async () => {
-    try {
-      const res = await otp(`auth/generate-otp`, {
-        body: objData,
-      });
+    const isLastItem = index === listData.length - 1;
 
-      Toast({
-        title: 'OTP sent successfully',
-        duration: 2000,
-        bg: 'success.500',
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    return (
+      <VStack>
+        <Pressable
+          onPress={item.onPress}
+          py={3}
+          px={4}
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-between"
 
-  const { setUser, getUser, setToken } = useAuth();
+          borderBottomColor="gray.200"
+        >
+          <HStack space={'xs'} alignItems="center">
+            {item.leftIcon && (
+              <HStack alignItems='center'>
 
-  const toast = useToast();
+                <Box rounded={'$xl'} m={'$2'} p={'$2'}>
+                  <AppIcon
+                    FeatherName={item.leftIcon?.FeatherName}
+                    size={item.leftIcon?.size}
+                    color={item.leftIcon?.color}
+                  />
+                </Box>
 
-  const handleLogin = async () => {
-    try {
-      const res = await login(`auth/login-with-phone`, {
-        body: {
-          token: params?.token || asyncToken,
-          otp: otpValue,
-        },
-      });
+                <Divider mx={'$1'} py={'$5'} orientation="vertical" bgColor='gray' />
+              </HStack>
 
-      // setUser({
-      //   mobile: mobileNumber,
-      //   otp: otpValue.join(''), // Assuming you need the OTP value in string format
-      // });726866
 
-      if (res?.results?.success) {
+            )}
+            <VStack ml={'$4'}>
+              <Text fontSize="$lg" fontWeight='$semibold'>{item.title}</Text>
+              {item.subtitle && <Text fontSize="$xs">{item.subtitle}</Text>}
+            </VStack>
+          </HStack>
+          <Box mr={'$4'}>
+            <AppIcon
+              FeatherName="chevron-right"
+              color={'gray'}
+              size={20}
+            />
+          </Box>
 
-        setToken(res?.results?.data?.token);
-        setUser(res?.results?.data);
-        toast.show({
-          title: res?.results?.success ? 'Login Successful!' : 'Login Failed',
-          duration: 5000,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
 
-  const formInputs: FormInput[] = useMemo(
-    () => [
+        </Pressable>
+        {!isLastItem && <Divider my={'$2'} alignSelf='center' width={'60%'} orientation="horizontal" bgColor='transparent' />}
+      </VStack>
+    );
+  }
+
+
+  const { logout } = useAuth();
+
+  // const handleLogout = () => {
+  //   logout();
+  //   navigate('Login');
+  // };
+
+  const listData: {
+    title: string;
+    subtitle?: string;
+    avatar?: string;
+    leftIcon?: IconProps & { backgroundColor?: string };
+    isHeading?: boolean;
+    onPress?: () => void;
+  }[] = [
       {
-        key: 'username',
-        label: undefined,
-        placeholder: 'Enter registration email address',
-        icon: { FeatherName: 'mail' },
-        rules: {
-          required: 'Email address is required',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address',
-          },
-        },
-        inputProps: { keyboardType: 'email-address', autoCapitalize: 'none' },
+        title: 'Profile',
+        leftIcon: { FeatherName: 'user', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
+        subtitle: 'Manage Profile',
+        // onPress: () => navigate('AllOrders')
+
       },
-    ],
-    [],
-  );
+      {
+        title: 'Notification',
+        leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
+        subtitle: 'Manage Notification',
+        // onPress: () => navigate('WishList')
+      },
+      {
+        title: 'Messages',
+        leftIcon: { FeatherName: 'message-square', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
+        subtitle: 'Manage Chats',
+        // onPress: () => navigate('MyCoupons')
+      },
+      {
+        title: 'Help & FAQ',
+        leftIcon: { FeatherName: 'help-circle', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
+        subtitle: 'Get help',
+        // onPress: () => navigate('Address')
+      },
+      {
+        title: 'Languages',
+        leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
+        subtitle: 'Manage Language',
+        // onPress: () => navigate('Wallet')
+      },
+      {
+        title: 'Log Out',
+        leftIcon: { FeatherName: 'log-out', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
+
+        subtitle: 'See all settings',
+        onPress: () => {
+          logout();
+          navigate('Login');
+        }
+      },
+
+      // {
+      //   title: 'Privacy Policy',
+      //   leftIcon: { FeatherName: 'lock', color: COLORS.PRIMARY, size: 18 },
+      //   onPress: () => Linking.openURL('https://yard-ecommerce-web.vercel.app/privacy-policy')
+      // },
+      // {
+      //   title: 'Terms of Service',
+      //   leftIcon: { FeatherName: 'file-text', color: COLORS.PRIMARY, size: 18 },
+      //   onPress: () => Linking.openURL('https://yard-ecommerce-web.vercel.app/terms-and-conditions')
+
+      // },
+      // {
+      //   title: 'About',
+      //   leftIcon: { FeatherName: 'info', color: COLORS.PRIMARY, size: 18 },
+      // },
+
+      // {
+      //   title: 'Logout',
+      //   leftIcon: { FeatherName: 'log-out', color: COLORS.PRIMARY, size: 18 },
+      //   onPress: () => {
+      //     logout();
+      //     navigate('Login');
+      //   }
+      // },
+
+    ];
+  const userData: {
+    name?: string;
+    email?: string;
+    avatar?: string;
+    mobileNumber?: number;
+    gender?: string;
+
+  } =
+  {
+    name: 'Scissors Salon',
+    email: 'Gk Pattanaik',
+    avatar: IMAGES.LOGO,
+    mobileNumber: 775421654,
+    gender: 'male',
+  }
+
 
 
   return (
-    <VStack
-      justifyContent='space-between'
-      h="$full"
-      bg={'white'}>
+    <Box bg={'white'} h={'$full'} >
+      <StatusBar animated backgroundColor={COLORS.theme[600]} />
+      <ImageBackground
+        h={HEIGHT * 0.3}
+        borderRadius={5}
+        resizeMode="cover"
+        source={IMAGES.ONBOARDING}
+        alt="Logo"
+        zIndex={1}
+        imageStyle={{ opacity: 0.5, backgroundColor: 'blue' }}>
 
-      <Image
-        w="$56"
-        h="$64"
-        mt={'$24'}
-        source={IMAGES.FORGOT}
-        alt="logo"
-        alignSelf='center'
-      />
-      <Box
+        <VStack alignItems="center" space={'xs'} mt={5} >
 
-        bg={'white'}>
-        <Box w={'97%'} my={5} alignSelf={'center'}>
-          <VStack space={'xs'}>
-            <VStack space={'xs'}>
-              <Heading mx={'$1'} fontSize={26} color={'black'}>
-                Forgot Password?
-              </Heading>
-              <Text
-                fontSize={12}
-                mx={'$1'}
-                w={'80%'}
-                color={'blue.500'}
-              >
-                Enter your your email. If your email is registered then we will send you a code to your mobile.{' '}
-              </Text>
-            </VStack>
-            <Box mx={5} mb={'$4'}>
-              {formInputs.map(input => (
-                <AppInput
-                  input={input}
-                  key={input.key}
-                  control={control}
-                  errorMessage={errors?.[input?.key]?.message}
-                />
-              ))}
-            </Box>
-            <Box>
 
-              <Box m={2} mb={'$5'} mt={'$2'}>
-                <Btn
-                  borderRadius="$sm"
-                  alignItems={'center'}
-                  w="$full"
-                  onPress={handleLogin}
-                  bg={COLORS.theme[600]}
-                  _text={{
 
-                    fontSize: '$md',
-                    fontFamily: 'Montserrat-Semibold',
-                    textAlign: 'center',
-                  }}>
-                  <HStack space={'md'} alignItems={'center'}>
-                    {/* <Spinner alignSelf={'center'} size={13} color={'white'} /> */}
+          <Pressable
+            justifyContent={'center'}
+            alignItems={'center'}
+            borderWidth={'$2'}
+            borderColor={COLORS.theme[600]}
+            borderRadius={'$full'}
+            position={'absolute'}
+            top={'$16'}
+            zIndex={1}
+          >
+            <Avatar size="xl">
+              <AvatarFallbackText>Scissors Salon</AvatarFallbackText>
+              <AvatarImage
+                size="2xl"
+                alt='Scissors Salon'
+                source={{
+                  uri: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+                }}
+              />
+            </Avatar>
+          </Pressable>
 
-                    {isLoading ? (
-                      <Spinner size={'small'} color={'white'} />
-                    ) : (
-                      <Heading py={1} fontSize={15} color={'white'}>
-                        Verify
-                      </Heading>
-                    )}
-                  </HStack>
-                </Btn>
-              </Box>
 
-              <HStack
-                mb={'$4'}
-                justifyContent={'center'}
-                alignItems={'center'}
-                mt={4}
-                space={'md'}>
-                <Text fontSize={11} color={'gray'}>
-                  Didn't received the OTP?
-                </Text>
-                <Pressable $pressed={{ opacity: 0.5 }} onPress={handleResend}>
-                  <Text
-                    underline
-                    fontSize={12}
+        </VStack>
+      </ImageBackground>
 
-                    color={COLORS.theme[600]}>
-                    Resend OTP
-                  </Text>
-                </Pressable>
-              </HStack>
-            </Box>
-          </VStack>
+      <Heading textAlign={'center'} size="md" color={'black'} mt={'$12'} >
+        Scissors Salon
+      </Heading>
+
+      <Text mb={'$5'} color={'black'} mt={1} textAlign={'center'} fontSize={14}>Gopalkrishna Pattanaik</Text>
+      <ScrollView >
+
+        <Box zIndex={0} mt={'$5'} bg={'white'} mx={3} >
+          <FlatList
+            data={listData}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          />
+
         </Box>
-      </Box>
-    </VStack>
+
+      </ScrollView >
+    </Box >
   );
 }
-
