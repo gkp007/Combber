@@ -20,9 +20,6 @@ type notificationType = {
   }
 }
 
-
-
-
 const Notifications = () => {
 
 

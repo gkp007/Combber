@@ -12,7 +12,6 @@ import { COLORS } from '~/styles';
 import React from 'react';
 import { Private } from 'screens';
 
-
 const BottomTab = createBottomTabNavigator();
 
 export default () => {
