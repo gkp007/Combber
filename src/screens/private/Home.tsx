@@ -1,263 +1,172 @@
-import { AvatarImage, Divider, FlatList, ImageBackground } from '@gluestack-ui/themed';
-import { ScrollView } from '@gluestack-ui/themed';
-import { AvatarFallbackText } from '@gluestack-ui/themed';
-import { Avatar } from '@gluestack-ui/themed';
+import React, { useState } from 'react';
 import {
-  Box,
-  Heading,
   Text,
   HStack,
-  VStack,
-  Image,
   Pressable,
-  Spinner,
+  Toast,
 } from '@gluestack-ui/themed';
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { StatusBar } from 'react-native';
-import { Linking } from 'react-native';
-import { IMAGES } from '~/assets';
-import AppIcon, { IconProps } from '~/components/core/AppIcon';
+import { FlatList } from '@gluestack-ui/themed';
+import Empty from '~/components/core/Empty';
 import useAuth from '~/hooks/useAuth';
-import { StackAndTabType } from '~/routes/private/types';
-import { COLORS, HEIGHT, WIDTH } from '~/styles';
-export default function Profile() {
+import { useChange, useFetch } from '~/hooks/useAPI';
+import NotificationCard from '~/components/NotificationCard';
+import { ANIMATIONS } from '~/assets';
+import { HEIGHT, WIDTH } from '~/styles';
+import PrivateContainer from '~/components/shared/PrivateContainer';
+type notificationType = {
+  item: {
+    id: string;
 
-  const { navigate, goBack } = useNavigation<StackAndTabType>();
-
-
-  function renderItem({ item, index }: { item: typeof listData[0], index: number }) {
-
-    const isLastItem = index === listData.length - 1;
-
-    return (
-      <VStack>
-        <Pressable
-          onPress={item.onPress}
-          py={3}
-          px={4}
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-between"
-
-          borderBottomColor="gray.200"
-        >
-          <HStack space={'xs'} alignItems="center">
-            {item.leftIcon && (
-              <HStack alignItems='center'>
-
-                <Box rounded={'$xl'} m={'$2'} p={'$2'}>
-                  <AppIcon
-                    FeatherName={item.leftIcon?.FeatherName}
-                    size={item.leftIcon?.size}
-                    color={item.leftIcon?.color}
-                  />
-                </Box>
-
-                <Divider mx={'$1'} py={'$5'} orientation="vertical" bgColor='gray' />
-              </HStack>
-
-
-            )}
-            <VStack ml={'$4'}>
-              <Text fontSize="$lg" fontWeight='$semibold'>{item.title}</Text>
-              {item.subtitle && <Text fontSize="$xs">{item.subtitle}</Text>}
-            </VStack>
-          </HStack>
-          <Box mr={'$4'}>
-            <AppIcon
-              FeatherName="chevron-right"
-              color={'gray'}
-              size={20}
-            />
-          </Box>
-
-
-
-        </Pressable>
-        {!isLastItem && <Divider my={'$2'} alignSelf='center' width={'60%'} orientation="horizontal" bgColor='transparent' />}
-      </VStack>
-    );
   }
+}
 
 
-  const { logout } = useAuth();
-
-  // const handleLogout = () => {
-  //   logout();
-  //   navigate('Login');
-  // };
-
-  const listData: {
-    title: string;
-    subtitle?: string;
-    avatar?: string;
-    leftIcon?: IconProps & { backgroundColor?: string };
-    isHeading?: boolean;
-    onPress?: () => void;
-  }[] = [
-      {
-        title: 'Profile',
-        leftIcon: { FeatherName: 'user', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Manage Profile',
-        // onPress: () => navigate('AllOrders')
-
-      },
-      {
-        title: 'Bookings',
-        leftIcon: { FeatherName: 'user', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'See all bookings',
-        // onPress: () => navigate('AllOrders')
-
-      },
-      {
-        title: 'Bank Details',
-        leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Manage Notification',
-        // onPress: () => navigate('WishList')
-      },
-      {
-        title: 'Employee Details',
-        leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Add or remove employees',
-        // onPress: () => navigate('WishList')
-      },
-      {
-        title: 'Messages',
-        leftIcon: { FeatherName: 'message-square', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Manage Chats',
-        // onPress: () => navigate('MyCoupons')
-      },
-      {
-        title: 'Help & FAQ',
-        leftIcon: { FeatherName: 'help-circle', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Get help',
-        // onPress: () => navigate('Address')
-      },
-      {
-        title: 'Delete account',
-        leftIcon: { FeatherName: 'help-circle', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Get help',
-        // onPress: () => navigate('Address')
-      },
-      {
-        title: 'Business Details',
-        leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Manage Language',
-        // onPress: () => navigate('Wallet')
-      },
-      {
-        title: 'Log Out',
-        leftIcon: { FeatherName: 'log-out', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-
-        subtitle: 'See all settings',
-        onPress: () => {
-          logout();
-          navigate('Login');
-        }
-      },
-
-      // {
-      //   title: 'Privacy Policy',
-      //   leftIcon: { FeatherName: 'lock', color: COLORS.PRIMARY, size: 18 },
-      //   onPress: () => Linking.openURL('https://yard-ecommerce-web.vercel.app/privacy-policy')
-      // },
-      // {
-      //   title: 'Terms of Service',
-      //   leftIcon: { FeatherName: 'file-text', color: COLORS.PRIMARY, size: 18 },
-      //   onPress: () => Linking.openURL('https://yard-ecommerce-web.vercel.app/terms-and-conditions')
-
-      // },
-      // {
-      //   title: 'About',
-      //   leftIcon: { FeatherName: 'info', color: COLORS.PRIMARY, size: 18 },
-      // },
-
-      // {
-      //   title: 'Logout',
-      //   leftIcon: { FeatherName: 'log-out', color: COLORS.PRIMARY, size: 18 },
-      //   onPress: () => {
-      //     logout();
-      //     navigate('Login');
-      //   }
-      // },
-
-    ];
-  const userData: {
-    name?: string;
-    email?: string;
-    avatar?: string;
-    mobileNumber?: number;
-    gender?: string;
-
-  } =
-  {
-    name: 'Scissors Salon',
-    email: 'Gk Pattanaik',
-    avatar: IMAGES.LOGO,
-    mobileNumber: 775421654,
-    gender: 'male',
-  }
 
 
+const Notifications = () => {
+
+
+  const dummyData = [
+    {
+      id: '1',
+      title: 'Appointment Reminder',
+      description: 'Your appointment with Barber Joe is scheduled for tomorrow at 10:00 AM.',
+    },
+    {
+      id: '2',
+      title: 'Appointment Confirmed',
+      description: 'Your appointment with Barber Alex has been confirmed for next Friday at 2:00 PM.',
+    },
+    {
+      id: '3',
+      title: 'New Appointment Request',
+      description: 'You have a new appointment request from John Doe for next Saturday at 11:30 AM.',
+    },
+    {
+      id: '4',
+      title: 'Appointment Cancellation',
+      description: 'Your appointment with Barber Smith has been cancelled. Please reschedule if needed.',
+    },
+    {
+      id: '5',
+      title: 'Reminder: Leave a Review',
+      description: 'Don\'t forget to leave a review for your recent appointment with Barber Sam!',
+    },
+  ];
+
+
+
+  const [data, setData] = useState(dummyData);
+
+  const [showModal, setShowModal] = useState(false);
+  const { user } = useAuth();
+  const { change } = useChange();
+  const { isLoading, mutate } = useFetch<any>(
+    `notificns?userId=${user?.id}&orderBedAt:desc`,
+  );
+  console.log(data, 'noti')
+
+  const handleReadALL = async () => {
+    try {
+      const response = await change(`notifications/read/all`, {
+        method: 'PUT',
+        body: {
+          userId: user?.id,
+        },
+      });
+      // if (response?.status !== 200) throw new Error(response?.results?.msg);
+
+      if (response?.results?.success === true) {
+        // Toast.show({
+        //   title: 'Success',
+        //   description: 'All marked read successfully',
+        //   bgColor: '#84cc16',
+        //   duration: 5000,
+        // });
+        mutate();
+      }
+    } catch (error) {
+      Toast({
+        title: 'Error',
+        description: 'error occurred',
+        duration: 5000,
+        bgColor: '#fb7185',
+      });
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    try {
+      const res = await change(`notifications//delete-all`, {
+        method: 'DELETE',
+        body: {
+          userId: user?.id,
+        },
+      });
+      if (res?.status === 200) {
+        setShowModal(false);
+        Toast({
+          title: 'Delete Successful!',
+          duration: 5000,
+          bgColor: 'green.600',
+        });
+        mutate();
+      } else {
+        setShowModal(false);
+        Toast({
+          title: res?.results?.msg,
+          // title: 'Delete Not Successful',
+          duration: 5000,
+          bgColor: 'rose.600',
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <Box bg={'white'} h={'$full'} >
-      <StatusBar animated backgroundColor={COLORS.theme[600]} />
-      <Box
-        bg={COLORS.theme[600]}
-        h={HEIGHT / 3}
-        zIndex={-1}
-        borderBottomLeftRadius={'$2xl'}
-        borderBottomRightRadius={'$2xl'}
-      >
+    <>
+      <PrivateContainer title="Notifications">
 
-        <VStack alignItems="center" space={'xs'} mt={5} >
-
-          <Heading textAlign={'center'} size="lg" color={'white'} mt={'$4'} >
-            Scissors
-          </Heading>
-
-          <Text color={'white'} textAlign={'center'} fontSize={14}>Gopalkrishna Pattanaik</Text>
-
-          <Pressable
-            justifyContent={'center'}
-            alignItems={'center'}
-            borderWidth={'$2'}
-            borderColor={COLORS.theme[600]}
-            borderRadius={'$full'}
-            position={'absolute'}
-            top={'$20'}
-            zIndex={1}
-          >
-            <Avatar size="xl">
-              <AvatarFallbackText>Scissors Salon</AvatarFallbackText>
-              <AvatarImage
-                size="2xl"
-                alt='Scissors Salon'
-                source={{
-                  uri: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-                }}
-              />
-            </Avatar>
-          </Pressable>
-
-
-        </VStack>
-      </Box>
-
-
-
-      <Box zIndex={0} mt={'$16'} bg={'white'} mx={3} >
+        {data?.length > 0 && (
+          <HStack mt={'$4'} justifyContent={'space-between'} mx={'$3'} alignItems={'center'}>
+            <Pressable onPress={handleReadALL}>
+              <Text  >
+                Mark All Read
+              </Text>
+            </Pressable>
+            <Pressable onPress={handleDeleteAll}>
+              <Text bold >
+                Clear all
+              </Text>
+            </Pressable>
+          </HStack>
+        )}
         <FlatList
-          data={listData}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index.toString()}
+          mt={'$3'}
+          refreshing={isLoading}
+          onRefresh={mutate}
+          data={data}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }: notificationType) => (
+            <NotificationCard item={item} key={item?.id} mutate={mutate} />
+          )}
+          ListEmptyComponent={
+            <>
+              <Empty
+                title="No data available"
+                animation={ANIMATIONS.NO_DATA}
+                height={HEIGHT / 1.7}
+                width={WIDTH}
+              />
+            </>
+          }
         />
-
-      </Box>
-
-
-    </Box >
+      </PrivateContainer>
+    </>
   );
-}
+};
+
+
+export default Notifications;
