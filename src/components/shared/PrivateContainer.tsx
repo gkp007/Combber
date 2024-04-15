@@ -51,7 +51,7 @@ export default function PrivateContainer({
     <>
       <Box
         flex={1}
-        bg={'white'}
+        bg={'$coolGray100'}
         {..._box}>
         <HStack
           bg="white"
@@ -82,7 +82,7 @@ export default function PrivateContainer({
               <Text
                 color="black"
                 fontWeight={'bold'}
-                fontSize={'$lg'}
+                fontSize={'$md'}
                 {..._titleProps}>
                 {title}
               </Text>

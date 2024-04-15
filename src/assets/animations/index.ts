@@ -7,8 +7,7 @@ export default {
   NO_DATA2: require('./No_Data2.json'),
   NO_DATA3: require('./No_Data3.json'),
   NO_DATA4: require('./No_Data4.json'),
-
   CARD: require('./Card.json'),
-
+  STORE: require('./store.json'),
   UPLOAD: require('./upload.json'),
 };
