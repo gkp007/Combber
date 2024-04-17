@@ -1,5 +1,5 @@
-import {Auth, Public} from '../../screens';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {Public, Auth} from '~/screens';
 
 type PublicScreens = {
   [key in keyof typeof Public]: undefined;
