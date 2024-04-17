@@ -129,7 +129,7 @@ export default function Register(): JSX.Element {
         })
         toast.show({
           title: res?.results?.success
-            ? 'Register Successful login your account !'
+            ? 'Register Successful login your account !!!!'
             : 'Login Failed',
           duration: 5000,
         });
