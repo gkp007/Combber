@@ -187,7 +187,8 @@ const BusinessInfo = () => {
                   </Textarea>
 
 
-                  {/* <Text>new branch</Text> */}
+                  {/* <Text>new branch</Text>
+                  <Text>new branch</Text> */}
                   <Pressable
                     bgColor='$white'
                     rounded={'$full'}
