@@ -1,21 +1,17 @@
-import {
-  Box,
-  Text,
-  Icon,
-} from '@gluestack-ui/themed';
-import { StyleSheet } from 'react-native';
-import { useState } from 'react';
+import {Box, Text, Icon, AddIcon} from '@gluestack-ui/themed';
+import {StyleSheet} from 'react-native';
+import {useState} from 'react';
 import useAuth from '~/hooks/useAuth';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AppIcon from '~/components/core/AppIcon';
-import { COLORS } from '~/styles';
+import {COLORS} from '~/styles';
 import React from 'react';
-import { Private } from 'screens';
+import {Private} from '~/screens';
 
 const BottomTab = createBottomTabNavigator();
 
-export default () => {
-  const { user } = useAuth();
+export default function TabLayout() {
+  const {user} = useAuth();
   const [open, setOpen] = useState(false);
   const toggleOpened = () => {
     setOpen(!open);
@@ -41,24 +37,18 @@ export default () => {
           name="Dashboard"
           component={Private.Home}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <Box alignItems={'center'} justifyContent={'center'}>
-                <Icon
-                  m={'$1'}
-                  size={'sm'}
-                  color={focused ? COLORS.theme[600] : '#748C94'}
-                  as={
-                    focused ? (
-                      <AppIcon AntDesignName="appstore1" />
-                    ) : (
-                      <AppIcon AntDesignName="appstore-o" />
-                    )
-                  }
-                />
+                <Box>
+                  {focused ? (
+                    <AppIcon AntDesignName="appstore1" />
+                  ) : (
+                    <AppIcon AntDesignName="appstore-o" />
+                  )}
+                </Box>
                 <Text
                   color={focused ? COLORS.theme[600] : '#748C94'}
-                  fontSize={focused ? 10 : 8}
-                >
+                  fontSize={focused ? 10 : 8}>
                   Dashboard
                 </Text>
               </Box>
@@ -71,21 +61,15 @@ export default () => {
         <BottomTab.Screen
           name="MyProjects"
           component={Private.Home}
-          // component={Private.UploadEmployeeData}
-          // component={Private.HRDashboard}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <Box alignItems={'center'} justifyContent={'center'}>
-                <Icon
-                  m={1}
-                  size={'md'}
-                  color={focused ? COLORS.theme[600] : '#748C94'}
-                  as={<AppIcon FontistoName="ampproject" />}
-                />
+                <Box>
+                  <AppIcon FontistoName="ampproject" />
+                </Box>
                 <Text
                   color={focused ? COLORS.theme[600] : '#748C94'}
-                  fontSize={focused ? 10 : 8}
-                >
+                  fontSize={focused ? 10 : 8}>
                   Project
                 </Text>
               </Box>
@@ -109,18 +93,14 @@ export default () => {
           name="Email"
           component={Private.Home}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <Box alignItems={'center'} justifyContent={'center'}>
-                <Icon
-                  m={1}
-                  size={'sm'}
-                  color={focused ? COLORS.theme[600] : '#748C94'}
-                  as={<AppIcon EntypoName="email" />}
-                />
+                <Box>
+                  <AppIcon EntypoName="email" />
+                </Box>
                 <Text
                   color={focused ? COLORS.theme[600] : '#748C94'}
-                  fontSize={focused ? 10 : 8}
-                >
+                  fontSize={focused ? 10 : 8}>
                   Email
                 </Text>
               </Box>
@@ -134,24 +114,19 @@ export default () => {
           name="Profile"
           component={Private.Profile}
           options={{
-            tabBarIcon: ({ focused }) => (
+            tabBarIcon: ({focused}) => (
               <Box alignItems={'center'} justifyContent={'center'}>
-                <Icon
-                  m={'$1'}
-                  size={'sm'}
-                  color={focused ? COLORS.theme[600] : '#748C94'}
-                  as={
-                    focused ? (
-                      <AppIcon FontAwesomeName="user-circle" />
-                    ) : (
-                      <AppIcon FontAwesomeName="user-circle-o" />
-                    )
-                  }
-                />
+                <Box>
+                  {focused ? (
+                    <AppIcon FontAwesomeName="user-circle" />
+                  ) : (
+                    <AppIcon FontAwesomeName="user-circle-o" />
+                  )}
+                </Box>
+
                 <Text
                   color={focused ? COLORS.theme[600] : '#748C94'}
-                  fontSize={focused ? 10 : 8}
-                >
+                  fontSize={focused ? 10 : 8}>
                   Profile
                 </Text>
               </Box>
@@ -164,16 +139,4 @@ export default () => {
       </BottomTab.Navigator>
     </>
   );
-};
-
-const styles = StyleSheet.create({
-  tabBar: {
-    height: 60,
-    paddingBottom: 10,
-    // position: 'absolute',
-    // bottom: 15,
-    // right: 10,
-    // left: 10,
-    // borderRadius: 12,
-  },
-});
+}
