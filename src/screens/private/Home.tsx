@@ -3,7 +3,6 @@ import {
   Text,
   HStack,
   Pressable,
-  Toast,
   Heading,
   Box,
   VStack,
@@ -14,7 +13,6 @@ import {
   CheckboxLabel,
   CheckIcon,
   ScrollView,
-  Center,
   ModalContent,
   ModalHeader,
   ModalCloseButton,
@@ -25,24 +23,17 @@ import {
   CloseIcon,
   ButtonText,
   Modal,
-  ModalBackdrop
-
+  ModalBackdrop,
+  Textarea
 } from '@gluestack-ui/themed';
-import { FlatList } from '@gluestack-ui/themed';
-import Empty from '~/components/core/Empty';
-import useAuth from '~/hooks/useAuth';
-import { useChange, useFetch } from '~/hooks/useAPI';
-import NotificationCard from '~/components/NotificationCard';
-import { ANIMATIONS } from '~/assets';
-import { COLORS, HEIGHT, WIDTH } from '~/styles';
-import PrivateContainer from '~/components/shared/PrivateContainer';
-import LottieView from 'lottie-react-native';
+import { COLORS, WIDTH } from '~/styles';
 import AppInput from '~/components/core/AppInput';
 import { useForm } from 'react-hook-form';
 import AppIcon from '~/components/core/AppIcon';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 import Btn from '~/components/core/Btn';
+import { TextareaInput } from '@gluestack-ui/themed';
 
 type FormInput = {
   key: string;
@@ -53,7 +44,7 @@ type FormInput = {
   inputProps?: any;
 };
 
-const Notifications = () => {
+const BusinessInfo = () => {
 
 
   const [showModal, setShowModal] = useState(false)
@@ -182,6 +173,21 @@ const Notifications = () => {
                       errorMessage={errors?.[input?.key]?.message}
                     />
                   ))}
+
+                  <Textarea
+                    size="md"
+                    isReadOnly={false}
+                    isInvalid={false}
+                    isDisabled={false}
+                    w="$full"
+                    borderRadius={'$md'}
+                    mt={'$6'}
+                  >
+                    <TextareaInput placeholder="Enter Store Address..." />
+                  </Textarea>
+
+
+                  {/* <Text>new branch</Text> */}
                   <Pressable
                     bgColor='$white'
                     rounded={'$full'}
@@ -192,14 +198,12 @@ const Notifications = () => {
                     borderColor='$blue300'
                   >
                     <HStack ml={'$5'} alignItems='center' justifyContent='space-between' height="100%">
-                      <Text color={COLORS.theme[600]} bold>Add Store Location</Text>
+                      <Text color={COLORS.theme[600]} bold>Add Location from map</Text>
                       <Box mr={'$5'}>
                         <AppIcon MaterialCommunityIconsName='chevron-triple-right' color={COLORS.theme[600]} />
                       </Box>
-
                     </HStack>
                   </Pressable>
-
                 </VStack>
               </Box>
             </Box>
@@ -210,7 +214,6 @@ const Notifications = () => {
                 <HStack space={'xs'} justifyContent={'space-between'} alignItems={'center'} mb={'$3'}>
                   <Heading fontSize={'$lg'} bold>Select working days</Heading>
                   <AppIcon IoniconsName='calendar-number-outline' size={22} />
-
                 </HStack>
 
                 <CheckboxGroup
@@ -329,7 +332,6 @@ const Notifications = () => {
               // onPress={handleSubmit(handleLoginWithGmail)}
               >
                 <Heading fontSize={15} color={'white'}>
-
                   <HStack alignItems={'center'} space={'xs'}>
                     <Text color={'white'} bold> Submit </Text>
                     <AppIcon
@@ -345,7 +347,7 @@ const Notifications = () => {
 
           </VStack>
 
-        </Box>
+        </Box >
 
 
 
@@ -409,11 +411,10 @@ const Notifications = () => {
           onConfirm={handleClosingTimeConfirm}
           onCancel={hideClosingTimePicker}
         />
-
-      </ScrollView>
+      </ScrollView >
     </>
   );
 };
 
 
-export default Notifications;
+export default BusinessInfo;
