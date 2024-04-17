@@ -138,6 +138,8 @@ const BusinessInfo = () => {
     <>
 
       <ScrollView>
+
+        {/* <Text>ok</Text> */}
         <Box m={'$2'} backgroundColor='$coolGray100'>
           <VStack justifyContent='space-between'>
 
