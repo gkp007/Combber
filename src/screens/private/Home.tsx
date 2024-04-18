@@ -136,9 +136,7 @@ const BusinessInfo = () => {
 
   return (
     <>
-
       <ScrollView>
-
         {/* <Text>ok</Text> */}
         <Box m={'$2'} backgroundColor='$coolGray100'>
           <VStack justifyContent='space-between'>
@@ -150,6 +148,7 @@ const BusinessInfo = () => {
 
               <AppIcon IoniconsName='storefront-outline' color={COLORS.theme[600]} size={30} />
             </HStack>
+
 
 
             <Box softShadow='1' backgroundColor='$white' borderColor={'$blue300'} borderRadius={'$xl'} mt={'$4'}>
@@ -418,6 +417,5 @@ const BusinessInfo = () => {
     </>
   );
 };
-
 
 export default BusinessInfo;
