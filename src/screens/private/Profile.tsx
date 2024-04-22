@@ -1,7 +1,12 @@
-import { AvatarImage, Divider, FlatList, ImageBackground } from '@gluestack-ui/themed';
-import { ScrollView } from '@gluestack-ui/themed';
-import { AvatarFallbackText } from '@gluestack-ui/themed';
-import { Avatar } from '@gluestack-ui/themed';
+import {
+  AvatarImage,
+  Divider,
+  FlatList,
+  ImageBackground,
+} from '@gluestack-ui/themed';
+import {ScrollView} from '@gluestack-ui/themed';
+import {AvatarFallbackText} from '@gluestack-ui/themed';
+import {Avatar} from '@gluestack-ui/themed';
 import {
   Box,
   Heading,
@@ -12,22 +17,25 @@ import {
   Pressable,
   Spinner,
 } from '@gluestack-ui/themed';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import { StatusBar } from 'react-native';
-import { Linking } from 'react-native';
-import { IMAGES } from '~/assets';
-import AppIcon, { IconProps } from '~/components/core/AppIcon';
+import {StatusBar} from 'react-native';
+import {Linking} from 'react-native';
+import {IMAGES} from '~/assets';
+import AppIcon, {IconProps} from '~/components/core/AppIcon';
 import useAuth from '~/hooks/useAuth';
-import { StackAndTabType } from '~/routes/private/types';
-import { COLORS, HEIGHT, WIDTH } from '~/styles';
+import {StackAndTabType} from '~/routes/private/types';
+import {COLORS, HEIGHT, WIDTH} from '~/styles';
 export default function Profile() {
+  const {navigate, goBack} = useNavigation<StackAndTabType>();
 
-  const { navigate, goBack } = useNavigation<StackAndTabType>();
-
-
-  function renderItem({ item, index }: { item: typeof listData[0], index: number }) {
-
+  function renderItem({
+    item,
+    index,
+  }: {
+    item: (typeof listData)[0];
+    index: number;
+  }) {
     const isLastItem = index === listData.length - 1;
 
     return (
@@ -39,13 +47,10 @@ export default function Profile() {
           flexDirection="row"
           alignItems="center"
           justifyContent="space-between"
-
-          borderBottomColor="gray.200"
-        >
+          borderBottomColor="gray.200">
           <HStack space={'xs'} alignItems="center">
             {item.leftIcon && (
-              <HStack alignItems='center'>
-
+              <HStack alignItems="center">
                 <Box rounded={'$xl'} m={'$2'} p={'$2'}>
                   <AppIcon
                     FeatherName={item.leftIcon?.FeatherName}
@@ -54,210 +59,257 @@ export default function Profile() {
                   />
                 </Box>
 
-                <Divider mx={'$1'} py={'$5'} orientation="vertical" bgColor='gray' />
+                <Divider
+                  mx={'$1'}
+                  py={'$5'}
+                  orientation="vertical"
+                  bgColor="gray"
+                />
               </HStack>
-
-
             )}
             <VStack ml={'$4'}>
-              <Text fontSize="$lg" fontWeight='$semibold'>{item.title}</Text>
+              <Text fontSize="$lg" fontWeight="$semibold">
+                {item.title}
+              </Text>
               {item.subtitle && <Text fontSize="$xs">{item.subtitle}</Text>}
             </VStack>
           </HStack>
           <Box mr={'$4'}>
-            <AppIcon
-              FeatherName="chevron-right"
-              color={'gray'}
-              size={20}
-            />
+            <AppIcon FeatherName="chevron-right" color={'gray'} size={20} />
           </Box>
-
-
-
         </Pressable>
-        {!isLastItem && <Divider my={'$2'} alignSelf='center' width={'60%'} orientation="horizontal" bgColor='transparent' />}
+        {!isLastItem && (
+          <Divider
+            my={'$2'}
+            alignSelf="center"
+            width={'60%'}
+            orientation="horizontal"
+            bgColor="transparent"
+          />
+        )}
       </VStack>
     );
   }
 
-
-  const { logout } = useAuth();
-
-  // const handleLogout = () => {
-  //   logout();
-  //   navigate('Login');
-  // };
+  const {logout} = useAuth();
 
   const listData: {
     title: string;
     subtitle?: string;
     avatar?: string;
-    leftIcon?: IconProps & { backgroundColor?: string };
+    leftIcon?: IconProps & {backgroundColor?: string};
     isHeading?: boolean;
     onPress?: () => void;
   }[] = [
-      {
-        title: 'Profile',
-        leftIcon: { FeatherName: 'user', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Manage Profile',
-        // onPress: () => navigate('AllOrders')
-
+    {
+      title: 'Profile',
+      leftIcon: {
+        FeatherName: 'user',
+        color: COLORS.theme[600],
+        size: 18,
+        backgroundColor: '$amber200',
       },
-      {
-        title: 'Bookings',
-        leftIcon: { FeatherName: 'user', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'See all bookings',
-        // onPress: () => navigate('AllOrders')
-
+      subtitle: 'Manage Profile',
+      // onPress: () => navigate('AllOrders')
+    },
+    {
+      title: 'Bookings',
+      leftIcon: {
+        FeatherName: 'user',
+        color: COLORS.theme[600],
+        size: 18,
+        backgroundColor: '$amber200',
       },
-      {
-        title: 'Bank Details',
-        leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Manage Notification',
-        // onPress: () => navigate('WishList')
+      subtitle: 'See all bookings',
+      // onPress: () => navigate('AllOrders')
+    },
+    {
+      title: 'Bank Details',
+      leftIcon: {
+        FeatherName: 'bell',
+        color: COLORS.theme[600],
+        size: 18,
+        backgroundColor: '$amber200',
       },
-      {
-        title: 'Employee Details',
-        leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Add or remove employees',
-        // onPress: () => navigate('WishList')
+      subtitle: 'Manage Notification',
+      // onPress: () => navigate('WishList')
+    },
+    {
+      title: 'Employee Details',
+      leftIcon: {
+        FeatherName: 'bell',
+        color: COLORS.theme[600],
+        size: 18,
+        backgroundColor: '$amber200',
       },
-      {
-        title: 'Messages',
-        leftIcon: { FeatherName: 'message-square', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Manage Chats',
-        // onPress: () => navigate('MyCoupons')
+      subtitle: 'Add or remove employees',
+      // onPress: () => navigate('WishList')
+    },
+    {
+      title: 'Messages',
+      leftIcon: {
+        FeatherName: 'message-square',
+        color: COLORS.theme[600],
+        size: 18,
+        backgroundColor: '$amber200',
       },
-      {
-        title: 'Help & FAQ',
-        leftIcon: { FeatherName: 'help-circle', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Get help',
-        // onPress: () => navigate('Address')
+      subtitle: 'Manage Chats',
+      // onPress: () => navigate('MyCoupons')
+    },
+    {
+      title: 'Help & FAQ',
+      leftIcon: {
+        FeatherName: 'help-circle',
+        color: COLORS.theme[600],
+        size: 18,
+        backgroundColor: '$amber200',
       },
-      {
-        title: 'Delete account',
-        leftIcon: { FeatherName: 'help-circle', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Get help',
-        // onPress: () => navigate('Address')
+      subtitle: 'Get help',
+      // onPress: () => navigate('Address')
+    },
+    {
+      title: 'Delete account',
+      leftIcon: {
+        FeatherName: 'help-circle',
+        color: COLORS.theme[600],
+        size: 18,
+        backgroundColor: '$amber200',
       },
-      {
-        title: 'Business Details',
-        leftIcon: { FeatherName: 'bell', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-        subtitle: 'Manage Language',
-        // onPress: () => navigate('Wallet')
+      subtitle: 'Get help',
+      // onPress: () => navigate('Address')
+    },
+    {
+      title: 'Business Details',
+      leftIcon: {
+        FeatherName: 'bell',
+        color: COLORS.theme[600],
+        size: 18,
+        backgroundColor: '$amber200',
       },
-      {
-        title: 'Log Out',
-        leftIcon: { FeatherName: 'log-out', color: COLORS.theme[600], size: 18, backgroundColor: '$amber200' },
-
-        subtitle: 'See all settings',
-        onPress: () => {
-          logout();
-          navigate('Login');
-        }
-      },
-
-      // {
-      //   title: 'Privacy Policy',
-      //   leftIcon: { FeatherName: 'lock', color: COLORS.PRIMARY, size: 18 },
-      //   onPress: () => Linking.openURL('https://yard-ecommerce-web.vercel.app/privacy-policy')
-      // },
-      // {
-      //   title: 'Terms of Service',
-      //   leftIcon: { FeatherName: 'file-text', color: COLORS.PRIMARY, size: 18 },
-      //   onPress: () => Linking.openURL('https://yard-ecommerce-web.vercel.app/terms-and-conditions')
-
-      // },
-      // {
-      //   title: 'About',
-      //   leftIcon: { FeatherName: 'info', color: COLORS.PRIMARY, size: 18 },
-      // },
-
-      // {
-      //   title: 'Logout',
-      //   leftIcon: { FeatherName: 'log-out', color: COLORS.PRIMARY, size: 18 },
-      //   onPress: () => {
-      //     logout();
-      //     navigate('Login');
-      //   }
-      // },
-
-    ];
+      subtitle: 'Manage Language',
+      // onPress: () => navigate('Wallet')
+    },
+  ];
   const userData: {
     name?: string;
     email?: string;
     avatar?: string;
     mobileNumber?: number;
     gender?: string;
-
-  } =
-  {
+  } = {
     name: 'Scissors Salon',
     email: 'Gk Pattanaik',
     avatar: IMAGES.LOGO,
     mobileNumber: 775421654,
     gender: 'male',
-  }
-
-
+  };
 
   return (
-    <Box bg={'white'} h={'$full'} >
+    <Box bg={'white'} h={'100%'}>
       <StatusBar animated backgroundColor={COLORS.theme[600]} />
       <Box
+        borderWidth={'$1'}
+        borderColor="#121212"
         bg={COLORS.theme[600]}
-        h={HEIGHT / 3}
-        zIndex={-1}
+        h={'15%'}
+        // zIndex={-1}
         borderBottomLeftRadius={'$2xl'}
         borderBottomRightRadius={'$2xl'}
-      >
-
-        <VStack alignItems="center" space={'xs'} mt={5} >
-
-          <Heading textAlign={'center'} size="lg" color={'white'} mt={'$4'} >
-            Scissors
-          </Heading>
-
-          <Text color={'white'} textAlign={'center'} fontSize={14}>Gopalkrishna Pattanaik</Text>
-
+        >
+        <VStack 
+        // alignItems="center" 
+        // space={'xs'}
+        >
           <Pressable
-            justifyContent={'center'}
-            alignItems={'center'}
-            borderWidth={'$2'}
+            // justifyContent={'center'}
+            // alignItems={'center'}
+            borderWidth={'$4'}
             borderColor={COLORS.theme[600]}
             borderRadius={'$full'}
-            position={'absolute'}
-            top={'$20'}
-            zIndex={1}
+            // position={'absolute'}
+            top={'$1/2'}
+            // zIndex={1}
           >
             <Avatar size="xl">
               <AvatarFallbackText>Scissors Salon</AvatarFallbackText>
               <AvatarImage
                 size="2xl"
-                alt='Scissors Salon'
+                alt="Scissors Salon"
                 source={{
-                  uri: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+                  uri: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60',
                 }}
               />
             </Avatar>
           </Pressable>
-
-
         </VStack>
       </Box>
+      {/* about card's */}
 
+      <Box
+        borderWidth={'$1'}
+        borderColor="#121212"
+        bg="#003d73"
+        mt={'$12'}
+        py={'$4'}
+        mx={'$2'}
+        rounded={'$lg'}
+        flexDirection="row"
+        justifyContent="space-around"
+        h={'10%'}
+        >
+        {/* Followes */}
+        <Box alignItems="center">
+          <Text
+            color="#FFF"
+            fontSize={'$2xl'}
+            fontWeight="$extrabold">
+            230K
+          </Text>
+          <Text color="#FFF" fontWeight="$light" fontSize={'$sm'}>
+            Follower
+          </Text>
+        </Box>
+        {/* Clint */}
+        <Box alignItems="center">
+          <Text
+            color="#FFF"
+            fontSize={'$2xl'}
+            fontWeight="$extrabold">
+            108
+          </Text>
+          <Text color="#FFF" fontWeight="$light" fontSize={'$sm'}>
+            Clint
+          </Text>
+        </Box>
+        {/* Project */}
+        <Box alignItems="center">
+          <Text
+            color="#FFF"
+            fontSize={'$2xl'}
+            fontWeight="$extrabold">
+            498
+          </Text>
+          <Text color="#FFF" fontWeight="$light" fontSize={'$sm'}>
+            Projects
+          </Text>
+        </Box>
+      </Box>
 
-
-      <Box zIndex={0} mt={'$16'} bg={'white'} mx={3} >
+      <Box
+        borderWidth={'$1'}
+        borderColor="#121212"
+        zIndex={0}
+        bg={'white'}
+        h={'55%'}
+        mx={3}
+        mt={'$1'}
+        >
         <FlatList
           data={listData}
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
         />
-
       </Box>
-
-
-    </Box >
+    </Box>
   );
 }

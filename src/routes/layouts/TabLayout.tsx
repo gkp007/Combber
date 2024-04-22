@@ -39,18 +39,11 @@ export default function TabLayout() {
           options={{
             tabBarIcon: ({focused}) => (
               <Box alignItems={'center'} justifyContent={'center'}>
-                <Box>
-                  {focused ? (
-                    <AppIcon AntDesignName="appstore1" />
-                  ) : (
-                    <AppIcon AntDesignName="appstore-o" />
-                  )}
-                </Box>
-                <Text
-                  color={focused ? COLORS.theme[600] : '#748C94'}
-                  fontSize={focused ? 10 : 8}>
-                  Dashboard
-                </Text>
+                {focused ? (
+                  <AppIcon color={'#d07131'} AntDesignName="home" />
+                ) : (
+                  <AppIcon color={'#3b3b3b'} AntDesignName="home" />
+                )}
               </Box>
             ),
           }}
@@ -64,14 +57,11 @@ export default function TabLayout() {
           options={{
             tabBarIcon: ({focused}) => (
               <Box alignItems={'center'} justifyContent={'center'}>
-                <Box>
-                  <AppIcon FontistoName="ampproject" />
-                </Box>
-                <Text
-                  color={focused ? COLORS.theme[600] : '#748C94'}
-                  fontSize={focused ? 10 : 8}>
-                  Project
-                </Text>
+                {focused ? (
+                  <AppIcon color={'#d07131'} FeatherName="calendar" />
+                ) : (
+                  <AppIcon color={'#3b3b3b'} FeatherName="calendar" />
+                )}
               </Box>
             ),
           }}
@@ -86,23 +76,30 @@ export default function TabLayout() {
             tabBarItemStyle: {
               height: 0,
             },
-            // tabBarButton: () => <BottomAdd open={open} setOpen={setOpen} />,
+            tabBarButton: () => (
+              <Box
+                bg="#d0d0d0"
+                alignItems={'center'}
+                justifyContent={'center'}
+                rounded={'$full'}
+                w={'$10'}
+                h={'$10'}>
+                <AppIcon color={'#000000'} FeatherName="menu" />
+              </Box>
+            ),
           }}
         />
         <BottomTab.Screen
           name="Email"
-          component={Private.Home}
+          component={Private.GooMap}
           options={{
             tabBarIcon: ({focused}) => (
               <Box alignItems={'center'} justifyContent={'center'}>
-                <Box>
-                  <AppIcon EntypoName="email" />
-                </Box>
-                <Text
-                  color={focused ? COLORS.theme[600] : '#748C94'}
-                  fontSize={focused ? 10 : 8}>
-                  Email
-                </Text>
+                {focused ? (
+                  <AppIcon color={'#d07131'} FeatherName="map-pin" />
+                ) : (
+                  <AppIcon color={'#3b3b3b'} FeatherName="map-pin" />
+                )}
               </Box>
             ),
           }}
@@ -116,19 +113,11 @@ export default function TabLayout() {
           options={{
             tabBarIcon: ({focused}) => (
               <Box alignItems={'center'} justifyContent={'center'}>
-                <Box>
-                  {focused ? (
-                    <AppIcon FontAwesomeName="user-circle" />
-                  ) : (
-                    <AppIcon FontAwesomeName="user-circle-o" />
-                  )}
-                </Box>
-
-                <Text
-                  color={focused ? COLORS.theme[600] : '#748C94'}
-                  fontSize={focused ? 10 : 8}>
-                  Profile
-                </Text>
+                {focused ? (
+                  <AppIcon color={'#d07131'} FontAwesomeName="user-circle" />
+                ) : (
+                  <AppIcon color={'#3b3b3b'} FontAwesomeName="user-circle-o" />
+                )}
               </Box>
             ),
           }}
