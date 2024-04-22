@@ -51,7 +51,7 @@ export default function Profile() {
           <HStack space={'xs'} alignItems="center">
             {item.leftIcon && (
               <HStack alignItems="center">
-                <Box rounded={'$xl'} m={'$2'} p={'$2'}>
+                <Box rounded={'$2xl'} py={'$2'} px={'$2'}>
                   <AppIcon
                     FeatherName={item.leftIcon?.FeatherName}
                     size={item.leftIcon?.size}
@@ -59,16 +59,16 @@ export default function Profile() {
                   />
                 </Box>
 
-                <Divider
+                {/* <Divider
                   mx={'$1'}
                   py={'$5'}
                   orientation="vertical"
                   bgColor="gray"
-                />
+                /> */}
               </HStack>
             )}
-            <VStack ml={'$4'}>
-              <Text fontSize="$lg" fontWeight="$semibold">
+            <VStack ml={'$1'}>
+              <Text fontSize="$sm" fontWeight="$semibold">
                 {item.title}
               </Text>
               {item.subtitle && <Text fontSize="$xs">{item.subtitle}</Text>}
@@ -78,15 +78,6 @@ export default function Profile() {
             <AppIcon FeatherName="chevron-right" color={'gray'} size={20} />
           </Box>
         </Pressable>
-        {!isLastItem && (
-          <Divider
-            my={'$2'}
-            alignSelf="center"
-            width={'60%'}
-            orientation="horizontal"
-            bgColor="transparent"
-          />
-        )}
       </VStack>
     );
   }
@@ -106,7 +97,7 @@ export default function Profile() {
       leftIcon: {
         FeatherName: 'user',
         color: COLORS.theme[600],
-        size: 18,
+        size: 22,
         backgroundColor: '$amber200',
       },
       subtitle: 'Manage Profile',
@@ -117,7 +108,7 @@ export default function Profile() {
       leftIcon: {
         FeatherName: 'user',
         color: COLORS.theme[600],
-        size: 18,
+        size: 22,
         backgroundColor: '$amber200',
       },
       subtitle: 'See all bookings',
@@ -128,7 +119,7 @@ export default function Profile() {
       leftIcon: {
         FeatherName: 'bell',
         color: COLORS.theme[600],
-        size: 18,
+        size: 22,
         backgroundColor: '$amber200',
       },
       subtitle: 'Manage Notification',
@@ -139,7 +130,7 @@ export default function Profile() {
       leftIcon: {
         FeatherName: 'bell',
         color: COLORS.theme[600],
-        size: 18,
+        size: 22,
         backgroundColor: '$amber200',
       },
       subtitle: 'Add or remove employees',
@@ -150,18 +141,28 @@ export default function Profile() {
       leftIcon: {
         FeatherName: 'message-square',
         color: COLORS.theme[600],
-        size: 18,
+        size: 22,
         backgroundColor: '$amber200',
       },
       subtitle: 'Manage Chats',
       // onPress: () => navigate('MyCoupons')
     },
+  ];
+
+  const listData2: {
+    title: string;
+    subtitle?: string;
+    avatar?: string;
+    leftIcon?: IconProps & {backgroundColor?: string};
+    isHeading?: boolean;
+    onPress?: () => void;
+  }[] = [
     {
       title: 'Help & FAQ',
       leftIcon: {
         FeatherName: 'help-circle',
         color: COLORS.theme[600],
-        size: 18,
+        size: 22,
         backgroundColor: '$amber200',
       },
       subtitle: 'Get help',
@@ -172,7 +173,7 @@ export default function Profile() {
       leftIcon: {
         FeatherName: 'help-circle',
         color: COLORS.theme[600],
-        size: 18,
+        size: 22,
         backgroundColor: '$amber200',
       },
       subtitle: 'Get help',
@@ -183,13 +184,14 @@ export default function Profile() {
       leftIcon: {
         FeatherName: 'bell',
         color: COLORS.theme[600],
-        size: 18,
+        size: 22,
         backgroundColor: '$amber200',
       },
       subtitle: 'Manage Language',
       // onPress: () => navigate('Wallet')
     },
   ];
+
   const userData: {
     name?: string;
     email?: string;
@@ -205,21 +207,15 @@ export default function Profile() {
   };
 
   return (
-    <Box bg={'white'} h={'100%'}>
+    <Box bg={'#ededed'} h={'100%'}>
       <StatusBar animated backgroundColor={COLORS.theme[600]} />
       <Box
-        borderWidth={'$1'}
-        borderColor="#121212"
         bg={COLORS.theme[600]}
         h={'15%'}
         // zIndex={-1}
         borderBottomLeftRadius={'$2xl'}
-        borderBottomRightRadius={'$2xl'}
-        >
-        <VStack 
-        // alignItems="center" 
-        // space={'xs'}
-        >
+        borderBottomRightRadius={'$2xl'}>
+        <VStack alignItems="center" space={'xs'}>
           <Pressable
             // justifyContent={'center'}
             // alignItems={'center'}
@@ -246,8 +242,6 @@ export default function Profile() {
       {/* about card's */}
 
       <Box
-        borderWidth={'$1'}
-        borderColor="#121212"
         bg="#003d73"
         mt={'$12'}
         py={'$4'}
@@ -255,40 +249,30 @@ export default function Profile() {
         rounded={'$lg'}
         flexDirection="row"
         justifyContent="space-around"
-        h={'10%'}
-        >
+        h={'10%'}>
         {/* Followes */}
         <Box alignItems="center">
-          <Text
-            color="#FFF"
-            fontSize={'$2xl'}
-            fontWeight="$extrabold">
+          <Heading fontSize={'$xl'} color={COLORS.theme[600]}>
             230K
-          </Text>
+          </Heading>
           <Text color="#FFF" fontWeight="$light" fontSize={'$sm'}>
             Follower
           </Text>
         </Box>
         {/* Clint */}
         <Box alignItems="center">
-          <Text
-            color="#FFF"
-            fontSize={'$2xl'}
-            fontWeight="$extrabold">
+          <Heading fontSize={'$xl'} color={COLORS.theme[600]}>
             108
-          </Text>
+          </Heading>
           <Text color="#FFF" fontWeight="$light" fontSize={'$sm'}>
             Clint
           </Text>
         </Box>
         {/* Project */}
         <Box alignItems="center">
-          <Text
-            color="#FFF"
-            fontSize={'$2xl'}
-            fontWeight="$extrabold">
+          <Heading fontSize={'$xl'} color={COLORS.theme[600]}>
             498
-          </Text>
+          </Heading>
           <Text color="#FFF" fontWeight="$light" fontSize={'$sm'}>
             Projects
           </Text>
@@ -296,16 +280,30 @@ export default function Profile() {
       </Box>
 
       <Box
-        borderWidth={'$1'}
-        borderColor="#121212"
+        bgColor="#FFF"
         zIndex={0}
-        bg={'white'}
-        h={'55%'}
-        mx={3}
-        mt={'$1'}
-        >
+        borderRadius={'$md'}
+        shadowColor="$amber200"
+        // h={'60%'}
+        mx={'$2'}
+        mt={'$2'}>
         <FlatList
           data={listData}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </Box>
+
+      <Box
+        bgColor="#FFF"
+        zIndex={0}
+        borderRadius={'$md'}
+        shadowColor="$amber200"
+        // h={'60%'}
+        mx={'$2'}
+        mt={'$2'}>
+        <FlatList
+          data={listData2}
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
         />
