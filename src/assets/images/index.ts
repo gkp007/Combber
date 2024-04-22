@@ -6,4 +6,5 @@ export const IMAGES = {
   ONBOARDING: require('./onboardingLogo.png'),
   OTP: require('./otp.jpg'),
   FORGOT: require('./forgot.jpg'),
+  DEMO: require('./demo.png'),
 };
