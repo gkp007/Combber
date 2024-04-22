@@ -10,4 +10,6 @@ export default {
   CARD: require('./Card.json'),
   STORE: require('./store.json'),
   UPLOAD: require('./upload.json'),
+  SUCCESS: require('./congo.json'),
+  CONGO: require('./success.json'),
 };
