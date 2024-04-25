@@ -20,6 +20,8 @@ module.exports = {
           '~/screens': './src/screens',
           '~/styles': './src/styles',
           '~/types': './src/types',
+          '~/services': './src/service',
+          '~/utils': './src/utils',
         },
       },
     ],
