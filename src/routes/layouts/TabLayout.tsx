@@ -1,17 +1,17 @@
-import {Box, Text, Icon, AddIcon} from '@gluestack-ui/themed';
-import {StyleSheet} from 'react-native';
-import {useState} from 'react';
+import { Box, Text, Icon, AddIcon } from '@gluestack-ui/themed';
+import { StyleSheet } from 'react-native';
+import { useState } from 'react';
 import useAuth from '~/hooks/useAuth';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AppIcon from '~/components/core/AppIcon';
-import {COLORS} from '~/styles';
+import { COLORS } from '~/styles';
 import React from 'react';
-import {Private} from '~/screens';
+import { Private } from '~/screens';
 
 const BottomTab = createBottomTabNavigator();
 
 export default function TabLayout() {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const toggleOpened = () => {
     setOpen(!open);
@@ -34,10 +34,10 @@ export default function TabLayout() {
           },
         }}>
         <BottomTab.Screen
-          name="Dashboard"
+          name="Home"
           component={Private.Home}
           options={{
-            tabBarIcon: ({focused}) => (
+            tabBarIcon: ({ focused }) => (
               <Box alignItems={'center'} justifyContent={'center'}>
                 {focused ? (
                   <AppIcon color={'#d07131'} AntDesignName="home" />
@@ -55,7 +55,7 @@ export default function TabLayout() {
           name="MyProjects"
           component={Private.Home}
           options={{
-            tabBarIcon: ({focused}) => (
+            tabBarIcon: ({ focused }) => (
               <Box alignItems={'center'} justifyContent={'center'}>
                 {focused ? (
                   <AppIcon color={'#d07131'} FeatherName="calendar" />
@@ -93,7 +93,7 @@ export default function TabLayout() {
           name="Email"
           component={Private.GooMap}
           options={{
-            tabBarIcon: ({focused}) => (
+            tabBarIcon: ({ focused }) => (
               <Box alignItems={'center'} justifyContent={'center'}>
                 {focused ? (
                   <AppIcon color={'#d07131'} FeatherName="map-pin" />
@@ -111,7 +111,7 @@ export default function TabLayout() {
           name="Profile"
           component={Private.Profile}
           options={{
-            tabBarIcon: ({focused}) => (
+            tabBarIcon: ({ focused }) => (
               <Box alignItems={'center'} justifyContent={'center'}>
                 {focused ? (
                   <AppIcon color={'#d07131'} FontAwesomeName="user-circle" />
