@@ -24,13 +24,11 @@ export default function TabLayout() {
           tabBarShowLabel: false,
           tabBarStyle: {
             position: 'absolute',
-            paddingBottom: 5,
             margin: 0,
-            bottom: 5,
-            left: 8,
-            right: 8,
-            borderRadius: 10,
+            borderTopEndRadius: 22,
+            borderTopStartRadius: 22,
             height: 60,
+            backgroundColor:'#090f3f'
           },
         }}>
         <BottomTab.Screen
@@ -40,9 +38,9 @@ export default function TabLayout() {
             tabBarIcon: ({ focused }) => (
               <Box alignItems={'center'} justifyContent={'center'}>
                 {focused ? (
-                  <AppIcon color={'#d07131'} AntDesignName="home" />
+                  <AppIcon color={'#20a0bd'} AntDesignName="home" />
                 ) : (
-                  <AppIcon color={'#3b3b3b'} AntDesignName="home" />
+                  <AppIcon color={'#FFFFFF'} AntDesignName="home" />
                 )}
               </Box>
             ),
@@ -58,9 +56,9 @@ export default function TabLayout() {
             tabBarIcon: ({ focused }) => (
               <Box alignItems={'center'} justifyContent={'center'}>
                 {focused ? (
-                  <AppIcon color={'#d07131'} FeatherName="calendar" />
+                  <AppIcon color={'#20a0bd'} FeatherName="calendar" />
                 ) : (
-                  <AppIcon color={'#3b3b3b'} FeatherName="calendar" />
+                  <AppIcon color={'#FFFFFF'} FeatherName="calendar" />
                 )}
               </Box>
             ),
@@ -75,16 +73,18 @@ export default function TabLayout() {
           options={{
             tabBarItemStyle: {
               height: 0,
+              
             },
             tabBarButton: () => (
               <Box
-                bg="#d0d0d0"
+                bg="#070c34"
                 alignItems={'center'}
                 justifyContent={'center'}
                 rounded={'$full'}
-                w={'$10'}
-                h={'$10'}>
-                <AppIcon color={'#000000'} FeatherName="menu" />
+                w={'$12'}
+                h={'$12'}
+                >
+                <AppIcon color={'#FFF'} FeatherName="menu" />
               </Box>
             ),
           }}
@@ -96,9 +96,9 @@ export default function TabLayout() {
             tabBarIcon: ({ focused }) => (
               <Box alignItems={'center'} justifyContent={'center'}>
                 {focused ? (
-                  <AppIcon color={'#d07131'} FeatherName="map-pin" />
+                  <AppIcon color={'#20a0bd'} FeatherName="map-pin" />
                 ) : (
-                  <AppIcon color={'#3b3b3b'} FeatherName="map-pin" />
+                  <AppIcon color={'#FFFFFF'} FeatherName="map-pin" />
                 )}
               </Box>
             ),
@@ -114,9 +114,9 @@ export default function TabLayout() {
             tabBarIcon: ({ focused }) => (
               <Box alignItems={'center'} justifyContent={'center'}>
                 {focused ? (
-                  <AppIcon color={'#d07131'} FontAwesomeName="user-circle" />
+                  <AppIcon color={'#20a0bd'} FontAwesomeName="user-circle" />
                 ) : (
-                  <AppIcon color={'#3b3b3b'} FontAwesomeName="user-circle-o" />
+                  <AppIcon color={'#FFFFFF'} FontAwesomeName="user-circle-o" />
                 )}
               </Box>
             ),
