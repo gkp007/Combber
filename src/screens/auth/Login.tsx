@@ -269,11 +269,11 @@ export default function Login(): JSX.Element {
           <VStack justifyContent={'space-between'} w={'$full'}>
             <Box px="$4">
               <Heading fontSize={18} color={'black'}>
-                Register with your us
+                Login with us
               </Heading>
 
               <Text fontSize={10} color={'blue.500'}>
-                We will send a code to your mobile
+                Login to continue using app
               </Text>
             </Box>
 
@@ -287,6 +287,10 @@ export default function Login(): JSX.Element {
                     errorMessage={errors?.[input?.key]?.message}
                   />
                 ))}
+
+                <Text size="sm" color={'blue.500'} bold alignSelf="flex-end">
+                  Forgot Password?
+                </Text>
               </Box>
 
               <Box mx={15}>
@@ -317,7 +321,7 @@ export default function Login(): JSX.Element {
 
             <HStack alignItems="center" flexDirection="row" mx={'$5'}>
               <Text fontSize="$xs" fontWeight="400">
-                Already Have an account?
+                Don't Have an account?
               </Text>
               <Btn
                 colors={['#fff', '#fff']}
@@ -327,7 +331,7 @@ export default function Login(): JSX.Element {
                   fontSize: '$xs',
                   bold: true,
                 }}>
-                Login
+                Register
               </Btn>
             </HStack>
 
