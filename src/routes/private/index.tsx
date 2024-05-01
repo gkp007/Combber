@@ -23,6 +23,7 @@ export default function PrivateRoutes({ initialRouteName }: PrivateRouteProps) {
       <Stack.Screen name="Notification" component={Private.Notification} />
       <Stack.Screen name='GooMap' component={Private.GooMap} />
       <Stack.Screen name='EmployeeManagement' component={Private.EmployeeManagement} />
+      <Stack.Screen name='ManageStore' component={Private.ManageStore} />
     </Stack.Navigator>
   );
 }

@@ -1,122 +1,68 @@
 import React from 'react';
-import { Text, HStack, VStack, Image, Pressable, Box, Divider } from '@gluestack-ui/themed';
-import { COLORS, WIDTH } from '~/styles';
-import AppIcon from '~/components/core/AppIcon';
+import { StatusBar, FlatList } from 'react-native';
 import { PrivateContainer } from '~/components/shared';
+import { EmployeeCard } from '~/components/container';
+import { Box } from '@gluestack-ui/themed';
+import { COLORS } from '~/styles';
+import { Pressable } from '@gluestack-ui/themed';
+import { Text } from '@gluestack-ui/themed';
+import AppIcon from '~/components/core/AppIcon';
+import { HStack } from '@gluestack-ui/themed';
 
-interface ProfileData {
-    name: string;
-    phoneNumber: string;
-    availability: string;
-    services: string[];
-    stylist: string;
-    amount: number;
-    paymentStatus: boolean;
-    status: string;
-}
+const employeeDataArray = [
+    {
+        name: 'Motilal Nayak',
+        experience: '1 year 3 months',
+        rating: 4.8,
+        status: 'Active',
+        totalRevenue: 24605,
+        totalBookings: 1606,
+    },
+    {
+        name: 'Sumanta Behera',
+        experience: '2 year 9 months',
+        rating: 4.2,
+        status: 'Deactive',
+        totalRevenue: 145605,
+        totalBookings: 916,
+    },
+    {
+        name: 'Amulya Behera',
+        experience: '0 year 9 months',
+        rating: 4.2,
+        status: 'Active',
+        totalRevenue: 14000,
+        totalBookings: 59,
+    },
 
-interface ProfileDataProps {
-    profileData: ProfileData;
-}
+];
 
-const ProfileCard: React.FC<ProfileDataProps> = ({ profileData }) => {
+const EmployeeManagementScreen = () => {
+
+
     return (
+        <PrivateContainer title="Employee Management">
+            <StatusBar animated backgroundColor={COLORS.theme[700]} />
+            <Box bg={'white'} h={'$full'}>
 
-        <PrivateContainer title={'My Employees'}>
-            <Pressable
-                bgColor={'#FFFF'}
-                borderRadius={'$xl'}
-                mx={'$2'}
-                borderWidth={'$1'}
-                borderColor='$coolGray400'
-                overflow='hidden'
-                mt={'$4'}
-            >
-                {/* Profile Header */}
-                <HStack
-                    alignItems='center'
-                    backgroundColor='$coolGray100'
-                    borderTopRightRadius={'$md'}
-                    borderTopLeftRadius={'$2xl'}>
-                    <Image
-                        alignSelf='flex-start'
-                        source={{
-                            uri: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-                        }}
-                        alt=""
-                        borderRadius={10}
-                        size={'sm'}
-                        p={'$2'}
-                        m={'$2'}
-                    />
-                    <VStack p={'$2'} width={'55%'} alignSelf='flex-start'>
-                        <Text fontSize="$lg" bold>
-                            {'Motilal Nayak' || 'Not Available'}
-                        </Text>
-                        <Text fontSize="$xs" color={'blue.500'}>
-                            {'9445654216' || 'Not Available'}
-                        </Text>
-                        <Text fontSize="$xs" color={'blue.500'}>
-                            {'1 year 3 month' || 'Not Available'}
-                        </Text>
-                    </VStack>
-                    <VStack alignItems='flex-end' space={'xl'}>
-                        <HStack alignItems='center' px={'$2'} mt={'$1'} bg={'$white'} mx={'$2'} space={'xs'} borderRadius={'$2xl'} >
+                <Pressable borderWidth={'$1'} borderRadius={'$xs'} borderColor='$coolGray500' p={'$2'} mx={'$2'} >
+                    <HStack space={'xs'} justifyContent='center' alignItems={'center'}>
+                        <Text textAlign='center' bold color={COLORS.primary[600]}>Click Here To Add Professionals</Text>
+                        <AppIcon AntDesignName="plus" size={20} />
+                    </HStack>
 
-                            <AppIcon MaterialCommunityIconsName="circle-slice-8" color={'green'} size={10} />
-                            <Text fontSize="$xs" color={'$green500'} bold>
-                                Active
-                            </Text>
-                            {/* <AppIcon EvilIconsName="chevron-down" color={'green'} size={20} /> */}
-
-                        </HStack>
-                        <HStack
-                            p={'$2'}
-                            space={'xs'}
-                            alignItems='center'
-                            alignSelf='flex-end'>
-                            <Text fontSize="$xs" color={'$red500'}>
-                                View Details
-                            </Text>
-                            <AppIcon AntDesignName="caretright" color={'red'} size={10} />
-                        </HStack>
-                    </VStack>
-                </HStack>
-
-                <Divider bg="$coolGray300" />
-
-                {/* Profile Services */}
-                <HStack justifyContent='space-between' my={'$2'} alignItems={'center'}>
-
-                    <Box px={'$2'} w={WIDTH * 0.4}>
-                        <VStack space={'xs'}>
-                            <Text fontSize="$lg" bold color='$black' textAlign='center'>
-                                {'24605' || 'Not Available'}
-                            </Text>
-                            <Text fontSize="$lg" textAlign='center'>
-                                Total Revenue
-                            </Text>
-                        </VStack>
-                    </Box>
-
-                    <Divider bg="$coolGray300" orientation='vertical' />
-
-                    <VStack justifyContent={'center'} w={WIDTH * 0.4} mr={'$2'}>
-                        <Text textAlign='center' bold color='$black'>
-                            {'1606' || 'Not Available'}
-                        </Text>
-                        <Text textAlign='center' >
-                            Total Bookings
-                        </Text>
-                    </VStack>
-                </HStack>
-
-                <Divider bg="$coolGray300" />
-
-
-            </Pressable>
+                </Pressable>
+                <FlatList
+                    data={employeeDataArray}
+                    renderItem={({ item }) => (
+                        <EmployeeCard employeeData={item}
+                        />
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+            </Box>
         </PrivateContainer>
     );
 };
 
-export default ProfileCard;
+export default EmployeeManagementScreen;

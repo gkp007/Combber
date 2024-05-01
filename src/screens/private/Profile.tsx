@@ -126,7 +126,7 @@ export default function Profile() {
         onPress: () => navigate('EmployeeManagement')
       },
       {
-        title: 'Employee Details',
+        title: 'Manage Store',
         leftIcon: {
           FeatherName: 'bell',
           color: COLORS.theme[600],
@@ -134,7 +134,7 @@ export default function Profile() {
           backgroundColor: '$amber200',
         },
         subtitle: 'Add or remove employees',
-        // onPress: () => navigate('WishList')
+        onPress: () => navigate('ManageStore')
       },
       {
         title: 'Messages',

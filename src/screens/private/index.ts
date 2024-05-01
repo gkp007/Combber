@@ -6,3 +6,4 @@ export {default as BusinessInfo} from './OwnerOnboarding/BusinessInfo';
 export {default as GooMap} from '../private/googleMap/GooMap';
 export {default as BookingStarts} from './BookingStarts';
 export {default as EmployeeManagement} from './EmployeeManagement';
+export {default as ManageStore} from './ManageStore';
