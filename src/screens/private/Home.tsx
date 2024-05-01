@@ -1,6 +1,8 @@
 import { BarChart, LineChart } from "react-native-gifted-charts";
-import React, { useState } from 'react';
-import { Box, Heading, HStack, Pressable, Text } from "@gluestack-ui/themed";
+import React, { ReactNode, useState } from 'react';
+import { Box, Divider, Heading, HStack, Pressable, ScrollView, Text, VStack } from "@gluestack-ui/themed";
+import { COLORS, WIDTH } from "~/styles";
+import { StatusBar } from "@gluestack-ui/themed";
 
 
 export default function Home() {
@@ -173,143 +175,217 @@ export default function Home() {
 
   ];
 
+  const SERVICE_ITEMS = [
+    { name: 'Hair Cutting', duration: 7000 },
+    { name: 'Facial', duration: 3000 },
+    { name: 'SPA', duration: 5000 }
+  ];
+  const SERVICES_BY = [
+    { name: 'Sumanta Behera', duration: 6000 },
+    { name: 'Motilal Nayak', duration: 5000 },
+    { name: 'Amulya Behera', duration: 4000 }
+  ];
+
   return (
-    <Box>
 
-
-      <HStack bg={'$white'} justifyContent="space-between" borderRadius={15} px={'$4'} py={'$1'} mt={'$5'}>
+    <Box bg={'white'} flex={1} h={'$full'}>
+      <HStack bg="white" justifyContent="space-between" px={'$4'} mt={'$1'} borderBottomWidth={'$2'} borderTopWidth={'$2'} borderTopColor='$blueGray300' borderBottomColor='$blueGray300'>
         <Pressable onPress={() => handleTabChange('weekly')}>
-          <Box borderBottomWidth={selectedTab === 'weekly' ? 2 : 0}>
-            <Text textAlign="center" mx={'$2'} py={'$1'} color={selectedTab === 'weekly' ? "black" : "$grey"} bold fontSize={'$sm'}>Weekly</Text>
+          <Box borderBottomWidth={selectedTab === 'weekly' ? 2 : 0} borderColor='$blue700'>
+            <Text textAlign="center" mx={'$2'} py={'$1'} color={selectedTab === 'weekly' ? '$blue700' : "$grey"} bold fontSize={'$sm'}>Weekly</Text>
           </Box>
         </Pressable>
         <Pressable onPress={() => handleTabChange('monthly')}>
-          <Box borderBottomWidth={selectedTab === 'monthly' ? 2 : 0}>
-            <Text mx={'$2'} color={selectedTab === 'monthly' ? "black" : "$grey"} bold fontSize={'$sm'}>Monthly</Text>
+          <Box borderBottomWidth={selectedTab === 'monthly' ? 2 : 0} borderColor='$blue700'>
+            <Text mx={'$2'} py={'$1'} color={selectedTab === 'monthly' ? '$blue700' : "$grey"} bold fontSize={'$sm'}>Monthly</Text>
           </Box>
         </Pressable>
         <Pressable onPress={() => handleTabChange('yearly')}>
-          <Box borderBottomWidth={selectedTab === 'yearly' ? 2 : 0}>
-            <Text mx={'$2'} color={selectedTab === 'yearly' ? "black" : "$grey"} bold fontSize={'$sm'}>Yearly</Text>
+          <Box borderBottomWidth={selectedTab === 'yearly' ? 2 : 0} borderColor='$blue700'>
+            <Text mx={'$2'} py={'$1'} color={selectedTab === 'yearly' ? '$blue700' : "$grey"} bold fontSize={'$sm'}>Yearly</Text>
           </Box>
         </Pressable>
       </HStack>
 
+      <ScrollView>
+
+        <Box bg={'$white'} softShadow="1" borderRadius={'$md'} >
 
 
-      <Box bg={'$white'} softShadow="1" m={'$1'} borderRadius={'$md'} >
+          <Box m={'$2'}>
+            <Heading mx={'$2'} fontSize={'$lg'} bold>Average Income</Heading>
+            <Text mx={'$2'} fontSize={'$xs'} color="$blueGray400">15000 this week Earning</Text>
+          </Box>
 
-        <Box m={'$2'}>
-          <Heading mx={'$2'} fontSize={'$lg'} bold>Average Booking</Heading>
-          <Text mx={'$2'} fontSize={'$xs'} color="$blueGray400">52 this week bookings</Text>
-        </Box>
-
-        <Box overflow="hidden" m={'$4'} w={'95%'} bg={'$white'} borderRadius={'$lg'} alignSelf="center" alignItems="center" justifyContent="center" >
-          {selectedTab === 'weekly' && (
-            <BarChart
-              height={150}
-              barWidth={12}
-              spacing={35}
-              showGradient
-              hideYAxisText
-              barBorderTopLeftRadius={15}
-              barBorderTopRightRadius={15}
-              noOfSections={4}
-              stackData={weeklyData}
-              yAxisColor={'transparent'}
-              xAxisColor={'transparent'}
-              gradientColor={'rgba(0, 100, 244,0.8)'}
-              frontColor={'black'}
-              isAnimated
-              animationDuration={1500}
-            />
-          )}
-          {selectedTab === 'monthly' && (
-            <LineChart
-              isAnimated
-              curved
-              thickness={1}
-              animateOnDataChange
-              animationDuration={1000}
-              onDataChangeAnimationDuration={300}
-              areaChart
-              yAxisTextStyle={{ color: 'gray' }}
-              startFillColor={'rgb(8,10,254)'}
-              endFillColor={'white'}
-              startOpacity={0.13}
-              endOpacity={0.08}
-              showDataPointOnFocus
-              showStripOnFocus
-              showTextOnFocus
-              focusEnabled
-              backgroundColor="transparent"
-              initialSpacing={0}
-              data={monthlyData}
-              maxValue={140}
-              noOfSections={3}
-              spacing={12}
-              hideDataPoints
-              hideRules
-              color="blue"
-              yAxisColor={'transparent'}
-              xAxisColor={'transparent'}
-              xAxisLabelTextStyle={{ width: 80, marginLeft: 26 }}
-              pointerConfig={{
-                pointerStripHeight: 175,
-                pointerStripColor: 'blue',
-                pointerStripWidth: 1,
-                pointerColor: 'lightgray',
-                radius: 6,
-                strokeDashArray: [2, 5],
-                pointerLabelWidth: 100,
-                pointerLabelHeight: 90,
-                activatePointersOnLongPress: true,
-                autoAdjustPointerLabelPosition: false,
-                pointerLabelComponent: items => {
-                  return (
-                    <Box
-                      style={{
-                        height: 90,
-                        width: 100,
-                        justifyContent: 'center',
-                        marginTop: -30,
-                        marginLeft: -40,
-                      }}>
-                      <Text style={{ color: 'white', fontSize: 14, marginBottom: 6, textAlign: 'center' }}>
-                        {items[0].date}
-                      </Text>
-                      <Box style={{ paddingHorizontal: 10, paddingVertical: 6, borderRadius: 16, backgroundColor: 'gray' }}>
-                        <Text style={{ fontWeight: 'bold', textAlign: 'center', color: 'white' }}>
-                          {'₹ ' + items[0].value + '.0'}
+          <Box overflow="hidden" m={'$4'} w={'95%'} bg={'$white'} borderRadius={'$lg'} alignSelf="center" alignItems="center" justifyContent="center" >
+            {selectedTab === 'weekly' && (
+              <BarChart
+                height={150}
+                barWidth={12}
+                spacing={35}
+                showGradient
+                hideYAxisText
+                barBorderTopLeftRadius={15}
+                barBorderTopRightRadius={15}
+                noOfSections={4}
+                stackData={weeklyData}
+                yAxisColor={'transparent'}
+                xAxisColor={'transparent'}
+                gradientColor={'rgba(0, 100, 244,0.8)'}
+                frontColor={'black'}
+                isAnimated
+                animationDuration={1500}
+              />
+            )}
+            {selectedTab === 'monthly' && (
+              <LineChart
+                isAnimated
+                curved
+                thickness={1}
+                animateOnDataChange
+                animationDuration={1000}
+                onDataChangeAnimationDuration={300}
+                areaChart
+                yAxisTextStyle={{ color: 'gray' }}
+                startFillColor={'rgb(8,10,254)'}
+                endFillColor={'white'}
+                startOpacity={0.13}
+                endOpacity={0.08}
+                showDataPointOnFocus
+                showStripOnFocus
+                showTextOnFocus
+                focusEnabled
+                backgroundColor="transparent"
+                initialSpacing={0}
+                data={monthlyData}
+                maxValue={140}
+                noOfSections={3}
+                spacing={12}
+                hideDataPoints
+                hideRules
+                color="blue"
+                yAxisColor={'transparent'}
+                xAxisColor={'transparent'}
+                xAxisLabelTextStyle={{ width: 80, marginLeft: 26 }}
+                pointerConfig={{
+                  pointerStripHeight: 175,
+                  pointerStripColor: 'blue',
+                  pointerStripWidth: 1,
+                  pointerColor: 'lightgray',
+                  radius: 6,
+                  strokeDashArray: [2, 5],
+                  pointerLabelWidth: 100,
+                  pointerLabelHeight: 90,
+                  activatePointersOnLongPress: true,
+                  autoAdjustPointerLabelPosition: false,
+                  pointerLabelComponent: (items: {
+                    date: ReactNode; value: string;
+                  }[]) => {
+                    return (
+                      <Box
+                        style={{
+                          height: 90,
+                          width: 100,
+                          justifyContent: 'center',
+                          marginTop: -30,
+                          marginLeft: -40,
+                        }}>
+                        <Text style={{ color: 'white', fontSize: 14, marginBottom: 6, textAlign: 'center' }}>
+                          {items[0].date}
                         </Text>
+                        <Box style={{ paddingHorizontal: 10, paddingVertical: 6, borderRadius: 16, backgroundColor: 'gray' }}>
+                          <Text style={{ fontWeight: 'bold', textAlign: 'center', color: 'white' }}>
+                            {'₹ ' + items[0].value + '.0'}
+                          </Text>
+                        </Box>
                       </Box>
+                    );
+                  },
+                }}
+              />
+            )}
+            {selectedTab === 'yearly' && (
+              <BarChart
+                height={150}
+                barWidth={12}
+                spacing={35}
+                showGradient
+                hideYAxisText
+                barBorderTopLeftRadius={15}
+                barBorderTopRightRadius={15}
+                noOfSections={4}
+                stackData={yearlyData}
+                yAxisColor={'transparent'}
+                xAxisColor={'transparent'}
+                gradientColor={'rgba(0, 100, 244,0.8)'}
+                frontColor={'black'}
+                isAnimated
+                animationDuration={1500}
+              />
+            )}
+          </Box>
+
+
+          <Box m={'$2'}>
+            <Text mt="$5" m="$1" fontSize="$lg" color={COLORS.theme[700]} bold>
+              Income in terms of services
+            </Text>
+            <Box borderWidth="$1" my="$2" borderRadius="$2xl" borderColor="$coolGray300">
+              <Box borderTopRightRadius="$2xl" borderTopLeftRadius="$2xl" alignItems="center" justifyContent="center" bg={'$coolGray200'}>
+                <Text fontSize="$md" mb="$1" bold textAlign="center">
+                  Revenue Per Services
+                </Text>
+              </Box>
+              {SERVICE_ITEMS.map((item, index) => (
+                <React.Fragment key={index}>
+                  <Divider bg="$coolGray300" />
+                  <HStack justifyContent="space-between" my="$2" alignItems="center">
+                    <Box px="$2" w={WIDTH * 0.3}>
+                      <VStack space="xs">
+                        <Text fontSize="$md" color="$black">{`${index + 1}. ${item.name}`}</Text>
+                      </VStack>
                     </Box>
-                  );
-                },
-              }}
-            />
-          )}
-          {selectedTab === 'yearly' && (
-            <BarChart
-              height={150}
-              barWidth={12}
-              spacing={35}
-              showGradient
-              hideYAxisText
-              barBorderTopLeftRadius={15}
-              barBorderTopRightRadius={15}
-              noOfSections={4}
-              stackData={yearlyData}
-              yAxisColor={'transparent'}
-              xAxisColor={'transparent'}
-              gradientColor={'rgba(0, 100, 244,0.8)'}
-              frontColor={'black'}
-              isAnimated
-              animationDuration={1500}
-            />
-          )}
+                    <HStack justifyContent="flex-end" w={WIDTH * 0.6} mr="$2">
+                      <Text fontSize="$md">{item.duration}</Text>
+                    </HStack>
+                  </HStack>
+                </React.Fragment>
+              ))}
+            </Box>
+          </Box>
+          <Box m={'$2'}>
+            <Text mt="$5" m="$1" fontSize="$lg" color={COLORS.theme[700]} bold>
+              Income in terms of employee
+            </Text>
+            <Box borderWidth="$1" my="$2" borderRadius="$2xl" borderColor="$coolGray300">
+              <Box borderTopRightRadius="$2xl" borderTopLeftRadius="$2xl" alignItems="center" justifyContent="center" bg={'$coolGray200'}>
+                <Text fontSize="$md" mb="$1" bold textAlign="center">
+                  Earnings Per Professional
+                </Text>
+              </Box>
+              {SERVICES_BY.map((item, index) => (
+                <React.Fragment key={index}>
+                  <Divider bg="$coolGray300" />
+                  <HStack justifyContent="space-between" my="$2" alignItems="center">
+                    <Box px="$2" w={WIDTH * 0.6}>
+                      <VStack space="xs">
+                        <Text fontSize="$md" color="$black">{`${index + 1}. ${item.name}`}</Text>
+                      </VStack>
+                    </Box>
+                    <HStack justifyContent="flex-end" w={WIDTH * 0.3} mr="$2">
+                      <Text fontSize="$md">{item.duration}</Text>
+                    </HStack>
+                  </HStack>
+                </React.Fragment>
+              ))}
+            </Box>
+          </Box>
+
+
         </Box>
-      </Box>
-    </Box>
+      </ScrollView>
+
+
+    </Box >
   );
 };

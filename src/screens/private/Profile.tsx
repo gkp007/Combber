@@ -4,9 +4,9 @@ import {
   FlatList,
   ImageBackground,
 } from '@gluestack-ui/themed';
-import {ScrollView} from '@gluestack-ui/themed';
-import {AvatarFallbackText} from '@gluestack-ui/themed';
-import {Avatar} from '@gluestack-ui/themed';
+import { ScrollView } from '@gluestack-ui/themed';
+import { AvatarFallbackText } from '@gluestack-ui/themed';
+import { Avatar } from '@gluestack-ui/themed';
 import {
   Box,
   Heading,
@@ -17,17 +17,17 @@ import {
   Pressable,
   Spinner,
 } from '@gluestack-ui/themed';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {StatusBar} from 'react-native';
-import {Linking} from 'react-native';
-import {IMAGES} from '~/assets';
-import AppIcon, {IconProps} from '~/components/core/AppIcon';
+import { StatusBar } from 'react-native';
+import { Linking } from 'react-native';
+import { IMAGES } from '~/assets';
+import AppIcon, { IconProps } from '~/components/core/AppIcon';
 import useAuth from '~/hooks/useAuth';
-import {StackAndTabType} from '~/routes/private/types';
-import {COLORS, HEIGHT, WIDTH} from '~/styles';
+import { StackAndTabType } from '~/routes/private/types';
+import { COLORS, HEIGHT, WIDTH } from '~/styles';
 export default function Profile() {
-  const {navigate, goBack} = useNavigation<StackAndTabType>();
+  const { navigate, goBack } = useNavigation<StackAndTabType>();
 
   function renderItem({
     item,
@@ -82,115 +82,115 @@ export default function Profile() {
     );
   }
 
-  const {logout} = useAuth();
+  const { logout } = useAuth();
 
   const listData: {
     title: string;
     subtitle?: string;
     avatar?: string;
-    leftIcon?: IconProps & {backgroundColor?: string};
+    leftIcon?: IconProps & { backgroundColor?: string };
     isHeading?: boolean;
     onPress?: () => void;
   }[] = [
-    {
-      title: 'Profile',
-      leftIcon: {
-        FeatherName: 'user',
-        color: COLORS.theme[600],
-        size: 22,
-        backgroundColor: '$amber200',
+      {
+        title: 'Profile',
+        leftIcon: {
+          FeatherName: 'user',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Manage Profile',
+        // onPress: () => navigate('AllOrders')
       },
-      subtitle: 'Manage Profile',
-      // onPress: () => navigate('AllOrders')
-    },
-    {
-      title: 'Bookings',
-      leftIcon: {
-        FeatherName: 'user',
-        color: COLORS.theme[600],
-        size: 22,
-        backgroundColor: '$amber200',
+      {
+        title: 'Bookings',
+        leftIcon: {
+          FeatherName: 'user',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'See all bookings',
+        // onPress: () => navigate('AllOrders')
       },
-      subtitle: 'See all bookings',
-      // onPress: () => navigate('AllOrders')
-    },
-    {
-      title: 'Bank Details',
-      leftIcon: {
-        FeatherName: 'bell',
-        color: COLORS.theme[600],
-        size: 22,
-        backgroundColor: '$amber200',
+      {
+        title: 'Employee Management',
+        leftIcon: {
+          FeatherName: 'bell',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Manage Notification',
+        onPress: () => navigate('EmployeeManagement')
       },
-      subtitle: 'Manage Notification',
-      // onPress: () => navigate('WishList')
-    },
-    {
-      title: 'Employee Details',
-      leftIcon: {
-        FeatherName: 'bell',
-        color: COLORS.theme[600],
-        size: 22,
-        backgroundColor: '$amber200',
+      {
+        title: 'Employee Details',
+        leftIcon: {
+          FeatherName: 'bell',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Add or remove employees',
+        // onPress: () => navigate('WishList')
       },
-      subtitle: 'Add or remove employees',
-      // onPress: () => navigate('WishList')
-    },
-    {
-      title: 'Messages',
-      leftIcon: {
-        FeatherName: 'message-square',
-        color: COLORS.theme[600],
-        size: 22,
-        backgroundColor: '$amber200',
+      {
+        title: 'Messages',
+        leftIcon: {
+          FeatherName: 'message-square',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Manage Chats',
+        // onPress: () => navigate('MyCoupons')
       },
-      subtitle: 'Manage Chats',
-      // onPress: () => navigate('MyCoupons')
-    },
-  ];
+    ];
 
   const listData2: {
     title: string;
     subtitle?: string;
     avatar?: string;
-    leftIcon?: IconProps & {backgroundColor?: string};
+    leftIcon?: IconProps & { backgroundColor?: string };
     isHeading?: boolean;
     onPress?: () => void;
   }[] = [
-    {
-      title: 'Help & FAQ',
-      leftIcon: {
-        FeatherName: 'help-circle',
-        color: COLORS.theme[600],
-        size: 22,
-        backgroundColor: '$amber200',
+      {
+        title: 'Help & FAQ',
+        leftIcon: {
+          FeatherName: 'help-circle',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Get help',
+        // onPress: () => navigate('Address')
       },
-      subtitle: 'Get help',
-      // onPress: () => navigate('Address')
-    },
-    {
-      title: 'Delete account',
-      leftIcon: {
-        FeatherName: 'help-circle',
-        color: COLORS.theme[600],
-        size: 22,
-        backgroundColor: '$amber200',
+      {
+        title: 'Delete account',
+        leftIcon: {
+          FeatherName: 'help-circle',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Get help',
+        // onPress: () => navigate('Address')
       },
-      subtitle: 'Get help',
-      // onPress: () => navigate('Address')
-    },
-    {
-      title: 'Business Details',
-      leftIcon: {
-        FeatherName: 'bell',
-        color: COLORS.theme[600],
-        size: 22,
-        backgroundColor: '$amber200',
+      {
+        title: 'Business Details',
+        leftIcon: {
+          FeatherName: 'bell',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Manage Language',
+        // onPress: () => navigate('Wallet')
       },
-      subtitle: 'Manage Language',
-      // onPress: () => navigate('Wallet')
-    },
-  ];
+    ];
 
   const userData: {
     name?: string;
@@ -224,7 +224,7 @@ export default function Profile() {
             borderRadius={'$full'}
             // position={'absolute'}
             top={'$1/2'}
-            // zIndex={1}
+          // zIndex={1}
           >
             <Avatar size="xl">
               <AvatarFallbackText>Scissors Salon</AvatarFallbackText>
