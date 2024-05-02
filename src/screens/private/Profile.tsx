@@ -137,7 +137,7 @@ export default function Profile() {
         onPress: () => navigate('ManageStore')
       },
       {
-        title: 'Messages',
+        title: 'Gallery',
         leftIcon: {
           FeatherName: 'message-square',
           color: COLORS.theme[600],
@@ -145,7 +145,29 @@ export default function Profile() {
           backgroundColor: '$amber200',
         },
         subtitle: 'Manage Chats',
-        // onPress: () => navigate('MyCoupons')
+        onPress: () => navigate('Gallery')
+      },
+      {
+        title: 'All Transaction',
+        leftIcon: {
+          FeatherName: 'message-square',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Manage Chats',
+        onPress: () => navigate('TransactionHistory')
+      },
+      {
+        title: 'Block List',
+        leftIcon: {
+          FeatherName: 'message-square',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Manage Chats',
+        onPress: () => navigate('BlockList')
       },
     ];
 

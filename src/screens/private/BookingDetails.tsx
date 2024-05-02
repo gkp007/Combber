@@ -62,7 +62,7 @@ export default function Profile() {
     const { logout } = useAuth();
 
     return (
-        <ScrollView mb="$20">
+        <ScrollView >
             <Box bg="white" h="$full">
                 <StatusBar animated backgroundColor={COLORS.theme[700]} />
 

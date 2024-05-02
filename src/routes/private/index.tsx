@@ -24,6 +24,10 @@ export default function PrivateRoutes({ initialRouteName }: PrivateRouteProps) {
       <Stack.Screen name='GooMap' component={Private.GooMap} />
       <Stack.Screen name='EmployeeManagement' component={Private.EmployeeManagement} />
       <Stack.Screen name='ManageStore' component={Private.ManageStore} />
+      <Stack.Screen name='Gallery' component={Private.Gallery} />
+      <Stack.Screen name='TransactionHistory' component={Private.TransactionHistory} />
+      <Stack.Screen name='BookingDetails' component={Private.BookingDetails} />
+      <Stack.Screen name='BlockList' component={Private.BlockList} />
     </Stack.Navigator>
   );
 }

@@ -7,3 +7,7 @@ export {default as GooMap} from '../private/googleMap/GooMap';
 export {default as BookingStarts} from './BookingStarts';
 export {default as EmployeeManagement} from './EmployeeManagement';
 export {default as ManageStore} from './ManageStore';
+export {default as Gallery} from './Gallery';
+export {default as TransactionHistory} from './TransactionHistory';
+export {default as BookingDetails} from './BookingDetails';
+export {default as BlockList} from './BlockList';
