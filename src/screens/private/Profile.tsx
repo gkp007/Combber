@@ -169,6 +169,39 @@ export default function Profile() {
         subtitle: 'Manage Chats',
         onPress: () => navigate('BlockList')
       },
+      {
+        title: 'Help',
+        leftIcon: {
+          FeatherName: 'message-square',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Manage Chats',
+        onPress: () => navigate('Help')
+      },
+      {
+        title: 'Ratings',
+        leftIcon: {
+          FeatherName: 'message-square',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Manage Chats',
+        onPress: () => navigate('Ratings')
+      },
+      {
+        title: 'Services',
+        leftIcon: {
+          FeatherName: 'message-square',
+          color: COLORS.theme[600],
+          size: 22,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Manage Chats',
+        onPress: () => navigate('Services')
+      },
     ];
 
   const listData2: {

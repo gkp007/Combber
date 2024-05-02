@@ -12,4 +12,5 @@ export default {
   UPLOAD: require('./upload.json'),
   SUCCESS: require('./congo.json'),
   CONGO: require('./success.json'),
+  HELP: require('./Help.json'),
 };

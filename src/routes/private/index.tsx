@@ -28,6 +28,9 @@ export default function PrivateRoutes({ initialRouteName }: PrivateRouteProps) {
       <Stack.Screen name='TransactionHistory' component={Private.TransactionHistory} />
       <Stack.Screen name='BookingDetails' component={Private.BookingDetails} />
       <Stack.Screen name='BlockList' component={Private.BlockList} />
+      <Stack.Screen name='Help' component={Private.Help} />
+      <Stack.Screen name='Ratings' component={Private.Ratings} />
+      <Stack.Screen name='Services' component={Private.Services} />
     </Stack.Navigator>
   );
 }

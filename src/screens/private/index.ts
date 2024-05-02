@@ -11,3 +11,6 @@ export {default as Gallery} from './Gallery';
 export {default as TransactionHistory} from './TransactionHistory';
 export {default as BookingDetails} from './BookingDetails';
 export {default as BlockList} from './BlockList';
+export {default as Help} from './Help';
+export {default as Ratings} from './Ratings';
+export {default as Services} from './Services';
