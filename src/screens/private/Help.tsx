@@ -71,20 +71,20 @@ const Help = () => {
                         source={animations.HELP}
                         autoPlay
                         style={{ height: 200, width: 300 }}
-                        loop={true}
+                        loop={false}
                     />
                 </Box>
 
                 <Box mt={'$2'} borderRadius={'$lg'} bg={'white'} p={'$2'} >
                     <HStack alignItems={'center'} space='xl' >
-                        <Box p={'$4'} borderRadius={'$2xl'} bg={'$blue100'}>
+                        <Box p={'$4'} borderRadius={'$2xl'} bg={'$blue50'}>
                             <AppIcon IoniconsName="call-outline" size={32} color={'blue'} />
                         </Box>
                         <VStack space={'xs'} >
                             <Text fontSize={12} color={'$blueGray500'}>
                                 Our 24 x 7 Customer Service
                             </Text>
-                            <Heading color={'blue.600'} fontSize={16} w={'90%'} mr="auto" >
+                            <Heading bold fontSize={'$md'} w={'90%'} mr="auto" >
                                 +911234567890
                             </Heading>
                         </VStack>
@@ -92,14 +92,14 @@ const Help = () => {
                 </Box>
                 <Box mt={'$2'} borderRadius={'$lg'} bg={'white'} p={'$2'} >
                     <HStack alignItems={'center'} space='xl' >
-                        <Box p={'$4'} borderRadius={'$2xl'} bg={'$blue100'}>
+                        <Box p={'$4'} borderRadius={'$2xl'} bg={'$blue50'}>
                             <AppIcon FontistoName="email" size={32} color={'blue'} />
                         </Box>
                         <VStack space={'xs'} >
                             <Text fontSize={12} color={'$blueGray500'}>
                                 Write us at
                             </Text>
-                            <Heading color={'blue.600'} fontSize={16} w={'100%'} mr="auto" >
+                            <Heading bold fontSize={'$md'} w={'100%'} mr="auto" >
                                 demo@combbers.com
                             </Heading>
                         </VStack>
@@ -108,7 +108,7 @@ const Help = () => {
 
 
 
-                <Box mt={'$8'} mb={'$1'}>
+                <Box mt={'$8'} mb={'$3'} mx={'$2'}>
                     <Heading size={'md'} color={'black'}>Frequently Asked Questions</Heading>
                 </Box>
 

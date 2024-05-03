@@ -53,7 +53,7 @@ const Ratings: React.FC = () => {
 
     const renderItem = ({ item }) => {
         return (
-            <Box borderWidth={'$1'} m={'$3'} w={WIDTH * 0.44} borderColor='$blueGray400' borderRadius={'$md'}>
+            <Box bg={'$white'} borderWidth={'$1'} m={'$3'} w={WIDTH * 0.44} borderColor='$blueGray400' borderRadius={'$md'}>
 
                 <Pressable
                     bgColor={'#FFFF'}
@@ -118,22 +118,25 @@ const Ratings: React.FC = () => {
     };
 
     return (
-        <PrivateContainer title={'My Services'}>
-            <FlatList
-                data={data}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id}
-                numColumns={2}
-            />
+        <PrivateContainer title={'My Services'} bg={'$white'}>
+            <Box bg={'$white'} flex={1}>
 
-            <Pressable m={'$3'} py={'$2'} bg={COLORS.theme[700]} borderRadius={'$md'}>
-                <HStack justifyContent='center' alignItems={'center'} px={'$2'} space={'xs'}>
-                    <AppIcon IoniconsName="add" color={'white'} size={16} />
-                    <Text fontSize={'$md'} color={'$white'} px={2}>
-                        Add New Service
-                    </Text>
-                </HStack>
-            </Pressable>
+                <FlatList
+                    data={data}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id}
+                    numColumns={2}
+                />
+
+                <Pressable m={'$3'} py={'$2'} bg={COLORS.theme[700]} borderRadius={'$md'}>
+                    <HStack justifyContent='center' alignItems={'center'} px={'$2'} space={'xs'}>
+                        <AppIcon IoniconsName="add" color={'white'} size={16} />
+                        <Text fontSize={'$md'} color={'$white'} px={2}>
+                            Add New Service
+                        </Text>
+                    </HStack>
+                </Pressable>
+            </Box>
 
         </PrivateContainer>
     );
