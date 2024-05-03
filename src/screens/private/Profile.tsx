@@ -291,7 +291,7 @@ export default function Profile() {
         <Box
           bg="white"
           mt={'$3'}
-          py={'$4'}
+          py={'$2'}
           mx={'$2'}
           borderRadius={'$xs'}
           borderWidth={'$1'}
@@ -299,7 +299,7 @@ export default function Profile() {
           rounded={'$lg'}
           flexDirection="row"
           justifyContent="space-around"
-          h={'10%'}>
+          h={'7%'}>
           {/* Followes */}
           <Box alignItems="center">
             <Heading fontSize={'$xl'} color={COLORS.theme[600]}>

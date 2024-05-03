@@ -70,7 +70,7 @@ export default function Profile() {
                     </VStack>
                 </HStack>
                 <Box mr={'$4'}>
-                    <AppIcon FeatherName="chevron-right" color={'black'} size={24} />
+                    <AppIcon FeatherName="chevron-right" color={'blue'} size={18} />
                 </Box>
             </Pressable>
 
@@ -102,18 +102,17 @@ export default function Profile() {
             {
                 title: 'Bookings',
                 leftIcon: {
-                    FeatherName: 'user',
+                    FeatherName: 'align-center',
                     color: COLORS.theme[600],
                     size: 25,
                     backgroundColor: '$amber200',
                 },
-                subtitle: 'See all bookings',
                 // onPress: () => navigate('AllOrders')
             },
             {
                 title: 'Employee Management',
                 leftIcon: {
-                    FeatherName: 'bell',
+                    FeatherName: 'users',
                     color: COLORS.theme[600],
                     size: 25,
                     backgroundColor: '$amber200',
@@ -124,7 +123,7 @@ export default function Profile() {
             {
                 title: 'Manage Store',
                 leftIcon: {
-                    FeatherName: 'bell',
+                    FeatherName: 'home',
                     color: COLORS.theme[600],
                     size: 25,
                     backgroundColor: '$amber200',
@@ -135,7 +134,7 @@ export default function Profile() {
             {
                 title: 'Gallery',
                 leftIcon: {
-                    FeatherName: 'message-square',
+                    FeatherName: 'image',
                     color: COLORS.theme[600],
                     size: 25,
                     backgroundColor: '$amber200',
@@ -146,7 +145,7 @@ export default function Profile() {
             {
                 title: 'All Transaction',
                 leftIcon: {
-                    FeatherName: 'message-square',
+                    FeatherName: 'arrow-down-right',
                     color: COLORS.theme[600],
                     size: 25,
                     backgroundColor: '$amber200',
@@ -157,7 +156,7 @@ export default function Profile() {
             {
                 title: 'Block List',
                 leftIcon: {
-                    FeatherName: 'message-square',
+                    FeatherName: 'x-square',
                     color: COLORS.theme[600],
                     size: 25,
                     backgroundColor: '$amber200',
@@ -168,7 +167,7 @@ export default function Profile() {
             {
                 title: 'Help',
                 leftIcon: {
-                    FeatherName: 'message-square',
+                    FeatherName: 'alert-circle',
                     color: COLORS.theme[600],
                     size: 25,
                     backgroundColor: '$amber200',
@@ -179,7 +178,7 @@ export default function Profile() {
             {
                 title: 'Ratings',
                 leftIcon: {
-                    FeatherName: 'message-square',
+                    FeatherName: 'star',
                     color: COLORS.theme[600],
                     size: 25,
                     backgroundColor: '$amber200',
@@ -190,7 +189,7 @@ export default function Profile() {
             {
                 title: 'Services',
                 leftIcon: {
-                    FeatherName: 'message-square',
+                    FeatherName: 'box',
                     color: COLORS.theme[600],
                     size: 25,
                     backgroundColor: '$amber200',
@@ -245,11 +244,11 @@ export default function Profile() {
 
     return (
 
-        <Box bg={'$white'}>
+        <Box bg={'$white'} flex={1} mb={'$16'}>
             <StatusBar animated backgroundColor={COLORS.theme[600]} />
             <Box
                 bg={COLORS.theme[600]}
-                h={'8%'}
+                h={'10%'}
             // zIndex={-1}
             >
                 <VStack alignItems="center" space={'xs'}>
@@ -286,14 +285,13 @@ export default function Profile() {
                 </Text>
             </VStack>
 
-            {/* about card's */}
 
-            <ScrollView mb={'$64'}>
+            <ScrollView >
 
                 <Box
                     bg="white"
                     mt={'$3'}
-                    py={'$4'}
+                    py={'$2'}
                     mx={'$2'}
                     borderRadius={'$xs'}
                     borderWidth={'$1'}
@@ -301,13 +299,13 @@ export default function Profile() {
                     rounded={'$lg'}
                     flexDirection="row"
                     justifyContent="space-around"
-                    h={'10%'}>
+                    h={'7%'}>
                     {/* Followes */}
                     <Box alignItems="center">
                         <Heading fontSize={'$xl'} color={COLORS.theme[600]}>
                             230K
                         </Heading>
-                        <Text color={COLORS.theme[600]} bold fontSize={'$sm'}>
+                        <Text color={'$black'} bold fontSize={'$sm'}>
                             Total Revenue
                         </Text>
                     </Box>
@@ -318,7 +316,7 @@ export default function Profile() {
                         <Heading fontSize={'$xl'} color={COLORS.theme[600]}>
                             1568
                         </Heading>
-                        <Text color={COLORS.theme[600]} bold fontSize={'$sm'}>
+                        <Text color={'$black'} bold fontSize={'$sm'}>
                             Customer Served
                         </Text>
                     </Box>
@@ -330,8 +328,8 @@ export default function Profile() {
 
                 <Box
                     bgColor="#FFF"
-                    zIndex={0}
                     mt={'$6'}
+                    p={'$2'}
                     borderWidth={'$1'}
                     borderRadius={'$md'}
                     borderColor='$coolGray300'
@@ -347,19 +345,56 @@ export default function Profile() {
 
                 <Box
                     bgColor="#FFF"
-                    zIndex={0}
+                    mt={'$3'}
+                    p={'$2'}
+                    borderWidth={'$1'}
                     borderRadius={'$md'}
-                    shadowColor="$amber200"
+                    mb={'$4'}
+                    borderColor='$coolGray300'
                     // h={'60%'}
                     mx={'$2'}
-                    mt={'$2'}>
+                >
                     <FlatList
                         data={listData2}
                         renderItem={renderItem}
                         keyExtractor={(item, index) => index.toString()}
                     />
                 </Box>
+
+                <Pressable py={'$1'} borderWidth={'$1'} borderColor='$coolGray300' $pressed={{ opacity: 0.7 }} m={'$3'} bg={'white'} mx={'$3'} borderRadius={'$md'} >
+                    <HStack mx={'$4'} alignItems={'center'} justifyContent={'space-between'}>
+                        <HStack space={'xl'} alignItems={'center'}>
+                            <Box rounded={'$full'} bg={'$blue50'} py={'$2'} px={'$2'}>
+
+                                <AppIcon FeatherName="log-out" size={22} color={'blue'} />
+                            </Box>
+
+                            <Pressable onPress={() => logout()} >
+                                <Text fontSize="$md" bold  >
+                                    Logout
+                                </Text>
+                            </Pressable>
+                        </HStack>
+                        <Box mr={'$3'} >
+
+                            <AppIcon
+                                OcticonsName="chevron-right"
+                                size={18}
+                                color={'blue'}
+                            />
+                        </Box>
+                    </HStack>
+                </Pressable>
+                <Text
+                    mb={'$6'}
+                    color={'$coolGray400'}
+                    textAlign={'center'}
+                >
+                    App version 1.02.11
+                </Text>
+
             </ScrollView>
+
 
         </Box>
     );
