@@ -2,9 +2,8 @@ import {
   AvatarImage,
   Divider,
   FlatList,
-  ImageBackground,
+  ScrollView,
 } from '@gluestack-ui/themed';
-import { ScrollView } from '@gluestack-ui/themed';
 import { AvatarFallbackText } from '@gluestack-ui/themed';
 import { Avatar } from '@gluestack-ui/themed';
 import {
@@ -13,19 +12,15 @@ import {
   Text,
   HStack,
   VStack,
-  Image,
   Pressable,
-  Spinner,
 } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StatusBar } from 'react-native';
-import { Linking } from 'react-native';
-import { IMAGES } from '~/assets';
 import AppIcon, { IconProps } from '~/components/core/AppIcon';
 import useAuth from '~/hooks/useAuth';
 import { StackAndTabType } from '~/routes/private/types';
-import { COLORS, HEIGHT, WIDTH } from '~/styles';
+import { COLORS } from '~/styles';
 export default function Profile() {
   const { navigate, goBack } = useNavigation<StackAndTabType>();
 
@@ -39,46 +34,47 @@ export default function Profile() {
     const isLastItem = index === listData.length - 1;
 
     return (
-      <VStack>
-        <Pressable
-          onPress={item.onPress}
-          py={3}
-          px={4}
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-between"
-          borderBottomColor="gray.200">
-          <HStack space={'xs'} alignItems="center">
-            {item.leftIcon && (
-              <HStack alignItems="center">
-                <Box rounded={'$2xl'} py={'$2'} px={'$2'}>
-                  <AppIcon
-                    FeatherName={item.leftIcon?.FeatherName}
-                    size={item.leftIcon?.size}
-                    color={item.leftIcon?.color}
-                  />
-                </Box>
 
-                {/* <Divider
+      <Pressable
+        onPress={item.onPress}
+        py={'$2'}
+        px={'$2'}
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        borderBottomColor="gray.200">
+        <HStack space={'xs'} alignItems="center">
+          {item.leftIcon && (
+            <HStack alignItems="center">
+              <Box rounded={'$full'} bg={'$blue50'} py={'$2'} px={'$2'}>
+                <AppIcon
+                  FeatherName={item.leftIcon?.FeatherName}
+                  size={item.leftIcon?.size}
+                  color={item.leftIcon?.color}
+                />
+              </Box>
+
+              {/* <Divider
                   mx={'$1'}
-                  py={'$5'}
+                  py={'$3'}
                   orientation="vertical"
                   bgColor="gray"
                 /> */}
-              </HStack>
-            )}
-            <VStack ml={'$1'}>
-              <Text fontSize="$sm" fontWeight="$semibold">
-                {item.title}
-              </Text>
-              {item.subtitle && <Text fontSize="$xs">{item.subtitle}</Text>}
-            </VStack>
-          </HStack>
-          <Box mr={'$4'}>
-            <AppIcon FeatherName="chevron-right" color={'gray'} size={20} />
-          </Box>
-        </Pressable>
-      </VStack>
+            </HStack>
+          )}
+          <VStack ml={'$3'}>
+            <Text fontSize="$md" bold >
+              {item.title}
+            </Text>
+            {/* {item.subtitle && <Text fontSize="$xs">{item.subtitle}</Text>} */}
+          </VStack>
+        </HStack>
+        <Box mr={'$4'}>
+          <AppIcon FeatherName="chevron-right" color={'blue'} size={18} />
+        </Box>
+      </Pressable>
+
+
     );
   }
 
@@ -97,8 +93,8 @@ export default function Profile() {
         leftIcon: {
           FeatherName: 'user',
           color: COLORS.theme[600],
-          size: 22,
-          backgroundColor: '$amber200',
+          size: 25,
+          backgroundColor: '$amber400',
         },
         subtitle: 'Manage Profile',
         // onPress: () => navigate('AllOrders')
@@ -106,20 +102,19 @@ export default function Profile() {
       {
         title: 'Bookings',
         leftIcon: {
-          FeatherName: 'user',
+          FeatherName: 'align-center',
           color: COLORS.theme[600],
-          size: 22,
+          size: 25,
           backgroundColor: '$amber200',
         },
-        subtitle: 'See all bookings',
         // onPress: () => navigate('AllOrders')
       },
       {
         title: 'Employee Management',
         leftIcon: {
-          FeatherName: 'bell',
+          FeatherName: 'users',
           color: COLORS.theme[600],
-          size: 22,
+          size: 25,
           backgroundColor: '$amber200',
         },
         subtitle: 'Manage Notification',
@@ -128,9 +123,9 @@ export default function Profile() {
       {
         title: 'Manage Store',
         leftIcon: {
-          FeatherName: 'bell',
+          FeatherName: 'home',
           color: COLORS.theme[600],
-          size: 22,
+          size: 25,
           backgroundColor: '$amber200',
         },
         subtitle: 'Add or remove employees',
@@ -139,9 +134,9 @@ export default function Profile() {
       {
         title: 'Gallery',
         leftIcon: {
-          FeatherName: 'message-square',
+          FeatherName: 'image',
           color: COLORS.theme[600],
-          size: 22,
+          size: 25,
           backgroundColor: '$amber200',
         },
         subtitle: 'Manage Chats',
@@ -150,9 +145,9 @@ export default function Profile() {
       {
         title: 'All Transaction',
         leftIcon: {
-          FeatherName: 'message-square',
+          FeatherName: 'arrow-down-right',
           color: COLORS.theme[600],
-          size: 22,
+          size: 25,
           backgroundColor: '$amber200',
         },
         subtitle: 'Manage Chats',
@@ -161,9 +156,9 @@ export default function Profile() {
       {
         title: 'Block List',
         leftIcon: {
-          FeatherName: 'message-square',
+          FeatherName: 'x-square',
           color: COLORS.theme[600],
-          size: 22,
+          size: 25,
           backgroundColor: '$amber200',
         },
         subtitle: 'Manage Chats',
@@ -172,9 +167,9 @@ export default function Profile() {
       {
         title: 'Help',
         leftIcon: {
-          FeatherName: 'message-square',
+          FeatherName: 'alert-circle',
           color: COLORS.theme[600],
-          size: 22,
+          size: 25,
           backgroundColor: '$amber200',
         },
         subtitle: 'Manage Chats',
@@ -183,9 +178,9 @@ export default function Profile() {
       {
         title: 'Ratings',
         leftIcon: {
-          FeatherName: 'message-square',
+          FeatherName: 'star',
           color: COLORS.theme[600],
-          size: 22,
+          size: 25,
           backgroundColor: '$amber200',
         },
         subtitle: 'Manage Chats',
@@ -194,9 +189,9 @@ export default function Profile() {
       {
         title: 'Services',
         leftIcon: {
-          FeatherName: 'message-square',
+          FeatherName: 'box',
           color: COLORS.theme[600],
-          size: 22,
+          size: 25,
           backgroundColor: '$amber200',
         },
         subtitle: 'Manage Chats',
@@ -247,41 +242,27 @@ export default function Profile() {
       },
     ];
 
-  const userData: {
-    name?: string;
-    email?: string;
-    avatar?: string;
-    mobileNumber?: number;
-    gender?: string;
-  } = {
-    name: 'Scissors Salon',
-    email: 'Gk Pattanaik',
-    avatar: IMAGES.LOGO,
-    mobileNumber: 775421654,
-    gender: 'male',
-  };
-
   return (
-    <Box bg={'#ededed'} h={'100%'}>
+
+    <Box bg={'$white'} flex={1} mb={'$16'}>
       <StatusBar animated backgroundColor={COLORS.theme[600]} />
       <Box
         bg={COLORS.theme[600]}
-        h={'15%'}
-        // zIndex={-1}
-        borderBottomLeftRadius={'$2xl'}
-        borderBottomRightRadius={'$2xl'}>
+        h={'10%'}
+      // zIndex={-1}
+      >
         <VStack alignItems="center" space={'xs'}>
           <Pressable
             // justifyContent={'center'}
             // alignItems={'center'}
-            borderWidth={'$4'}
+            borderWidth={'$2'}
             borderColor={COLORS.theme[600]}
             borderRadius={'$full'}
-            // position={'absolute'}
-            top={'$1/2'}
+
+            top={'$5'}
           // zIndex={1}
           >
-            <Avatar size="xl">
+            <Avatar size="xl" p={'$0.5'} bg={'$white'}>
               <AvatarFallbackText>Scissors Salon</AvatarFallbackText>
               <AvatarImage
                 size="2xl"
@@ -294,75 +275,127 @@ export default function Profile() {
           </Pressable>
         </VStack>
       </Box>
-      {/* about card's */}
 
-      <Box
-        bg="#003d73"
-        mt={'$12'}
-        py={'$4'}
-        mx={'$2'}
-        rounded={'$lg'}
-        flexDirection="row"
-        justifyContent="space-around"
-        h={'10%'}>
-        {/* Followes */}
-        <Box alignItems="center">
-          <Heading fontSize={'$xl'} color={COLORS.theme[600]}>
-            230K
-          </Heading>
-          <Text color="#FFF" fontWeight="$light" fontSize={'$sm'}>
-            Follower
-          </Text>
-        </Box>
-        {/* Clint */}
-        <Box alignItems="center">
-          <Heading fontSize={'$xl'} color={COLORS.theme[600]}>
-            108
-          </Heading>
-          <Text color="#FFF" fontWeight="$light" fontSize={'$sm'}>
-            Clint
-          </Text>
-        </Box>
-        {/* Project */}
-        <Box alignItems="center">
-          <Heading fontSize={'$xl'} color={COLORS.theme[600]}>
-            498
-          </Heading>
-          <Text color="#FFF" fontWeight="$light" fontSize={'$sm'}>
-            Projects
-          </Text>
-        </Box>
-      </Box>
+      <VStack alignItems={'center'} mt={'$12'} >
+        <Heading fontSize={'$xl'} color={COLORS.primary[600]}>
+          Sissors Bro
+        </Heading>
+        <Text color={'$blueGray400'} fontSize="$xs">
+          Nayapalli, Bhubaneswar
+        </Text>
+      </VStack>
 
-      <Box
-        bgColor="#FFF"
-        zIndex={0}
-        borderRadius={'$md'}
-        shadowColor="$amber200"
-        // h={'60%'}
-        mx={'$2'}
-        mt={'$2'}>
-        <FlatList
-          data={listData}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </Box>
 
-      <Box
-        bgColor="#FFF"
-        zIndex={0}
-        borderRadius={'$md'}
-        shadowColor="$amber200"
-        // h={'60%'}
-        mx={'$2'}
-        mt={'$2'}>
-        <FlatList
-          data={listData2}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </Box>
+      <ScrollView >
+
+        <Box
+          bg="white"
+          mt={'$3'}
+          py={'$4'}
+          mx={'$2'}
+          borderRadius={'$xs'}
+          borderWidth={'$1'}
+          borderColor='$coolGray300'
+          rounded={'$lg'}
+          flexDirection="row"
+          justifyContent="space-around"
+          h={'10%'}>
+          {/* Followes */}
+          <Box alignItems="center">
+            <Heading fontSize={'$xl'} color={COLORS.theme[600]}>
+              230K
+            </Heading>
+            <Text color={'$black'} bold fontSize={'$sm'}>
+              Total Revenue
+            </Text>
+          </Box>
+
+          <Divider ml={'$4'} orientation='vertical' />
+          {/* Clint */}
+          <Box alignItems="center">
+            <Heading fontSize={'$xl'} color={COLORS.theme[600]}>
+              1568
+            </Heading>
+            <Text color={'$black'} bold fontSize={'$sm'}>
+              Customer Served
+            </Text>
+          </Box>
+          {/* Project */}
+
+        </Box>
+
+
+
+        <Box
+          bgColor="#FFF"
+          mt={'$6'}
+          p={'$2'}
+          borderWidth={'$1'}
+          borderRadius={'$md'}
+          borderColor='$coolGray300'
+          // h={'60%'}
+          mx={'$2'}
+        >
+          <FlatList
+            data={listData}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </Box>
+
+        <Box
+          bgColor="#FFF"
+          mt={'$3'}
+          p={'$2'}
+          borderWidth={'$1'}
+          borderRadius={'$md'}
+          mb={'$4'}
+          borderColor='$coolGray300'
+          // h={'60%'}
+          mx={'$2'}
+        >
+          <FlatList
+            data={listData2}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </Box>
+
+        <Pressable py={'$1'} borderWidth={'$1'} borderColor='$coolGray300' $pressed={{ opacity: 0.7 }} m={'$3'} bg={'white'} mx={'$3'} borderRadius={'$md'} >
+          <HStack mx={'$4'} alignItems={'center'} justifyContent={'space-between'}>
+            <HStack space={'xl'} alignItems={'center'}>
+              <Box rounded={'$full'} bg={'$blue50'} py={'$2'} px={'$2'}>
+
+                <AppIcon FeatherName="log-out" size={22} color={'blue'} />
+              </Box>
+
+              <Pressable onPress={() => logout()} >
+                <Text fontSize="$md" bold  >
+                  Logout
+                </Text>
+              </Pressable>
+            </HStack>
+            <Box mr={'$3'} >
+
+              <AppIcon
+                OcticonsName="chevron-right"
+                size={18}
+                color={'blue'}
+              />
+            </Box>
+          </HStack>
+        </Pressable>
+        <Text
+          mb={'$6'}
+          color={'$coolGray400'}
+          textAlign={'center'}
+        >
+          App version 1.02.11
+        </Text>
+
+      </ScrollView>
+
+
     </Box>
   );
 }
