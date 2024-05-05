@@ -14,3 +14,5 @@ export {default as BlockList} from './BlockList';
 export {default as Help} from './Help';
 export {default as Ratings} from './Ratings';
 export {default as Services} from './Services';
+export {default as ServiceCreate} from './ServiceCreate';
+export {default as Slot} from './Slot';

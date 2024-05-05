@@ -54,7 +54,7 @@ export default function AppInput({
         // isReadOnly={false}
         // isRequired={false}
         >
-          <FormControlLabel mb="$1">
+          <FormControlLabel mb="$2" mt={'$2'} ml={'$3'}>
             <FormControlLabelText fontFamily={`${fontFamily}-Regular`}>
               {input.label}
             </FormControlLabelText>

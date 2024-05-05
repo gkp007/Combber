@@ -31,6 +31,7 @@ export default function PrivateRoutes({ initialRouteName }: PrivateRouteProps) {
       <Stack.Screen name='Help' component={Private.Help} />
       <Stack.Screen name='Ratings' component={Private.Ratings} />
       <Stack.Screen name='Services' component={Private.Services} />
+      <Stack.Screen name='ServiceCreate' component={Private.ServiceCreate} />
     </Stack.Navigator>
   );
 }
