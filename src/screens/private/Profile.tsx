@@ -208,6 +208,17 @@ export default function Profile() {
         subtitle: 'Manage Chats',
         onPress: () => navigate('ServiceCreate')
       },
+      {
+        title: 'Slot',
+        leftIcon: {
+          FeatherName: 'box',
+          color: COLORS.theme[600],
+          size: 25,
+          backgroundColor: '$amber200',
+        },
+        subtitle: 'Manage Chats',
+        onPress: () => navigate('Slot')
+      },
     ];
 
   const listData2: {

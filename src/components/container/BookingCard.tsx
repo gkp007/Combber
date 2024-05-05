@@ -12,6 +12,7 @@ interface ProfileData {
     amount: number;
     paymentStatus: boolean;
     status: string;
+    bookingDateTime?: string;
 }
 
 interface ProfileDataProps {

@@ -1,8 +1,90 @@
-import { BarChart, LineChart } from "react-native-gifted-charts";
-import React, { ReactNode, useState } from 'react';
-import { Box, Divider, Heading, HStack, Pressable, ScrollView, Text, VStack } from "@gluestack-ui/themed";
-import { COLORS, WIDTH } from "~/styles";
-import { StatusBar } from "@gluestack-ui/themed";
+import React, { useState } from 'react';
+import { Box, FlatList, Heading, HStack, Pressable, ScrollView, Text } from "@gluestack-ui/themed";
+import { VStack } from '@gluestack-ui/themed';
+import AppIcon from '~/components/core/AppIcon';
+import { BookingCard } from '~/components/container';
+
+const profileDataArray = [
+  {
+    name: 'Gopalkrishna',
+    phoneNumber: '7752058263',
+    availability: '9.00 AM - 9.45 AM',
+    services: ['Hair Cutting', 'Facial & more'],
+    stylist: 'Sushanta Senapati',
+    amount: 350,
+    paymentStatus: false,
+    status: 'pending',
+    bookingDateTime: new Date('2024-05-01T09:05:00')
+  },
+  {
+    name: 'Meenaketan',
+    phoneNumber: '7752058263',
+    availability: '9.00 AM - 9.45 AM',
+    services: ['Hair Cutting'],
+    stylist: 'Sonam Senapati',
+    amount: 350,
+    paymentStatus: true,
+    status: 'completed',
+    bookingDateTime: new Date('2024-05-01T09:48:00')
+
+
+
+  },
+  {
+    name: 'Chinamayee',
+    phoneNumber: '7752058263',
+    availability: '9.00 AM - 9.45 AM',
+    services: ['Facial'],
+    stylist: 'Sushanta Senapati',
+    amount: 350,
+    paymentStatus: false,
+    status: 'rejected',
+    bookingDateTime: new Date('2024-05-01T09:52:00')
+
+
+
+  },
+  {
+    name: 'Debabrata',
+    phoneNumber: '7752058263',
+    availability: '9.00 AM - 9.45 AM',
+    services: ['Facial'],
+    stylist: 'Sushanta Senapati',
+    amount: 350,
+    paymentStatus: true,
+    status: 'completed',
+    bookingDateTime: new Date('2024-05-01T09:15:00')
+
+  },
+  {
+    name: 'Debabrata',
+    phoneNumber: '7752058263',
+    availability: '9.00 AM - 9.45 AM',
+    services: ['Facial'],
+    stylist: 'Sushanta Senapati',
+    amount: 350,
+    paymentStatus: true,
+    status: 'completed',
+    bookingDateTime: new Date('2024-05-01T09:15:00')
+
+  },
+  {
+    name: 'Debabrata',
+    phoneNumber: '7752058263',
+    availability: '9.00 AM - 9.45 AM',
+    services: ['Facial'],
+    stylist: 'Sushanta Senapati',
+    amount: 350,
+    paymentStatus: true,
+    status: 'completed',
+    bookingDateTime: new Date('2024-05-01T09:15:00')
+
+  },
+];
+
+const sortByBookingDateTime = (a, b) => {
+  return new Date(b.bookingDateTime) - new Date(a.bookingDateTime);
+};
 
 
 export default function Home() {
@@ -13,182 +95,17 @@ export default function Home() {
     setSelectedTab(tab);
   };
 
-  const weeklyData = [
-    {
-      stacks: [
-        { value: 50, color: 'white', marginBottom: 2, },
-      ],
-      label: 'S',
-    },
-    {
-      stacks: [
 
-        { value: 40, color: 'white', marginBottom: 2 },
-      ],
-      label: 'M',
-    },
-    {
-      stacks: [
+  const sortedBookings = profileDataArray.sort(sortByBookingDateTime);
 
-        { value: 30, color: 'white', marginBottom: 2 },
-      ],
-      label: 'T',
-    },
-    {
-      stacks: [
-        { value: 35, color: 'white', },
-
-      ],
-      label: 'W',
-    },
-    {
-      stacks: [{ value: 20, color: 'white' },],
-      label: 'T',
-    },
-    {
-      stacks: [
-
-        { value: 36, color: 'white', marginBottom: 2 },
-      ],
-      label: 'F',
-    },
-    {
-      stacks: [
-        { value: 45, color: 'white', },
-
-      ],
-      label: 'S',
-    },
-  ]
-
-  const monthlyData = [
-    { value: 110, },
-    { value: 80, },
-    { value: 60, },
-    { value: 90, },
-    { value: 100, label: '5' },
-    { value: 60, },
-    { value: 40, },
-    { value: 70, },
-    { value: 90, },
-    { value: 60, label: '10' },
-    { value: 130, },
-    { value: 0, },
-    { value: 60, },
-    { value: 50, },
-    { value: 67, label: '15' },
-    { value: 30, },
-    { value: 40, },
-    { value: 50, },
-    { value: 50, },
-    { value: 60, label: '20' },
-    { value: 70, },
-    { value: 75, },
-    { value: 85, },
-    { value: 95, },
-    { value: 86, label: '25' },
-    { value: 76, },
-    { value: 59, },
-    { value: 75, },
-    { value: 41, },
-    { value: 20, label: '30' },
-  ];
-
-  const yearlyData = [
-    {
-      stacks: [
-        { value: 50, color: 'white', marginBottom: 2, },
-      ],
-      label: 'Jan',
-    },
-    {
-      stacks: [
-
-        { value: 40, color: 'white', marginBottom: 2 },
-      ],
-      label: 'Feb',
-    },
-    {
-      stacks: [
-
-        { value: 30, color: 'white', marginBottom: 2 },
-      ],
-      label: 'Mar',
-    },
-    {
-      stacks: [
-        { value: 35, color: 'white', },
-
-      ],
-      label: 'Apr',
-    },
-    {
-      stacks: [{ value: 20, color: 'white' },],
-      label: 'May',
-    },
-    {
-      stacks: [
-
-        { value: 36, color: 'white', marginBottom: 2 },
-      ],
-      label: 'Jun',
-    },
-    {
-      stacks: [
-        { value: 45, color: 'white', },
-
-      ],
-      label: 'Jul',
-    },
-    {
-      stacks: [
-
-        { value: 40, color: 'white', marginBottom: 2 },
-      ],
-      label: 'Aug',
-    },
-    {
-      stacks: [
-
-        { value: 30, color: 'white', marginBottom: 2 },
-      ],
-      label: 'Sep',
-    },
-    {
-      stacks: [
-        { value: 35, color: 'white', },
-
-      ],
-      label: 'Oct',
-    },
-    {
-      stacks: [{ value: 20, color: 'white' },],
-      label: 'Nov',
-    },
-    {
-      stacks: [
-
-        { value: 36, color: 'white', marginBottom: 2 },
-      ],
-      label: 'Dec',
-    },
-
-  ];
-
-  const SERVICE_ITEMS = [
-    { name: 'Hair Cutting', duration: 7000 },
-    { name: 'Facial', duration: 3000 },
-    { name: 'SPA', duration: 5000 }
-  ];
-  const SERVICES_BY = [
-    { name: 'Sumanta Behera', duration: 6000 },
-    { name: 'Motilal Nayak', duration: 5000 },
-    { name: 'Amulya Behera', duration: 4000 }
-  ];
+  const renderItem = ({ item }) => (
+    <BookingCard profileData={item} />
+  );
 
   return (
 
-    <Box bg={'white'} flex={1} h={'$full'}>
+    <Box bg={'white'}>
+
       <HStack bg="white" justifyContent="space-between" px={'$4'} mt={'$1'} borderBottomWidth={'$2'} borderTopWidth={'$2'} borderTopColor='$blueGray300' borderBottomColor='$blueGray300'>
         <Pressable onPress={() => handleTabChange('weekly')}>
           <Box borderBottomWidth={selectedTab === 'weekly' ? 2 : 0} borderColor='$blue700'>
@@ -211,180 +128,71 @@ export default function Home() {
 
         <Box bg={'$white'} softShadow="1" borderRadius={'$md'} >
 
+          <HStack space={'md'} alignItems='center' justifyContent={'space-between'} m={'$3'} mb={'$3'}>
+
+            <VStack w={'36%'} p={'$2'} px={'$4'} borderWidth={'$1'} bg={'$white'} borderRadius={'$md'} borderColor='$blue700'>
+              <HStack justifyContent='space-between' alignItems='center'>
+                <Heading textAlign='left' fontSize={'$2xl'} bold color={'$black'}>
+                  5034
+                </Heading>
+                <AppIcon MaterialCommunityIconsName='chevron-right' size={25} color={'blue'} />
+
+              </HStack>
+              <Text fontSize={'$xs'} bold color={'$black'}>
+                Up by 5%
+              </Text>
+              <Text mt={'$1'} textAlign='left' fontSize={'$lg'} bold color={'$blue700'}>
+                Revenue
+              </Text>
+            </VStack>
+            <VStack w={'28%'} p={'$2'} px={'$4'} borderWidth={'$1'} bg={'$white'} borderRadius={'$md'} borderColor='$blue700'>
+              <HStack justifyContent='space-between' alignItems='center'>
+                <Heading textAlign='left' fontSize={'$2xl'} bold color={'$black'}>
+                  68
+                </Heading>
+                <AppIcon MaterialCommunityIconsName='chevron-right' size={25} color={'blue'} />
+
+              </HStack>
+              <Text fontSize={'$xs'} bold color={'$black'}>
+                Up by 10%
+              </Text>
+              <Text mt={'$1'} textAlign='left' fontSize={'$lg'} bold color={'$blue700'}>
+                Booking
+              </Text>
+            </VStack>
+
+            <VStack w={'28%'} p={'$2'} px={'$4'} borderWidth={'$1'} bg={'$white'} borderRadius={'$md'} borderColor='$blue700'>
+              <HStack justifyContent='space-between' alignItems='center'>
+                <Heading textAlign='left' fontSize={'$2xl'} bold color={'$black'}>
+                  68
+                </Heading>
+                <AppIcon MaterialCommunityIconsName='chevron-right' size={25} color={'blue'} />
+
+              </HStack>
+              <Text fontSize={'$xs'} bold color={'$black'}>
+                Up by 2%
+              </Text>
+              <Text mt={'$1'} textAlign='left' fontSize={'$lg'} bold color={'$blue700'}>
+                Slot
+              </Text>
+            </VStack>
+
+          </HStack>
 
           <Box m={'$2'}>
-            <Heading mx={'$2'} fontSize={'$lg'} bold>Average Income</Heading>
-            <Text mx={'$2'} fontSize={'$xs'} color="$blueGray400">15000 this week Earning</Text>
+            <Heading mx={'$1'} fontSize={'$lg'} bold>Latest Bookings</Heading>
+            <Text mx={'$1'} fontSize={'$xs'} color="$blueGray400">15000 this week Earning</Text>
           </Box>
-
-          <Box overflow="hidden" m={'$4'} w={'95%'} bg={'$white'} borderRadius={'$lg'} alignSelf="center" alignItems="center" justifyContent="center" >
-            {selectedTab === 'weekly' && (
-              <BarChart
-                height={150}
-                barWidth={12}
-                spacing={35}
-                showGradient
-                hideYAxisText
-                barBorderTopLeftRadius={15}
-                barBorderTopRightRadius={15}
-                noOfSections={4}
-                stackData={weeklyData}
-                yAxisColor={'transparent'}
-                xAxisColor={'transparent'}
-                gradientColor={'rgba(0, 100, 244,0.8)'}
-                frontColor={'black'}
-                isAnimated
-                animationDuration={1500}
-              />
-            )}
-            {selectedTab === 'monthly' && (
-              <LineChart
-                isAnimated
-                curved
-                thickness={1}
-                animateOnDataChange
-                animationDuration={1000}
-                onDataChangeAnimationDuration={300}
-                areaChart
-                yAxisTextStyle={{ color: 'gray' }}
-                startFillColor={'rgb(8,10,254)'}
-                endFillColor={'white'}
-                startOpacity={0.13}
-                endOpacity={0.08}
-                showDataPointOnFocus
-                showStripOnFocus
-                showTextOnFocus
-                focusEnabled
-                backgroundColor="transparent"
-                initialSpacing={0}
-                data={monthlyData}
-                maxValue={140}
-                noOfSections={3}
-                spacing={12}
-                hideDataPoints
-                hideRules
-                color="blue"
-                yAxisColor={'transparent'}
-                xAxisColor={'transparent'}
-                xAxisLabelTextStyle={{ width: 80, marginLeft: 26 }}
-                pointerConfig={{
-                  pointerStripHeight: 175,
-                  pointerStripColor: 'blue',
-                  pointerStripWidth: 1,
-                  pointerColor: 'lightgray',
-                  radius: 6,
-                  strokeDashArray: [2, 5],
-                  pointerLabelWidth: 100,
-                  pointerLabelHeight: 90,
-                  activatePointersOnLongPress: true,
-                  autoAdjustPointerLabelPosition: false,
-                  pointerLabelComponent: (items: {
-                    date: ReactNode; value: string;
-                  }[]) => {
-                    return (
-                      <Box
-                        style={{
-                          height: 90,
-                          width: 100,
-                          justifyContent: 'center',
-                          marginTop: -30,
-                          marginLeft: -40,
-                        }}>
-                        <Text style={{ color: 'white', fontSize: 14, marginBottom: 6, textAlign: 'center' }}>
-                          {items[0].date}
-                        </Text>
-                        <Box style={{ paddingHorizontal: 10, paddingVertical: 6, borderRadius: 16, backgroundColor: 'gray' }}>
-                          <Text style={{ fontWeight: 'bold', textAlign: 'center', color: 'white' }}>
-                            {'₹ ' + items[0].value + '.0'}
-                          </Text>
-                        </Box>
-                      </Box>
-                    );
-                  },
-                }}
-              />
-            )}
-            {selectedTab === 'yearly' && (
-              <BarChart
-                height={150}
-                barWidth={12}
-                spacing={35}
-                showGradient
-                hideYAxisText
-                barBorderTopLeftRadius={15}
-                barBorderTopRightRadius={15}
-                noOfSections={4}
-                stackData={yearlyData}
-                yAxisColor={'transparent'}
-                xAxisColor={'transparent'}
-                gradientColor={'rgba(0, 100, 244,0.8)'}
-                frontColor={'black'}
-                isAnimated
-                animationDuration={1500}
-              />
-            )}
-          </Box>
-
-
-          <Box m={'$2'}>
-            <Text mt="$5" m="$1" fontSize="$lg" color={COLORS.theme[700]} bold>
-              Income in terms of services
-            </Text>
-            <Box borderWidth="$1" my="$2" borderRadius="$2xl" borderColor="$coolGray300">
-              <Box borderTopRightRadius="$2xl" borderTopLeftRadius="$2xl" alignItems="center" justifyContent="center" bg={'$coolGray200'}>
-                <Text fontSize="$md" mb="$1" bold textAlign="center">
-                  Revenue Per Services
-                </Text>
-              </Box>
-              {SERVICE_ITEMS.map((item, index) => (
-                <React.Fragment key={index}>
-                  <Divider bg="$coolGray300" />
-                  <HStack justifyContent="space-between" my="$2" alignItems="center">
-                    <Box px="$2" w={WIDTH * 0.3}>
-                      <VStack space="xs">
-                        <Text fontSize="$md" color="$black">{`${index + 1}. ${item.name}`}</Text>
-                      </VStack>
-                    </Box>
-                    <HStack justifyContent="flex-end" w={WIDTH * 0.6} mr="$2">
-                      <Text fontSize="$md">{item.duration}</Text>
-                    </HStack>
-                  </HStack>
-                </React.Fragment>
-              ))}
-            </Box>
-          </Box>
-          <Box m={'$2'}>
-            <Text mt="$5" m="$1" fontSize="$lg" color={COLORS.theme[700]} bold>
-              Income in terms of employee
-            </Text>
-            <Box borderWidth="$1" my="$2" borderRadius="$2xl" borderColor="$coolGray300">
-              <Box borderTopRightRadius="$2xl" borderTopLeftRadius="$2xl" alignItems="center" justifyContent="center" bg={'$coolGray200'}>
-                <Text fontSize="$md" mb="$1" bold textAlign="center">
-                  Earnings Per Professional
-                </Text>
-              </Box>
-              {SERVICES_BY.map((item, index) => (
-                <React.Fragment key={index}>
-                  <Divider bg="$coolGray300" />
-                  <HStack justifyContent="space-between" my="$2" alignItems="center">
-                    <Box px="$2" w={WIDTH * 0.6}>
-                      <VStack space="xs">
-                        <Text fontSize="$md" color="$black">{`${index + 1}. ${item.name}`}</Text>
-                      </VStack>
-                    </Box>
-                    <HStack justifyContent="flex-end" w={WIDTH * 0.3} mr="$2">
-                      <Text fontSize="$md">{item.duration}</Text>
-                    </HStack>
-                  </HStack>
-                </React.Fragment>
-              ))}
-            </Box>
-          </Box>
-
 
         </Box>
+
       </ScrollView>
 
+      <FlatList
+        data={sortedBookings}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      />
 
     </Box >
   );

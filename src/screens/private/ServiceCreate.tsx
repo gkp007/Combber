@@ -18,13 +18,30 @@ import {
     Modal,
     ModalBackdrop,
     Divider,
-    Pressable
+    Pressable,
+    Actionsheet,
+    ActionsheetDragIndicator,
+    ActionsheetItemText,
+    SelectIcon,
+    SelectPortal,
+    SelectContent,
+    SelectDragIndicatorWrapper,
+    SelectItem
 } from '@gluestack-ui/themed';
 import { COLORS } from '~/styles';
 import AppInput from '~/components/core/AppInput';
 import { useForm } from 'react-hook-form';
 import AppIcon from '~/components/core/AppIcon';
 import Btn from '~/components/core/Btn';
+import { ActionsheetBackdrop } from '@gluestack-ui/themed';
+import { ActionsheetContent } from '@gluestack-ui/themed';
+import { ActionsheetDragIndicatorWrapper } from '@gluestack-ui/themed';
+import { ActionsheetItem } from '@gluestack-ui/themed';
+import { Select } from '@gluestack-ui/themed';
+import { SelectTrigger } from '@gluestack-ui/themed';
+import { SelectInput } from '@gluestack-ui/themed';
+import { SelectBackdrop } from '@gluestack-ui/themed';
+import { SelectDragIndicator } from '@gluestack-ui/themed';
 
 type FormInput = {
     key: string;
@@ -71,6 +88,10 @@ const BusinessInfo = () => {
             setServices(updatedServices);
         };
 
+        const [showActionsheet, setShowActionsheet] = React.useState(false)
+        const handleClose = () => setShowActionsheet(!showActionsheet)
+
+
 
         return services.map((service, index) => (
             <VStack key={index}>
@@ -93,31 +114,41 @@ const BusinessInfo = () => {
                 </HStack>
 
                 <Divider orientation='horizontal' bg={'$blue200'} my={'$2'} />
-                <AppInput
-                    key={` Category:'',-${index}`}
-                    input={{
-                        key: ` Category-${index}`,
-                        label: 'Category Name',
-                        color: '$white',
-                        placeholder: 'Select Category',
-                        icon: { FeatherName: 'codesandbox' },
-                        rules: {
-                            required: 'Category Name is required',
-                            pattern: {
-                                minLength: 5,
-                            },
-                        },
-                        inputProps: {
-                            autoCapitalize: 'none',
-                            marginBottom: '2',
-                            value: service.category,
-                            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                                handleServiceChange(index, 'name', e.target.value),
-                        },
-                    }}
-                    control={control}
-                    errorMessage={errors?.[`Name-${index}`]?.message}
-                />
+
+
+                <Text fontSize={'$md'} color={'$blueGray800'} mx={'$3'}  >
+                    Select Category
+                </Text>
+
+                <Select mt={'$2'}>
+                    <SelectTrigger borderRadius={'$full'} variant="outline" size="md" alignItems='center' >
+                        <Box ml={'$3'} mr={'$2'}>
+
+                            <AppIcon FeatherName='codesandbox' size={20} />
+                        </Box>
+
+                        <SelectInput mt={'$1'} fontSize={'$sm'} placeholder="Select Category" color={'$blueGray500'} />
+                        <Box mr={'$2'}>
+                            <AppIcon EvilIconsName='chevron-down' size={26} />
+                        </Box>
+                    </SelectTrigger>
+                    <SelectPortal>
+                        <SelectBackdrop />
+                        <SelectContent>
+                            <SelectDragIndicatorWrapper>
+                                <SelectDragIndicator />
+                            </SelectDragIndicatorWrapper>
+                            <SelectItem label="Hair Cutting" value="ux" />
+                            <SelectItem label="Nail" value="web" />
+                            <SelectItem
+                                label="Massage"
+                                value="cross-platform"
+                            />
+
+                        </SelectContent>
+                    </SelectPortal>
+                </Select>
+
                 <AppInput
                     key={`name-${index}`}
                     input={{
@@ -168,6 +199,45 @@ const BusinessInfo = () => {
                     control={control}
                     errorMessage={errors?.[`Duration-${index}`]?.message}
                 />
+
+                <Text mt={'$2'} fontSize={'$md'} color={'$blueGray800'} mx={'$3'}  >
+                    Select Duration
+                </Text>
+
+                <Select mt={'$2'} >
+                    <SelectTrigger borderRadius={'$full'} variant="outline" size="md" alignItems='center' >
+                        <Box ml={'$3'} mr={'$2'}>
+
+                            <AppIcon IoniconsName='timer-outline' size={20} />
+                        </Box>
+
+                        <SelectInput mt={'$1'} fontSize={'$sm'} placeholder="Select Duration" color={'$blueGray500'} />
+                        <Box mr={'$2'}>
+                            <AppIcon EvilIconsName='chevron-down' size={26} />
+                        </Box>
+                    </SelectTrigger>
+                    <SelectPortal>
+                        <SelectBackdrop />
+                        <SelectContent>
+                            <SelectDragIndicatorWrapper>
+                                <SelectDragIndicator />
+                            </SelectDragIndicatorWrapper>
+                            <SelectItem label="15 min" value="ux" />
+                            <SelectItem label="30 min" value="web" />
+                            <SelectItem label="45 min" value="web" />
+                            <SelectItem label="1 hour" value="web" />
+                            <SelectItem label="1 hour 15 min" value="web" />
+                            <SelectItem label="1 hour 30 min" value="web" />
+                            <SelectItem label="1 hour 45 min" value="web" />
+                            <SelectItem label="2 hour" value="web" />
+
+
+                        </SelectContent>
+                    </SelectPortal>
+                </Select>
+
+
+
                 <AppInput
                     key={`price-${index}`}
                     input={{
@@ -217,11 +287,16 @@ const BusinessInfo = () => {
                                 Create Category
                             </Heading>
 
-                            <Pressable $pressed={{ opacity: 0.5 }} onPress={() => setShowModal(true)}>
-                                <Heading fontSize={'$lg'} color={'$blue500'} mr={'$2'}>
-                                    Add New
-                                </Heading>
-                            </Pressable>
+                            <HStack space={'xs'} alignItems={'center'} bg={'$blue50'} borderRadius={'$full'} px={'$2'}>
+
+                                <Pressable $pressed={{ opacity: 0.5 }} onPress={() => setShowModal(true)}>
+                                    <Text fontSize={'$sm'} color={'$blue500'} bold >
+                                        Add
+                                    </Text>
+                                </Pressable>
+                                <AppIcon EvilIconsName='chevron-right' size={20} color={'blue'} />
+                            </HStack>
+
                         </HStack>
 
                         <HStack space={'md'} alignItems='center' mb={'$3'}>
@@ -298,7 +373,6 @@ const BusinessInfo = () => {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-
 
         </>
     );
