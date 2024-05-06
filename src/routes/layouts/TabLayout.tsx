@@ -28,7 +28,7 @@ export default function TabLayout() {
             borderTopEndRadius: 22,
             borderTopStartRadius: 22,
             height: 60,
-            backgroundColor:'#090f3f'
+            backgroundColor: '#090f3f'
           },
         }}>
         <BottomTab.Screen
@@ -50,15 +50,15 @@ export default function TabLayout() {
           }}
         />
         <BottomTab.Screen
-          name="MyProjects"
-          component={Private.Home}
+          name="AllBookings"
+          component={Private.AllBookings}
           options={{
             tabBarIcon: ({ focused }) => (
               <Box alignItems={'center'} justifyContent={'center'}>
                 {focused ? (
-                  <AppIcon color={'#20a0bd'} FeatherName="calendar" />
+                  <AppIcon color={'#20a0bd'} FontAwesomeName="scissors" />
                 ) : (
-                  <AppIcon color={'#FFFFFF'} FeatherName="calendar" />
+                  <AppIcon color={'#FFFFFF'} FontAwesomeName="scissors" />
                 )}
               </Box>
             ),
@@ -68,14 +68,14 @@ export default function TabLayout() {
           }}
         />
         <BottomTab.Screen
-          name="menu"
-          component={Private.Profile}
+          name="TransactionHistory"
+          component={Private.TransactionHistory}
           options={{
             tabBarItemStyle: {
               height: 0,
-              
+
             },
-            tabBarButton: () => (
+            tabBarIcon: ({ focused }) => (
               <Box
                 bg="#070c34"
                 alignItems={'center'}
@@ -83,22 +83,30 @@ export default function TabLayout() {
                 rounded={'$full'}
                 w={'$12'}
                 h={'$12'}
-                >
-                <AppIcon color={'#FFF'} FeatherName="menu" />
+                mt={'$12'}
+              >
+                {focused ? (
+                  <AppIcon color={'#20a0bd'} FeatherName="menu" />
+                ) : (
+                  <AppIcon color={'#FFFFFF'} FeatherName="menu" />
+                )}
               </Box>
             ),
           }}
+          listeners={{
+            tabPress: () => setOpen(false),
+          }}
         />
         <BottomTab.Screen
-          name="Email"
-          component={Private.GooMap}
+          name="MyProjects"
+          component={Private.Slot}
           options={{
             tabBarIcon: ({ focused }) => (
               <Box alignItems={'center'} justifyContent={'center'}>
                 {focused ? (
-                  <AppIcon color={'#20a0bd'} FeatherName="map-pin" />
+                  <AppIcon color={'#20a0bd'} FeatherName="calendar" />
                 ) : (
-                  <AppIcon color={'#FFFFFF'} FeatherName="map-pin" />
+                  <AppIcon color={'#FFFFFF'} FeatherName="calendar" />
                 )}
               </Box>
             ),

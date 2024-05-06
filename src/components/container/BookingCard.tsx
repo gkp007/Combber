@@ -26,14 +26,14 @@ const ProfileCard: React.FC<ProfileDataProps> = ({ profileData }) => {
             borderRadius={'$xl'}
             mx={'$2'}
             borderWidth={'$1'}
-            borderColor='$coolGray400'
+            borderColor='$coolGray300'
             overflow='hidden'
             mt={'$4'}
         >
             {/* Profile Header */}
             <HStack
                 alignItems='center'
-                backgroundColor='$coolGray100'
+                backgroundColor='$coolGray50'
                 borderTopRightRadius={'$md'}
                 borderTopLeftRadius={'$2xl'}>
                 <Image
