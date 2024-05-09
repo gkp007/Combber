@@ -37,6 +37,7 @@ export default function PrivateRoutes({ initialRouteName }: PrivateRouteProps) {
       <Stack.Screen name='RevenueStats' component={Private.RevenueStats} />
       <Stack.Screen name='SlotStats' component={Private.SlotStats} />
       <Stack.Screen name='AllBookings' component={Private.AllBookings} />
+      <Stack.Screen name='SelectProfessional' component={Private.SelectProfessional} />
     </Stack.Navigator>
   );
 }
