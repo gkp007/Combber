@@ -18,3 +18,4 @@ export {default as ServiceCreate} from './ServiceCreate';
 export {default as Slot} from './Slot';
 export {default as RevenueStats} from './RevenueStats';
 export {default as SlotStats} from './SlotStats';
+export {default as SelectProfessional} from './SelectProfessional';

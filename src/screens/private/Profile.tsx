@@ -100,14 +100,14 @@ export default function Profile() {
         // onPress: () => navigate('AllOrders')
       },
       {
-        title: 'Bookings',
+        title: 'Select Professional',
         leftIcon: {
           FeatherName: 'align-center',
           color: COLORS.theme[600],
           size: 25,
           backgroundColor: '$amber200',
         },
-        // onPress: () => navigate('AllOrders')
+        onPress: () => navigate('SelectProfessional')
       },
       {
         title: 'Employee Management',
