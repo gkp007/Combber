@@ -1,425 +1,251 @@
-import React, { useState } from 'react';
-import { Box, FlatList, Heading, HStack, Pressable, ScrollView, Text } from "@gluestack-ui/themed";
-import { VStack } from '@gluestack-ui/themed';
+import React, {useState} from 'react';
+import {
+  Box,
+  Image,
+  Text,
+  Heading,
+  Center,
+  VStack,
+  HStack,
+  Pressable,
+  Input,
+  EyeIcon,
+  InputField,
+  InputIcon,
+  InputSlot,
+  SearchIcon,
+} from '@gluestack-ui/themed';
 import AppIcon from '~/components/core/AppIcon';
-import { BookingCard } from '~/components/container';
+import {BookingCard} from '~/components/container';
 import TopServices from '~/components/TopServices';
 import TopProfessionals from '~/components/TopProfessional';
-import { useNavigation } from '@react-navigation/native';
-import { StackAndTabType } from '~/routes/private/types';
-
-
-const profileDataArray = [
-  {
-    name: 'Gopalkrishna',
-    phoneNumber: '7752058263',
-    availability: '9.00 AM - 9.45 AM',
-    services: ['Hair Cutting', 'Facial & more'],
-    stylist: 'Sushanta Senapati',
-    amount: 350,
-    paymentStatus: false,
-    status: 'pending',
-    bookingDateTime: new Date('2024-05-01T11:05:00')
-  },
-  {
-    name: 'Meenaketan',
-    phoneNumber: '7752058263',
-    availability: '9.00 AM - 9.45 AM',
-    services: ['Hair Cutting'],
-    stylist: 'Sonam Senapati',
-    amount: 350,
-    paymentStatus: true,
-    status: 'completed',
-    bookingDateTime: new Date('2024-05-01T09:48:00')
-
-  },
-  {
-    name: 'Chinamayee',
-    phoneNumber: '7752058263',
-    availability: '9.00 AM - 9.45 AM',
-    services: ['Facial'],
-    stylist: 'Sushanta Senapati',
-    amount: 350,
-    paymentStatus: false,
-    status: 'rejected',
-    bookingDateTime: new Date('2024-05-01T09:52:00')
-
-
-
-  },
-  {
-    name: 'Debabrata',
-    phoneNumber: '7752058263',
-    availability: '9.00 AM - 9.45 AM',
-    services: ['Facial'],
-    stylist: 'Sushanta Senapati',
-    amount: 350,
-    paymentStatus: true,
-    status: 'completed',
-    bookingDateTime: new Date('2024-05-01T09:15:00')
-
-  },
-  {
-    name: 'Debabrata',
-    phoneNumber: '7752058263',
-    availability: '9.00 AM - 9.45 AM',
-    services: ['Facial'],
-    stylist: 'Sushanta Senapati',
-    amount: 350,
-    paymentStatus: true,
-    status: 'completed',
-    bookingDateTime: new Date('2024-05-01T09:15:00')
-
-  },
-  {
-    name: 'Debabrata',
-    phoneNumber: '7752058263',
-    availability: '9.00 AM - 9.45 AM',
-    services: ['Facial'],
-    stylist: 'Sushanta Senapati',
-    amount: 350,
-    paymentStatus: true,
-    status: 'completed',
-    bookingDateTime: new Date('2024-05-01T010:15:00')
-
-  },
-];
-
-const topServicesData = [
-  {
-    name: 'Hair Cutting',
-    countThisMonth: 360,
-    countLastMonth: 310,
-    up: true,
-    upPercentage: 16
-  },
-  {
-    name: 'Manicure',
-    countThisMonth: 279,
-    countLastMonth: 310,
-    up: false,
-    downPercentage: 10
-  },
-  {
-    name: 'Manicure',
-    countThisMonth: 279,
-    countLastMonth: 310,
-    up: false,
-    downPercentage: 10
-  },
-];
-
-const topProfessionalsData = [
-  {
-    name: 'John Doe',
-    rating: 4.5,
-    experience: '5 years',
-    countThisMonth: 279,
-    countLastMonth: 310,
-    up: false,
-    downPercentage: 10
-  },
-  {
-    name: 'Jane Smith',
-    rating: 4.8,
-    experience: '8 years',
-    countThisMonth: 279,
-    countLastMonth: 310,
-    up: false,
-    downPercentage: 10
-  },
-];
-
-
-
-const sortByBookingDateTime = (a, b) => {
-  return new Date(b.bookingDateTime) - new Date(a.bookingDateTime);
-};
-
-
-
+import {useNavigation} from '@react-navigation/native';
+import {StackAndTabType} from '~/routes/private/types';
+import HomeSlider from '~/components/HomeSlider';
 
 export default function Home() {
+  const {navigate, goBack} = useNavigation<StackAndTabType>();
 
-  const [selectedTab, setSelectedTab] = useState('weekly');
+  const bannerData = [
+    {
+      id: '1',
+      imageUrl:
+        'https://img.freepik.com/free-photo/young-man-barbershop-trimming-hair_1303-26254.jpg',
+    },
+    {
+      id: '2',
+      imageUrl:
+        'https://img.freepik.com/free-photo/beard-grooming-close-up-shot_1163-2024.jpg',
+    },
+    {
+      id: '3',
+      imageUrl:
+        'https://img.freepik.com/free-photo/man-barbershop-salon-doing-haircut-beard-trim_1303-20962.jpg',
+    },
+    {
+      id: '4',
+      imageUrl:
+        'https://img.freepik.com/free-photo/stylish-man-sitting-barbershop_1157-24968.jpg',
+    },
+  ];
 
-  const handleTabChange = (tab: React.SetStateAction<string>) => {
-    setSelectedTab(tab);
-  };
+  const handleSearch = () => {};
 
+  const selectType = [
+    {
+      id: '1',
+      type: 'Man',
+    },
+    {
+      id: '2',
+      type: 'Woman',
+    },
+    {
+      id: '3',
+      type: 'Unisex',
+    },
+  ];
 
-  const sortedBookings = profileDataArray.sort(sortByBookingDateTime);
-  const latestBookings = sortedBookings.slice(0, 3);
-
-
-  const { navigate, goBack } = useNavigation<StackAndTabType>();
-
+  const serviceType = [
+    {
+      id:'1',
+      svType:'Hair Cut'
+    },
+    {
+      id:'2',
+      svType:'Beard'
+    },
+    {
+      id:'3',
+      svType:'facials'
+    },
+    {
+      id:'4',
+      svType:'Hair Colour'
+    },
+    {
+      id:'5',
+      svType:'Manciure'
+    },
+    {
+      id:'6',
+      svType:'Padicure'
+    },
+    {
+      id:'7',
+      svType:'Waxing'
+    },
+    {
+      id:'8',
+      svType:'Threding'
+    },
+  ]
 
   return (
-
     <Box bg={'white'} flex={1}>
+      {/* Profile */}
+      <Box
+        flexDirection={'row'}
+        justifyContent={'space-between'}
+        p={3}
+        alignItems={'center'}>
+        <HStack direction="rtl" alignItems={'center'}>
+          <Image
+            alt="profile_Image"
+            size="sm"
+            rounded={'$md'}
+            source={{
+              uri: 'https://cdn-icons-png.flaticon.com/512/2202/2202112.png',
+            }}
+          />
+          <Box p={4}>
+            <Heading fontWeight={'900'} fontSize={20}>
+              Debabrata Giri
+            </Heading>
+            <Text fontWeight={'$bold'} color={'#5F5F5F'} fontSize={15}>
+              6391 Elgin St. Celina
+            </Text>
+          </Box>
+        </HStack>
+        <HStack direction="ltr">
+          <Box
+            p={5}
+            borderWidth={1}
+            borderColor={'#939393'}
+            rounded={'$md'}
+            m={1}>
+            <Pressable>
+              <AppIcon
+                IoniconsName="notifications"
+                size={30}
+                color={'#1e1e1e'}
+              />
+            </Pressable>
+            <Center
+              bgColor="#ffffff"
+              rounded={'$full'}
+              position="absolute"
+              right={'$1'}
+              px={'$1.5'}>
+              <Text fontSize={'$xs'}>3</Text>
+            </Center>
+          </Box>
+          <Box
+            p={5}
+            borderWidth={1}
+            borderColor={'#aeaeae'}
+            rounded={'$md'}
+            m={1}>
+            <Pressable>
+              <AppIcon FeatherName="heart" size={30} color={'#1e1e1e'} />
+            </Pressable>
+            <Center
+              bg="#e00000"
+              rounded={'$full'}
+              position={'absolute'}
+              right={'$1'}
+              px={'$1.5'}>
+              <Text fontSize={'$xs'} color="#FFF">
+                7
+              </Text>
+            </Center>
+          </Box>
+        </HStack>
+      </Box>
+      {/* Search Filter */}
+      <Center>
+        <Input w={'98%'}>
+          <InputField type={'text'} placeholder="Search Location or salon.." />
+          <InputSlot pr="$3" onPress={handleSearch}>
+            <InputIcon as={SearchIcon} color="$blueGray300" />
+          </InputSlot>
+        </Input>
+      </Center>
+      {/* Exclusive  */}
+      <Text
+        py={'$4'}
+        fontWeight="$extrabold"
+        fontSize={'$2xl'}
+        mx={'$4'}
+        color={'#121212'}>
+        Exclusive Offers
+      </Text>
 
-      <HStack bg="white" justifyContent="space-between" px={'$4'} mt={'$1'} borderBottomWidth={'$2'} borderTopWidth={'$2'} borderTopColor='$blueGray300' borderBottomColor='$blueGray300'>
-        <Pressable onPress={() => handleTabChange('weekly')}>
-          <Box borderBottomWidth={selectedTab === 'weekly' ? 2 : 0} borderColor='$blue700'>
-            <Text textAlign="center" mx={'$2'} py={'$1'} color={selectedTab === 'weekly' ? '$blue700' : "$grey"} bold fontSize={'$sm'}>Weekly</Text>
-          </Box>
-        </Pressable>
-        <Pressable onPress={() => handleTabChange('today')}>
-          <Box borderBottomWidth={selectedTab === 'today' ? 2 : 0} borderColor='$blue700'>
-            <Text textAlign="center" mx={'$2'} py={'$1'} color={selectedTab === 'today' ? '$blue700' : "$grey"} bold fontSize={'$sm'}>Today</Text>
-          </Box>
-        </Pressable>
-        <Pressable onPress={() => handleTabChange('monthly')}>
-          <Box borderBottomWidth={selectedTab === 'monthly' ? 2 : 0} borderColor='$blue700'>
-            <Text mx={'$2'} py={'$1'} color={selectedTab === 'monthly' ? '$blue700' : "$grey"} bold fontSize={'$sm'}>Monthly</Text>
-          </Box>
-        </Pressable>
-        <Pressable onPress={() => handleTabChange('yearly')}>
-          <Box borderBottomWidth={selectedTab === 'yearly' ? 2 : 0} borderColor='$blue700'>
-            <Text mx={'$2'} py={'$1'} color={selectedTab === 'yearly' ? '$blue700' : "$grey"} bold fontSize={'$sm'}>Yearly</Text>
-          </Box>
+      {/* Image coro... */}
+      <HomeSlider bannerData={bannerData} />
+
+      {/* Upcoming... */}
+      <HStack
+        justifyContent="space-between"
+        py={'$2'}
+        mx={'$2'}
+        alignItems="center">
+        <Text fontWeight="$extrabold" fontSize={'$xl'} color={'#121212'}>
+          Upcomming Appointment
+        </Text>
+        <Pressable>
+          <Text fontWeight="$semibold" fontSize={'$md'} color={'#505050'}>
+            View ALl
+          </Text>
         </Pressable>
       </HStack>
 
-      <ScrollView showsVerticalScrollIndicator={false} mb={'$16'}>
-
-        <Box bg={'$white'} softShadow="1" borderRadius={'$md'} >
-
-          <HStack space={'md'} alignItems='center' justifyContent={'space-between'} m={'$3'} mb={'$3'}>
-
-
-            <Pressable $pressed-bg='$black' $pressed={{ opacity: 1 }} onPress={() => navigate('RevenueStats')} softShadow='1' w={'36%'} p={'$2'} px={'$4'} bg={'$white'} borderRadius={'$md'} borderColor='$blue700'>
-              <VStack>
-
-                <HStack justifyContent='space-between' alignItems='center'>
-                  <Heading textAlign='left' fontSize={'$2xl'} bold color={'$black'}>
-                    5034
-                  </Heading>
-                  <AppIcon MaterialCommunityIconsName='chevron-right' size={25} color={'blue'} />
-
-                </HStack>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  Up by 5%
-                </Text>
-                <Text mt={'$1'} textAlign='left' fontSize={'$lg'} bold color={'$coolGray600'}>
-                  Revenue
-                </Text>
-              </VStack>
-            </Pressable>
-            <Pressable onPress={() => navigate('BookingStats')} w={'28%'} softShadow='1' p={'$2'} px={'$4'} bg={'$white'} borderRadius={'$md'} borderColor='$blue700'>
-              <VStack>
-
-                <HStack justifyContent='space-between' alignItems='center'>
-                  <Heading textAlign='left' fontSize={'$2xl'} bold color={'$black'}>
-                    68
-                  </Heading>
-                  <AppIcon MaterialCommunityIconsName='chevron-right' size={25} color={'blue'} />
-
-                </HStack>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  Up by 10%
-                </Text>
-                <Text mt={'$1'} textAlign='left' fontSize={'$lg'} bold color={'$coolGray600'}>
-                  Booking
-                </Text>
-              </VStack>
-            </Pressable>
-
-            <Pressable w={'28%'} p={'$2'} px={'$4'} onPress={() => navigate('SlotStats')} softShadow='1' bg={'$white'} borderRadius={'$md'} borderColor='$blue700'>
-              <VStack>
-
-                <HStack justifyContent='space-between' alignItems='center'>
-                  <Heading textAlign='left' fontSize={'$2xl'} bold color={'$black'}>
-                    68
-                  </Heading>
-                  <AppIcon MaterialCommunityIconsName='chevron-right' size={25} color={'blue'} />
-
-                </HStack>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  Up by 2%
-                </Text>
-                <Text mt={'$1'} textAlign='left' fontSize={'$lg'} bold color={'$coolGray600'}>
-                  Slot
-                </Text>
-              </VStack>
-            </Pressable>
-
+      {/* Select Type */}
+      <HStack mx={'$3'}>
+        {selectType?.map(i => (
+          <HStack
+            // w={'$1/4'}
+            py={'$2'}
+            px={'$4'}
+            mx={'$2'}
+            borderWidth={'$1'}
+            bg={'#ffffff'}
+            borderRadius={'$lg'}
+            borderColor="#fff"
+            hardShadow="1"
+            alignItems="center"
+            justifyContent="space-between">
+            <Image
+              source={{
+                uri: `https://cdn-icons-png.flaticon.com/512/4440/4440953.png`,
+              }}
+              borderRadius={4}
+              overflow={'hidden'}
+              alt="no image"
+              w={'$12'}
+              h={'$12'}
+              resizeMode="cover"
+            />
+            <Text fontSize={'$md'} bold color={'$black'}>
+              {i?.type}
+            </Text>
           </HStack>
+        ))}
+      </HStack>
+
+      {/* Explore by service  */}
 
 
-          <HStack mx={'$4'} justifyContent='space-between' alignItems='center' >
-            <Heading fontSize={'$lg'} bold>Booked Slots</Heading>
-            <Pressable onPress={() => navigate('Slot')}>
-              <HStack px={'$2'} alignItems='center' space={'xs'} bg={'$blue50'} borderRadius={'$sm'} >
-                <Text fontSize={'$xs'} color={'$coolGray600'}>
-                  See all
-                </Text>
-                <AppIcon MaterialCommunityIconsName='chevron-right' size={20} color={'blue'} />
-              </HStack>
-            </Pressable>
-          </HStack>
-
-
-
-          <Box borderWidth={'$1'} borderColor='$coolGray300' bg={'$white'} backgroundColor='$white' borderRadius={'$md'} m={'$3'}>
-            <Box mb={'$2'} bg={'$blue50'} borderTopRightRadius={'$xl'} borderTopLeftRadius={'$xl'}>
-              <HStack mx={'$2'} justifyContent='space-between'>
-                <Text fontSize={'$sm'} bold color={'$black'}>
-                  1st Half
-                </Text>
-              </HStack>
-            </Box>
-            <HStack
-              justifyContent='space-between'
-              m={'$2'}
-            >
-
-              <Box p={'$1'} px={'$3'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'}>
-                  9:00 - 9:15
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$3'} borderWidth={'$1'} bg={'$coolGray300'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  9:15 - 9:30
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$3'} borderWidth={'$1'} bg={'$coolGray300'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  9:30 - 9:45
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$3'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'}>
-                  9:45 - 10:00
-                </Text>
-              </Box>
-            </HStack>
-            <HStack
-              justifyContent='space-between'
-              m={'$2'}
-            >
-
-              <Box p={'$1'} px={'$2'} bg={'$coolGray300'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  10:00 - 10:15
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$2'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'}>
-                  10:15 - 10:30
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$2'} bg={'$coolGray300'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  10:30 - 10:45
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$2'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'}>
-                  10:45 - 11:00
-                </Text>
-              </Box>
-            </HStack>
-            <HStack
-              justifyContent='space-between'
-              m={'$2'}
-            >
-
-              <Box p={'$1'} px={'$2'} bg={'$coolGray300'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  11:00 - 11:15
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$2'} bg={'$coolGray300'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  11:15 - 11:30
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$2'} bg={'$coolGray300'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  11:30 - 11:45
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$2'} bg={'$coolGray300'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'} bold color={'$black'}>
-                  11:45 - 12:00
-                </Text>
-              </Box>
-
-            </HStack>
-            <HStack
-              justifyContent='space-between'
-              m={'$2'}
-            >
-              <Box p={'$1'} px={'$2'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'}>
-                  12:00 - 12:15
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$2'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'}>
-                  12:15 - 12:30
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$2'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'}>
-                  12:30 - 12:45
-                </Text>
-              </Box>
-              <Box p={'$1'} px={'$2'} borderWidth={'$1'} borderRadius={'$xs'} borderColor='$blueGray300'>
-                <Text fontSize={'$xs'}>
-                  12:45 - 1:00
-                </Text>
-              </Box>
-            </HStack>
-          </Box>
-
-          <VStack space={'xs'}>
-
-            <Box borderRadius={'$md'} bg={'$white'} borderColor='$coolGray300' mx={'$1.5'} >
-              <Box mb={'$3'} mt={'$1'}>
-
-                <HStack mx={'$4'} justifyContent='space-between' alignItems='center' >
-                  <Heading fontSize={'$lg'} bold>Latest Bookings</Heading>
-                  <Pressable onPress={() => navigate('AllBookings')}>
-                    <HStack px={'$2'} alignItems='center' space={'xs'} bg={'$blue50'} borderRadius={'$sm'} >
-                      <Text fontSize={'$xs'} color={'$coolGray600'}>
-                        See all
-                      </Text>
-                      <AppIcon MaterialCommunityIconsName='chevron-right' size={20} color={'blue'} />
-                    </HStack>
-                  </Pressable>
-                </HStack>
-
-                <Pressable $pressed={{ opacity: 0.5 }} mt={'$2'} mx={'$2'} borderWidth={'$1'} borderRadius={'$md'} borderColor='$blue600'>
-                  <Heading textAlign='center' fontSize={'$lg'} color='$blue600' >On Spot Booking</Heading>
-                </Pressable>
-
-                <FlatList
-                  data={latestBookings}
-                  renderItem={({ item }) => (
-                    <BookingCard profileData={item}
-                    />
-                  )}
-
-                  keyExtractor={(item, index) => index.toString()}
-                />
-              </Box>
-
-            </Box>
-
-
-            <TopServices topServicesData={topServicesData} />
-
-            <TopProfessionals topProfessionalsData={topProfessionalsData} />
-
-          </VStack>
-
-        </Box>
-
-      </ScrollView>
-    </Box >
+    </Box>
   );
-};
+}
